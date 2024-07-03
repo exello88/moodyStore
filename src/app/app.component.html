@@ -1,1 +1,14 @@
-<app-home-page></app-home-page>
+<div class="mainMenu">
+    <p class="mainTittle" (click)="navigateToHome()">MOODY STORE</p>
+
+    <div class="iconField">
+        <button class="pi pi-search"></button>
+        <button class="pi pi-user" (click)="navigateToProfile()"></button>
+        <button class="pi pi-shopping-cart" (click)="navigateToCart()"></button>
+        <button class="pi pi-heart" (click)="navigateToWishlist()"></button>
+    </div>
+</div>
+
+<div class="dividingLine"></div>
+
+<router-outlet></router-outlet>

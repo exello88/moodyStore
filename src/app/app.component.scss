@@ -1,2 +1,41 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
+
+@import "primeicons/primeicons.css";
+
+.mainMenu {
+    display: flex;
+}
+
+.mainTittle {
+    font-family: 'Roboto', sans-serif;
+    color: #323334;
+    font-size: 28px;
+    font-weight: bold;
+    margin-left: 80px;
+    margin-top: 35px;
+    cursor: pointer;
+}
+
+.iconField {
+    display: flex;
+    margin-left: auto;
+    margin-right: 70px;
+}
+
+button {
+    border: 0px;
+    background-color: white;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.pi{
+    font-size: 24px;
+}
+
+.dividingLine{
+    height: 1px;
+    background-color: #323334;
+    margin: 0px 80px 0px 80px;
+}
