@@ -1,18 +1,20 @@
-.promotionField{
+@import '../variablesHomePage';
+
+.promotion__field{
     margin-top: 5px;
     height: 265px;
-    background-color: #DCE1DA;
+    background-color: $promotion-color;
     text-align: center;
     padding-top: 12px;
 }
 
-.prootionField__mainTitle, .prootionField__conditionsTitle, .prootionField__additionallyTitle{
-    color: #323334;
+.field__main__title, .field__conditions__title, .field__additionally__title{
+    color: $font-color;
     font-weight: 400;
     font-size: 38px;
     font-family: 'Roboto', sans-serif;
 }
 
-.prootionField__additionallyTitle{
+.field__additionally__title{
     font-size: 18px;
 }

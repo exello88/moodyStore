@@ -9,19 +9,19 @@ import { Router } from '@angular/router';
 export class AppComponent {
   constructor(private router: Router) {}
 
-  navigateToHome() {
+  public navigateToHome() : void {
     this.router.navigate(['/home']);
   }
 
-  navigateToProfile() {
+  public navigateToProfile() : void {
     this.router.navigate(['/profile']);
   }
 
-  navigateToCart() {
+  public navigateToCart() : void {
     this.router.navigate(['/cart']);
   }
 
-  navigateToWishlist() {
+  public navigateToWishlist() : void {
     this.router.navigate(['/wishlist']);
   }
 }
