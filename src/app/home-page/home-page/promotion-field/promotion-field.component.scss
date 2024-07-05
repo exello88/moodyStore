@@ -1,0 +1,20 @@
+@import '../variablesHomePage';
+
+.promotion-field{
+    margin-top: 5px;
+    height: 265px;
+    background-color: $promotion-color;
+    text-align: center;
+    padding-top: 12px;
+
+    &__main-title, &__conditions-title, &__additionally-title{
+        color: $font-color;
+        font-weight: 400;
+        font-size: 38px;
+        font-family: 'Roboto', sans-serif; 
+    }
+    
+    &__additionally-title{
+        font-size: 18px;
+    }
+}

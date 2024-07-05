@@ -1,0 +1,38 @@
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+@import "./variablesAppComponent";
+
+.main-menu {
+    display: flex;
+
+    &__tittle {
+        font-family: 'Roboto', sans-serif;
+        color: $font-color;
+        font-size: 28px;
+        font-weight: bold;
+        margin-left: 80px;
+        margin-top: 35px;
+        cursor: pointer;
+    }
+
+    &-actions {
+        display: flex;
+        margin-left: auto;
+        margin-right: 70px;
+
+        &__search, &__user, &__cart, &__wishlist {
+            border: 0px;
+            background-color: white;
+            margin-right: 10px;
+            cursor: pointer;
+            font-size: 24px;
+        }
+    }
+}
+
+.dividing__line {
+    height: 1px;
+    background-color: $font-color;
+    margin: 0px 80px 0px 80px;
+}
