@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 interface IFilters {
-  'New Arrivals': string[];
-  'Shop By Room': { [room: string]: string[] };
-  'shop by concept': string[];
+  'newArrivals': string[];
+  'shopByRoom': { [room: string]: string[] };
+  'shopByConcept': string[];
   'Gender': string[];
   'Color': string[];
   'Price': {

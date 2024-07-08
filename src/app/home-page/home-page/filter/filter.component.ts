@@ -1,11 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FilterService } from './filter.service';
 import { Subscription } from 'rxjs';
 
 interface IFilters {
-  'New Arrivals': string[];
-  'Shop By Room': { [room: string]: string[] };
-  'shop by concept': string[];
+  'newArrivals': string[];
+  'shopByRoom': { [room: string]: string[] };
+  'shopByConcept': string[];
   'Gender': string[];
   'Color': string[];
   'Price': {
@@ -26,7 +26,7 @@ export class FilterComponent {
   public filters!: IFilters;
   private subscription!: Subscription;
 
-  constructor(public filterService: FilterService) { }
+  constructor(private filterService: FilterService) { }
 
   ngOnInit() {
     this.subscription = this.filterService.getFilters().subscribe(data => {
@@ -44,5 +44,13 @@ export class FilterComponent {
       max: this.filters.Price[+key].max
     }));
     return price;
+  }
+
+
+  formatCamelCase(key: string): string {
+    let normalStr = key.replace(/([A-Z])/g, ' $1').trim().toLowerCase();
+    normalStr = normalStr.charAt(0).toUpperCase() + normalStr.slice(1);
+
+    return normalStr;
   }
 }
