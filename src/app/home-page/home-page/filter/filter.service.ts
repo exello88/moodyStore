@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-interface IFilters {
+export interface IFilters {
   'newArrivals': string[];
   'shopByRoom': { [room: string]: string[] };
   'shopByConcept': string[];

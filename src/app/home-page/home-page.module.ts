@@ -5,10 +5,12 @@ import { PromotionFieldComponent } from './home-page/promotion-field/promotion-f
 import { HomePageRoutingModule } from './home-page-routing.module';
 import { FilterComponent } from './home-page/filter/filter.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FilterService } from './home-page/filter/filter.service';
+import { FilterService, IFilters } from './home-page/filter/filter.service';
 import { Observable } from 'rxjs';
 
-export function appInitializer(filterService: FilterService): () => Observable<any> {
+
+
+export function appInitializer(filterService: FilterService): () => Observable<IFilters> {
   return () => filterService.getFilters();
 }
 

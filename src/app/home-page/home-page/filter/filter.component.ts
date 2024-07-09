@@ -1,20 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FilterService } from './filter.service';
+import { Component } from '@angular/core';
+import { FilterService, IFilters } from './filter.service';
 import { Subscription } from 'rxjs';
 
-interface IFilters {
-  'newArrivals': string[];
-  'shopByRoom': { [room: string]: string[] };
-  'shopByConcept': string[];
-  'Gender': string[];
-  'Color': string[];
-  'Price': {
-    [key: number]: {
-      'min': number;
-      'max': number;
-    };
-  };
-}
 
 @Component({
   selector: 'app-filter',
