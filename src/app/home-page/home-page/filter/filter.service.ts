@@ -20,9 +20,25 @@ export interface IFilters {
   providedIn: 'root'
 })
 export class FilterService {
-  constructor(private http: HttpClient) {}
-  
+  constructor(private http: HttpClient) { }
+
   public getFilters(): Observable<IFilters> {
     return this.http.get<IFilters>('https://moodystore-37962-default-rtdb.firebaseio.com/FILTERS.json');
+  }
+
+  public getNormalFormatStr(key: string): string {
+    let normalStr = key.replace(/([A-Z])/g, ' $1').trim().toLowerCase();
+    normalStr = normalStr.charAt(0).toUpperCase() + normalStr.slice(1);
+
+    return normalStr;
+  }
+
+  public getPriceRanges(filters : IFilters): { min: number; max: number }[] {
+    let price = Object.keys(filters.Price).map(key => ({
+      min: filters.Price[+key].min,
+      max: filters.Price[+key].max
+    }));
+    
+    return price;
   }
 }

@@ -25,19 +25,12 @@ export class FilterComponent {
     this.subscription.unsubscribe();
   }
 
-  getPriceRanges(): { min: number; max: number }[] {
-    let price = Object.keys(this.filters.Price).map(key => ({
-      min: this.filters.Price[+key].min,
-      max: this.filters.Price[+key].max
-    }));
-    return price;
+  public getPriceRanges(): { min: number; max: number }[] {
+    return this.filterService.getPriceRanges(this.filters);
   }
 
 
-  formatCamelCase(key: string): string {
-    let normalStr = key.replace(/([A-Z])/g, ' $1').trim().toLowerCase();
-    normalStr = normalStr.charAt(0).toUpperCase() + normalStr.slice(1);
-
-    return normalStr;
+  public formatCamelCase(key: string): string {
+    return this.filterService.getNormalFormatStr(key);
   }
 }
