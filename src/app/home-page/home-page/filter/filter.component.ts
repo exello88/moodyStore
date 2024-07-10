@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FilterService, IFilters } from './filter.service';
 import { Subscription } from 'rxjs';
 
@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.scss'
 })
-export class FilterComponent {
+export class FilterComponent implements OnInit, OnDestroy  {
 
   public filters!: IFilters;
   private subscription!: Subscription;
@@ -23,14 +23,5 @@ export class FilterComponent {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
-  }
-
-  public getPriceRanges(): { min: number; max: number }[] {
-    return this.filterService.getPriceRanges(this.filters);
-  }
-
-
-  public formatCamelCase(key: string): string {
-    return this.filterService.getNormalFormatStr(key);
   }
 }
