@@ -1,4 +1,4 @@
-<div class="filter">
+<div class="filter" *ngIf = "filtersLoaded">
     <p class="filter__title">New Arrivals</p>
     <div class="filter__arrivals">
         <p class="filter__arrivals-item" *ngFor="let item of filters.newArrivals">{{item}}</p>
@@ -30,4 +30,8 @@
         <input type="checkbox">
         <p class="filter__arrivals-item">{{item.value.min}}$ - {{item.value.max}}$</p>
     </div>
+</div>
+
+<div *ngIf = "!filtersLoaded" class="loader-field">
+    <p-progressSpinner class="loader-field__loader"></p-progressSpinner>
 </div>

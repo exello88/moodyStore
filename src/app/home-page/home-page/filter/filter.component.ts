@@ -12,12 +12,14 @@ export class FilterComponent implements OnInit, OnDestroy  {
 
   public filters!: IFilters;
   private subscription!: Subscription;
+  public filtersLoaded: boolean = false;
 
   constructor(private filterService: FilterService) { }
 
   ngOnInit() {
     this.subscription = this.filterService.getFilters().subscribe(data => {
-      this.filters = data;
+      this.filters = data; 
+      this.filtersLoaded = true; 
     });
   }
 
