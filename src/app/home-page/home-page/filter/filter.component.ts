@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.scss'
 })
-export class FilterComponent implements OnInit, OnDestroy  {
+export class FilterComponent implements OnInit, OnDestroy {
 
   public filters!: IFilters;
   private subscription!: Subscription;
@@ -18,8 +18,8 @@ export class FilterComponent implements OnInit, OnDestroy  {
 
   ngOnInit() {
     this.subscription = this.filterService.getFilters().subscribe(data => {
-      this.filters = data; 
-      this.filtersLoaded = true; 
+      this.filters = data;
+      this.filtersLoaded = true;
     });
   }
 

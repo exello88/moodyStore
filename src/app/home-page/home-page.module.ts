@@ -6,11 +6,13 @@ import { HomePageRoutingModule } from './home-page-routing.module';
 import { FilterComponent } from './home-page/filter/filter.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { LoaderComponent } from './home-page/loader/loader.component';
 @NgModule({
   declarations: [
     HomePageComponent,
     PromotionFieldComponent,
-    FilterComponent
+    FilterComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,

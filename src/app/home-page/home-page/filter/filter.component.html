@@ -1,4 +1,4 @@
-<div class="filter" *ngIf = "filtersLoaded">
+<div *ngIf="filtersLoaded" class="filter">
     <p class="filter__title">New Arrivals</p>
     <div class="filter__arrivals">
         <p class="filter__arrivals-item" *ngFor="let item of filters.newArrivals">{{item}}</p>
@@ -24,7 +24,6 @@
         <div class="color__block" *ngFor="let item of filters.Color" [style.background-color]="item"></div>
     </div>
 
-
     <p class="filter__title">Price</p>
     <div class="filter__gender" *ngFor="let item of filters.Price | keyvalue">
         <input type="checkbox">
@@ -32,6 +31,6 @@
     </div>
 </div>
 
-<div *ngIf = "!filtersLoaded" class="loader-field">
-    <p-progressSpinner class="loader-field__loader"></p-progressSpinner>
+<div *ngIf="!filtersLoaded" class="loader-field">
+    <app-loader [filterIsLoad]="filtersLoaded"></app-loader>
 </div>
