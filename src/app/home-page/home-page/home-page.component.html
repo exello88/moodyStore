@@ -1,2 +1,3 @@
 <app-promotion-field></app-promotion-field>
-<app-filter></app-filter>
+<app-filter (filtersLoadedEvent)="filtersLoaded($event)"></app-filter>
+<app-loader [filterIsLoad]="filterIsLoad"></app-loader>

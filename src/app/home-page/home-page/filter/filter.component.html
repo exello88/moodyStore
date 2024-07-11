@@ -1,4 +1,4 @@
-<div *ngIf="filtersLoaded" class="filter">
+<div *ngIf="filterLoaded" class="filter">
     <p class="filter__title">New Arrivals</p>
     <div class="filter__arrivals">
         <p class="filter__arrivals-item" *ngFor="let item of filters.newArrivals">{{item}}</p>
@@ -29,8 +29,4 @@
         <input type="checkbox">
         <p class="filter__arrivals-item">{{item.value.min}}$ - {{item.value.max}}$</p>
     </div>
-</div>
-
-<div *ngIf="!filtersLoaded" class="loader-field">
-    <app-loader [filterIsLoad]="filtersLoaded"></app-loader>
 </div>

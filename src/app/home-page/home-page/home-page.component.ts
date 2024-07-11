@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './home-page.component.scss'
 })
 export class HomePageComponent {
+  public filterIsLoad: boolean = false;
 
+  filtersLoaded(loaded: boolean) : void {
+    this.filterIsLoad = loaded;
+  }
 }

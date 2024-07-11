@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FilterService, IFilters } from './filter.service';
 import { Subscription } from 'rxjs';
 
@@ -12,14 +12,16 @@ export class FilterComponent implements OnInit, OnDestroy {
 
   public filters!: IFilters;
   private subscription!: Subscription;
-  public filtersLoaded: boolean = false;
+  public filterLoaded : boolean = false;
+  @Output() public filtersLoadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
   constructor(private filterService: FilterService) { }
 
   ngOnInit() {
     this.subscription = this.filterService.getFilters().subscribe(data => {
       this.filters = data;
-      this.filtersLoaded = true;
+      this.filtersLoadedEvent.emit(true);
+      this.filterLoaded = true;
     });
   }
 
