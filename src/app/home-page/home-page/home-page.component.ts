@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class HomePageComponent {
   public filterIsLoad: boolean = false;
 
-  filtersLoaded(loaded: boolean) : void {
+  public filtersLoaded(loaded: boolean) : void {
     this.filterIsLoad = loaded;
   }
 }
