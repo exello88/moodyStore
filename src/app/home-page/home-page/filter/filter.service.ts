@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { MegaMenuItem, MenuItem } from 'primeng/api';
 
 export interface IFilters {
   'newArrivals': string[];
@@ -40,5 +41,33 @@ export class FilterService {
       formatRooms[normalStr] = filters.shopByRoom[room];
     }
     return formatRooms;
+  }
+
+  public getItemForMegaMenu(filters: IFilters): MegaMenuItem[] {
+    const megaMenuItems: MegaMenuItem[] = [];
+
+    
+    megaMenuItems.push({
+      label: 'New Arrivals',
+      items: [filters.newArrivals.map(item => ({ label: item }))]
+    });
+
+    
+    megaMenuItems.push({
+      label: 'Shop By Room',
+      items: [Object.entries(filters.shopByRoom).map(([room, items]) => ({
+        label: room,
+        items: items.map(item => ({ label: item }))
+      }))],
+    });
+
+    
+    megaMenuItems.push({
+      label: 'Shop by concept',
+      items: [filters.shopByConcept.map(item => ({ label: item }))]
+    });
+
+
+    return megaMenuItems;
   }
 }
