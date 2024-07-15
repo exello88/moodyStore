@@ -1,5 +1,6 @@
 <div *ngIf="filterLoaded" class="filter">
-    <p-megaMenu [model]="megaMenuItems" orientation="vertical" />
+    <p-tree [value]="treeMenuItems" selectionMode="checkbox">
+    </p-tree>
 
     <p class="filter__title">Gender</p>
     <div class="filter__gender" *ngFor="let item of filters.Gender">

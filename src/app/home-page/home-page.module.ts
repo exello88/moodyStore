@@ -6,8 +6,8 @@ import { HomePageRoutingModule } from './home-page-routing.module';
 import { FilterComponent } from './home-page/filter/filter.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { MegaMenuModule } from 'primeng/megamenu';
 import { LoaderComponent } from './home-page/loader/loader.component';
+import { TreeModule } from 'primeng/tree';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,7 @@ import { LoaderComponent } from './home-page/loader/loader.component';
     HomePageRoutingModule,
     HttpClientModule,
     ProgressSpinnerModule,
-    MegaMenuModule
+    TreeModule
   ],
   exports: [
     HomePageComponent
