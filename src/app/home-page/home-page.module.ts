@@ -7,6 +7,8 @@ import { FilterComponent } from './home-page/filter/filter.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { LoaderComponent } from './home-page/loader/loader.component';
+import { TreeModule } from 'primeng/tree';
+
 @NgModule({
   declarations: [
     HomePageComponent,
@@ -18,7 +20,8 @@ import { LoaderComponent } from './home-page/loader/loader.component';
     CommonModule,
     HomePageRoutingModule,
     HttpClientModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    TreeModule
   ],
   exports: [
     HomePageComponent
