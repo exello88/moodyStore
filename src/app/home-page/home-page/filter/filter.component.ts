@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FilterService, IFilters } from './filter.service';
-import { max, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { TreeNode } from 'primeng/api';
 
 export interface ISelectedItems {
@@ -27,6 +27,8 @@ export class FilterComponent implements OnInit, OnDestroy {
   private subscription!: Subscription;
   public filterLoaded: boolean = false;
   @Output() filtersLoadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>(false);
+
+
 
   constructor(private filterService: FilterService) { }
 
