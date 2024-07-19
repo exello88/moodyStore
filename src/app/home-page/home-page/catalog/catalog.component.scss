@@ -1,0 +1,79 @@
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+@import './variablesCatalog.scss';
+@import './reset.css';
+
+.catalog-field {
+    margin-left: 130px;
+
+    &__main-title {
+        margin-top: 20px;
+        color: $main-font-color;
+        font-weight: 600;
+        font-size: 40px;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    &__second-title {
+        margin-top: 20px;
+        color: $main-font-color;
+        font-weight: 300;
+        font-size: 18px;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    &__filter {
+        display: flex;
+        margin-top: 35px;
+
+        .filter__icon {
+            cursor: pointer;
+        }
+
+        .filter__title {
+            margin-top: -1px;
+            color: $main-font-color;
+            font-weight: 300;
+            font-size: 16px;
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .filter__icon {
+            width: 19px;
+            height: 16px;
+        }
+
+        .filer-mode {
+            display: flex;
+            margin-left: auto;
+            margin-right: 80px;
+
+            .filter-mode__title {
+                margin-left: 10px;
+                cursor: pointer;
+                font-size: 16px;
+                color: $main-font-color;
+            }
+
+            .selected-mod {
+                color: $selected-mod;
+            }
+        }
+    }
+
+    &__card-field { 
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+    
+    .selected-mod {
+        color: $selected-mod;
+    }
+}

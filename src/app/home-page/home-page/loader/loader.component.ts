@@ -5,6 +5,5 @@ import { Component, Input } from '@angular/core';
   templateUrl: './loader.component.html',
   styleUrl: './loader.component.scss'
 })
-export class LoaderComponent{
-  @Input() filterIsLoad!: boolean;
+export class LoaderComponent {
 }

@@ -1,32 +1,26 @@
 <div *ngIf="filterLoaded" class="filter">
-    <p class="filter__title">New Arrivals</p>
-    <div class="filter__arrivals">
-        <p class="filter__arrivals-item" *ngFor="let item of filters.newArrivals">{{item}}</p>
-    </div>
-
-    <p class="filter__title">Shop By Room</p>
-    <div *ngFor="let room of filters.shopByRoom | keyvalue">
-        <p class="filter__arrivals-item">{{ room.key }}</p>
-        <p *ngFor="let item of room.value" class="filter__arrivals-item-2">{{ item }}</p>
-    </div>
-
-    <p class="filter__title">Shop by concept</p>
-    <p class="filter__arrivals-item" *ngFor="let item of filters.shopByConcept">{{item}}</p>
+    <p-tree [value]="treeMenuItems" selectionMode="checkbox" (selectionChange)="selectionChange($event)">
+    </p-tree>
 
     <p class="filter__title">Gender</p>
     <div class="filter__gender" *ngFor="let item of filters.Gender">
-        <input type="checkbox">
-        <p class="filter__arrivals-item">{{item}}</p>
+        <p class="filter__arrivals-item" (click)="filterSearch(item)"
+            [class.active]="selectedItems.typeProduct.includes(item)">
+            {{item}}
+        </p>
     </div>
+
 
     <p class="filter__title">Color</p>
     <div class="filter__color">
-        <div class="color__block" *ngFor="let item of filters.Color" [style.background-color]="item"></div>
+        <div class="color__block" *ngFor="let item of filters.Color" [style.background-color]="item"
+            (click)=filterColorSearch(item) [class.activeColor]="selectedItems.Color.includes(item)"></div>
     </div>
 
     <p class="filter__title">Price</p>
     <div class="filter__gender" *ngFor="let item of filters.Price | keyvalue">
-        <input type="checkbox">
-        <p class="filter__arrivals-item">{{item.value.min}}$ - {{item.value.max}}$</p>
+        <input type="checkbox" (click)="filterPriceSearch(item.value.min, item.value.max)">
+        <p class="filter__arrivals-item" (click)="filterPriceSearch(item.value.min, item.value.max)"
+            [class.active]="selectedItems.price.hasOwnProperty(item.key)">{{item.value.min}}$ - {{item.value.max}}$</p>
     </div>
 </div>

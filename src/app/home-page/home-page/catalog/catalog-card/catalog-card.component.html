@@ -1,0 +1,12 @@
+<p-card class="card">
+    <p class="card__title">{{cardInfo.name}}</p>
+    <ng-template pTemplate="header">
+      <div src="./Rectangle62.png" class="card__img"></div>
+    </ng-template>
+    <div class="card__count-imgs" style="display: flex;">
+      <div class="card__countImg" [ngStyle]="{'background-color': cardInfo.color}"></div>
+      <div class="card__countImg" [ngStyle]="{'background-color': cardInfo.color}"></div>
+    </div>
+    <p class="card__price">{{cardInfo.price}}$</p>
+  </p-card>
+  

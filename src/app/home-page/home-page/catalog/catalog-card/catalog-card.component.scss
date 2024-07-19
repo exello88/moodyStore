@@ -1,0 +1,47 @@
+@import '../variablesCatalog.scss';
+
+.card {
+    width: 306px;
+    margin-top: 25px;
+    cursor: pointer;
+
+    &__img {
+        width: 306px;
+        height: 365px;
+        background-image: url('./Rectangle62.png');
+        background-size: cover;
+    }
+
+    &__title {
+        margin-top: 20px;
+        color: $main-font-color;
+        font-weight: 600;
+        font-size: 18px;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .p-card {
+        .p-card-header {
+            margin-top: 20px;
+            color: $main-font-color;
+            font-weight: 600;
+            font-size: 18px;
+            font-family: 'Roboto', sans-serif;
+        }
+    }
+
+    &__countImg {
+        margin-right: 5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+    }
+
+    &__price {
+        margin-top: 20px;
+        color: $main-font-color;
+        font-weight: 600;
+        font-size: 24px;
+        font-family: 'Roboto', sans-serif;
+    }
+}
