@@ -32,6 +32,7 @@ export class CatalogService {
 
   public getCardForDrawing(activeFilters: string[], mode: string): Observable<CardInfo[]> {
     const observables = this.getFilteredCards(activeFilters, mode);
+    console.log(activeFilters);
 
     return forkJoin(observables).pipe(
       map(cards => cards.filter(card => card !== null && card !== undefined)),
