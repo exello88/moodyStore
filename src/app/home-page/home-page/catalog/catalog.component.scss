@@ -1,15 +1,14 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
-@import './variablesCatalog.scss';
-@import './reset.css';
+@import '../variablesHomePage';
 
 .catalog-field {
     margin-left: 130px;
 
     &__main-title {
         margin-top: 20px;
-        color: $main-font-color;
+        color: $font-color;
         font-weight: 600;
         font-size: 40px;
         font-family: 'Roboto', sans-serif;
@@ -17,7 +16,7 @@
 
     &__second-title {
         margin-top: 20px;
-        color: $main-font-color;
+        color: $font-color;
         font-weight: 300;
         font-size: 18px;
         font-family: 'Roboto', sans-serif;
@@ -33,7 +32,7 @@
 
         .filter__title {
             margin-top: -1px;
-            color: $main-font-color;
+            color: $font-color;
             font-weight: 300;
             font-size: 16px;
             cursor: pointer;
@@ -54,7 +53,7 @@
                 margin-left: 10px;
                 cursor: pointer;
                 font-size: 16px;
-                color: $main-font-color;
+                color: $font-color;
             }
 
             .selected-mod {

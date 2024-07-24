@@ -32,13 +32,29 @@ export class CatalogService {
 
   public getCardForDrawing(activeFilters: string[], mode: string): Observable<CardInfo[]> {
     const observables = this.getFilteredCards(activeFilters, mode);
-    console.log(activeFilters);
 
     return forkJoin(observables).pipe(
       map(cards => cards.filter(card => card !== null && card !== undefined)),
       map(cards => cards.flatMap(card => card))
     );
   }
+
+  public filterCards(allCards: CardInfo[], selectedItems: ISelectedItems): CardInfo[] {
+    return allCards.filter(card => {
+      if (selectedItems.Color.length > 0 && !selectedItems.Color.includes(card.color)) {
+        return false;
+      }
+
+      if (Object.keys(selectedItems.price).length > 0) {
+        return Object.values(selectedItems.price).some(priceRange => {
+          return card.price >= priceRange.min && card.price <= priceRange.max;
+        });
+      }
+
+      return true;
+    });
+  }
+
 
   private getFilteredCards(activeFilters: string[], mode: string): Observable<CardInfo[]>[] {
     const observables: Observable<CardInfo[]>[] = [];
@@ -65,21 +81,4 @@ export class CatalogService {
 
     return camelCaseWords.join('');
   }
-
-  public filterCards(allCards: CardInfo[], selectedItems: ISelectedItems): CardInfo[] {
-    return allCards.filter(card => {
-      if (selectedItems.Color.length > 0 && !selectedItems.Color.includes(card.color)) {
-        return false;
-      }
-
-      if (Object.keys(selectedItems.price).length > 0) {
-        return Object.values(selectedItems.price).some(priceRange => {
-          return card.price >= priceRange.min && card.price <= priceRange.max;
-        });
-      }
-
-      return true;
-    });
-  }
-
 }

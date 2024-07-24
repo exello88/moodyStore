@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { FilterService, IFilters } from './filter.service';
 import { Subscription } from 'rxjs';
 import { TreeNode } from 'primeng/api';
@@ -17,15 +17,19 @@ export interface ISelectedItems {
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
-  styleUrl: './filter.component.scss'
+  styleUrl: './filter.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class FilterComponent implements OnInit, OnDestroy {
-  public treeMenuItems!: TreeNode[];
   @Input() public selectedItems!: ISelectedItems;
-  @Output() selectedItemsEvent: EventEmitter<ISelectedItems> = new EventEmitter<ISelectedItems>();
+
+  public treeMenuItems!: TreeNode[];
   public filters!: IFilters;
-  private subscription!: Subscription;
   public filterLoaded: boolean = false;
+
+  private subscription!: Subscription;
+
+  @Output() selectedItemsEvent: EventEmitter<ISelectedItems> = new EventEmitter<ISelectedItems>();
   @Output() filtersLoadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
 
@@ -63,24 +67,30 @@ export class FilterComponent implements OnInit, OnDestroy {
     this.selectedItemsEvent.emit(this.selectedItems);
   }
 
-  private extractLabels(selectedItem: any) {
-    console.log(selectedItem);
-    if (selectedItem.label && !this.selectedItems.typeProduct.includes(selectedItem.label)) {
-      this.selectedItems.typeProduct.push(selectedItem.label);
-    }
-    if (selectedItem.children && Array.isArray(selectedItem.children)) {
-      selectedItem.children.forEach((child: any) => this.extractLabels(child));
-    }
-  }
-
-  public selectionChange(selectedItem: any) {
-
+  public selectionChange(selectedItem: TreeNode | TreeNode[] | null) {
     this.selectedItems = {
       typeProduct: [],
       price: {},
       Color: []
     };
-    selectedItem.forEach((item: any) => this.extractLabels(item));
+
+    if (Array.isArray(selectedItem)) {
+      selectedItem.forEach((item: TreeNode) => this.extractLabels(item));
+    } else if (selectedItem) {
+      this.extractLabels(selectedItem);
+    }
+
     this.selectedItemsEvent.emit(this.selectedItems);
   }
+
+  private extractLabels(selectedItem: TreeNode) {
+    console.log(selectedItem);
+    if (selectedItem.label && !this.selectedItems.typeProduct.includes(selectedItem.label)) {
+      this.selectedItems.typeProduct.push(selectedItem.label);
+    }
+    if (selectedItem.children && Array.isArray(selectedItem.children)) {
+      selectedItem.children.forEach((child: TreeNode) => this.extractLabels(child));
+    }
+  }
+
 }

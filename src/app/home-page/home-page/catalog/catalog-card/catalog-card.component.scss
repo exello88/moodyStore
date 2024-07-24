@@ -1,4 +1,4 @@
-@import '../variablesCatalog.scss';
+@import '../../variablesHomePage';
 
 .card {
     width: 306px;
@@ -14,7 +14,7 @@
 
     &__title {
         margin-top: 20px;
-        color: $main-font-color;
+        color: $font-color;
         font-weight: 600;
         font-size: 18px;
         font-family: 'Roboto', sans-serif;
@@ -23,7 +23,7 @@
     .p-card {
         .p-card-header {
             margin-top: 20px;
-            color: $main-font-color;
+            color: $font-color;
             font-weight: 600;
             font-size: 18px;
             font-family: 'Roboto', sans-serif;
@@ -39,7 +39,7 @@
 
     &__price {
         margin-top: 20px;
-        color: $main-font-color;
+        color: $font-color;
         font-weight: 600;
         font-size: 24px;
         font-family: 'Roboto', sans-serif;

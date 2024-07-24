@@ -19,21 +19,20 @@ export interface ISelectedItems {
   styleUrl: './catalog.component.scss'
 })
 export class CatalogComponent implements DoCheck, OnDestroy {
-  public ObjectForDrawing!: CardInfo[];
   @Input() selectedItems!: ISelectedItems;
-  private lustSelectedItems!: ISelectedItems;
+
+  public ObjectForDrawing!: CardInfo[];
   public modeStatus: string = 'Models';
   public lastModeStatus: string = 'Models';
   public catalogStatus: boolean = false;
-  @Output() filterStatusEvent: EventEmitter<boolean> = new EventEmitter<boolean>(false);
+
+  private lustSelectedItems!: ISelectedItems;
   private subscription!: Subscription;
+
+  @Output() filterStatusEvent: EventEmitter<boolean> = new EventEmitter<boolean>(false);
   @Output() catalogStatusEvent: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
   constructor(private catalogServise: CatalogService) { }
-
-  ngOnInit() {
-
-  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
@@ -42,7 +41,7 @@ export class CatalogComponent implements DoCheck, OnDestroy {
   ngDoCheck() {
     if (JSON.stringify(this.selectedItems) !== JSON.stringify(this.lustSelectedItems)) {
       this.lustSelectedItems = JSON.parse(JSON.stringify(this.selectedItems));
-      if (this.selectedItems.typeProduct.length === 0) this.selectedItems.typeProduct = ['newArrivals', 'beddingSets', 'blankets', 'classicCollection', 'coffeeTables', 'conscious', 'duvetCoverSets']
+      if (this.selectedItems.typeProduct.length === 0) this.selectedItems.typeProduct = ['newArrivals', 'beddingSets', 'blankets', 'classicCollection', 'coffeeTables', 'conscious', 'duvetCoverSets'] 
       this.subscription = this.catalogServise.getCardForDrawing(this.selectedItems.typeProduct, this.modeStatus).subscribe(allCards => {
         this.ObjectForDrawing = this.catalogServise.filterCards(allCards, this.selectedItems);
         this.catalogStatusEvent.emit(true);

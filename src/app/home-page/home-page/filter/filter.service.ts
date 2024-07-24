@@ -33,15 +33,6 @@ export class FilterService {
       );
   }
 
-  private getNormalFormatCase(filters: IFilters): { [room: string]: string[] } {
-    const formatRooms: { [room: string]: string[] } = {};
-    for (const room in filters.shopByRoom) {
-      let normalStr = room.replace(/([A-Z])/g, ' $1').trim().toLowerCase();
-      normalStr = normalStr.charAt(0).toUpperCase() + normalStr.slice(1);
-      formatRooms[normalStr] = filters.shopByRoom[room];
-    }
-    return formatRooms;
-  }
 
   public filterItemsChange(selectedItems: string[], item: string): string[] {
     if (selectedItems) {
@@ -72,7 +63,7 @@ export class FilterService {
   }
 
 
-  getItemForMegaMenu(filters: IFilters): TreeNode[] {
+  public getItemForMegaMenu(filters: IFilters): TreeNode[] {
     const treeMenuItems: TreeNode[] = [];
 
     treeMenuItems.push({
@@ -94,5 +85,15 @@ export class FilterService {
     });
 
     return treeMenuItems;
+  }
+
+  private getNormalFormatCase(filters: IFilters): { [room: string]: string[] } {
+    const formatRooms: { [room: string]: string[] } = {};
+    for (const room in filters.shopByRoom) {
+      let normalStr = room.replace(/([A-Z])/g, ' $1').trim().toLowerCase();
+      normalStr = normalStr.charAt(0).toUpperCase() + normalStr.slice(1);
+      formatRooms[normalStr] = filters.shopByRoom[room];
+    }
+    return formatRooms;
   }
 }

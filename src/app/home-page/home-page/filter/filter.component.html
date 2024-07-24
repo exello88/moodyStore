@@ -1,6 +1,9 @@
 <div *ngIf="filterLoaded" class="filter">
-    <p-tree [value]="treeMenuItems" selectionMode="checkbox" (selectionChange)="selectionChange($event)">
+
+    <p-tree class="custom-tree" [value]="treeMenuItems" selectionMode="checkbox"
+        (selectionChange)="selectionChange($event)">
     </p-tree>
+
 
     <p class="filter__title">Gender</p>
     <div class="filter__gender" *ngFor="let item of filters.Gender">
@@ -19,7 +22,6 @@
 
     <p class="filter__title">Price</p>
     <div class="filter__gender" *ngFor="let item of filters.Price | keyvalue">
-        <input type="checkbox" (click)="filterPriceSearch(item.value.min, item.value.max)">
         <p class="filter__arrivals-item" (click)="filterPriceSearch(item.value.min, item.value.max)"
             [class.active]="selectedItems.price.hasOwnProperty(item.key)">{{item.value.min}}$ - {{item.value.max}}$</p>
     </div>
