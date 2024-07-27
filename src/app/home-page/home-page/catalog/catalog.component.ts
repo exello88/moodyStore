@@ -22,8 +22,9 @@ export class CatalogComponent implements DoCheck, OnDestroy {
   @Input() selectedItems!: ISelectedItems;
 
   public ObjectForDrawing!: CardInfo[];
-  public modeStatus: string = 'Models';
-  public lastModeStatus: string = 'Models';
+  public modeStatus: string = 'Products';
+  public lastModeStatus: string = 'Products';
+  public filterStatus: boolean = false;
   public catalogStatus: boolean = false;
 
   private lustSelectedItems!: ISelectedItems;
@@ -40,11 +41,13 @@ export class CatalogComponent implements DoCheck, OnDestroy {
 
   ngDoCheck() {
     if (JSON.stringify(this.selectedItems) !== JSON.stringify(this.lustSelectedItems)) {
+      this.catalogStatus = false;
       this.lustSelectedItems = JSON.parse(JSON.stringify(this.selectedItems));
       if (this.selectedItems.typeProduct.length === 0) this.selectedItems.typeProduct = ['newArrivals', 'beddingSets', 'blankets', 'classicCollection', 'coffeeTables', 'conscious', 'duvetCoverSets'] 
       this.subscription = this.catalogServise.getCardForDrawing(this.selectedItems.typeProduct, this.modeStatus).subscribe(allCards => {
         this.ObjectForDrawing = this.catalogServise.filterCards(allCards, this.selectedItems);
         this.catalogStatusEvent.emit(true);
+        this.catalogStatus = true;
       });
     }
 
@@ -57,8 +60,8 @@ export class CatalogComponent implements DoCheck, OnDestroy {
   }
 
   public changeFilterStatus(): void {
-    this.catalogStatus = !this.catalogStatus;
-    this.filterStatusEvent.emit(this.catalogStatus);
+    this.filterStatus = !this.filterStatus;
+    this.filterStatusEvent.emit(this.filterStatus);
   }
 
   public changeModeStatus(mode: string): void {

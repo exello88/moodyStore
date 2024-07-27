@@ -68,11 +68,7 @@ export class FilterComponent implements OnInit, OnDestroy {
   }
 
   public selectionChange(selectedItem: TreeNode | TreeNode[] | null) {
-    this.selectedItems = {
-      typeProduct: [],
-      price: {},
-      Color: []
-    };
+
 
     if (Array.isArray(selectedItem)) {
       selectedItem.forEach((item: TreeNode) => this.extractLabels(item));
@@ -84,7 +80,6 @@ export class FilterComponent implements OnInit, OnDestroy {
   }
 
   private extractLabels(selectedItem: TreeNode) {
-    console.log(selectedItem);
     if (selectedItem.label && !this.selectedItems.typeProduct.includes(selectedItem.label)) {
       this.selectedItems.typeProduct.push(selectedItem.label);
     }

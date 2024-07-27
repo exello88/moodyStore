@@ -8,8 +8,8 @@
     &__img {
         width: 306px;
         height: 365px;
-        background-image: url('./Rectangle62.png');
-        background-size: cover;
+        object-fit: cover;
+
     }
 
     &__title {

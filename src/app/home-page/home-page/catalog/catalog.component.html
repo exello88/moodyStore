@@ -1,4 +1,4 @@
-<div  [class.catalog-field]="catalogStatus">
+<div [class.catalog-field]="filterStatus">
     <p class="catalog-field__main-title">CATALOG</p>
     <p class="catalog-field__second-title">It's easy to transform your bedroom interior with our great selection of
         accessories.</p>
@@ -11,7 +11,10 @@
             <p class="filter-mode__title" (click) = "changeModeStatus('Products')" [class.selected-mod] = "modeStatus === 'Products'">Products</p>
         </div>
     </div>
-    <div class="catalog-field__card-field">
+    <div class="catalog-field__card-field" *ngIf = "catalogStatus">
         <app-catalog-card *ngFor="let cardInfo of ObjectForDrawing" [cardInfo]="cardInfo"></app-catalog-card>
+    </div>
+    <div class="catalog-field__card-field" *ngIf = "!catalogStatus">
+        <app-loader></app-loader>
     </div>
 </div>
