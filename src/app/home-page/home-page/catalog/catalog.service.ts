@@ -66,7 +66,7 @@ export class CatalogService {
 
   private getFilterCard(filterName: string, mode: string): Observable<CardInfo[]> {
     filterName = this.convertToCamelCase(filterName);
-    return this.http.get<CardInfo[]>(`https://moodystore-37962-default-rtdb.firebaseio.com/CATALOG/${mode}/${filterName}.json`);
+    return this.http.get<CardInfo[]>(`https://moodystore2-15929-default-rtdb.firebaseio.com/CATALOG/${mode}/${filterName}.json`);
   }
 
   private convertToCamelCase(input: string): string {

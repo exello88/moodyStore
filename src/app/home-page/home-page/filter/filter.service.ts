@@ -24,7 +24,7 @@ export class FilterService {
   constructor(private http: HttpClient) { }
 
   public getFilters(): Observable<IFilters> {
-    return this.http.get<IFilters>('https://moodystore-37962-default-rtdb.firebaseio.com/FILTERS.json')
+    return this.http.get<IFilters>('https://moodystore2-15929-default-rtdb.firebaseio.com/FILTERS.json')
       .pipe(
         map(data => {
           data.shopByRoom = this.getNormalFormatCase(data);
