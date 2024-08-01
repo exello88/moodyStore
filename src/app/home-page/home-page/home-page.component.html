@@ -1,3 +1,7 @@
 <app-promotion-field></app-promotion-field>
-<app-filter (filtersLoadedEvent)="filtersLoaded($event)"></app-filter>
-<app-loader [filterIsLoad]="filterIsLoad"></app-loader>
+<div class="filter-catalog" *ngIf = "catalogIsLoad" >
+  <app-filter *ngIf="filterStatus" (filtersLoadedEvent)="filtersLoaded($event)"
+    (selectedItemsEvent)="selectedItemsChange($event)" [selectedItems]="selectedItems"></app-filter>
+  <app-catalog (filterStatusEvent)="filterStatusChange($event)" (catalogStatusEvent)="catalogStatusChange($event)" [selectedItems]="selectedItems"></app-catalog>
+</div>
+<app-loader *ngIf = "!catalogIsLoad"></app-loader>

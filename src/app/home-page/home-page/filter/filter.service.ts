@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
 import { TreeNode } from 'primeng/api';
+import { map, Observable } from 'rxjs';
 
 export interface IFilters {
   'newArrivals': string[];
@@ -24,7 +24,7 @@ export class FilterService {
   constructor(private http: HttpClient) { }
 
   public getFilters(): Observable<IFilters> {
-    return this.http.get<IFilters>('https://moodystore-37962-default-rtdb.firebaseio.com/FILTERS.json')
+    return this.http.get<IFilters>('https://moodystore2-15929-default-rtdb.firebaseio.com/FILTERS.json')
       .pipe(
         map(data => {
           data.shopByRoom = this.getNormalFormatCase(data);
@@ -33,17 +33,37 @@ export class FilterService {
       );
   }
 
-  private getNormalFormatCase(filters: IFilters): { [room: string]: string[] } {
-    const formatRooms: { [room: string]: string[] } = {};
-    for (const room in filters.shopByRoom) {
-      let normalStr = room.replace(/([A-Z])/g, ' $1').trim().toLowerCase();
-      normalStr = normalStr.charAt(0).toUpperCase() + normalStr.slice(1);
-      formatRooms[normalStr] = filters.shopByRoom[room];
+
+  public filterItemsChange(selectedItems: string[], item: string): string[] {
+    if (selectedItems) {
+      const indexOfItem = selectedItems.indexOf(item);
+      if (indexOfItem === -1) {
+        selectedItems.push(item);
+      } else {
+        selectedItems.splice(indexOfItem, 1);
+      }
     }
-    return formatRooms;
+    else {
+      selectedItems = [item];
+    }
+    return selectedItems;
   }
 
-  getItemForMegaMenu(filters: IFilters): TreeNode[] {
+  public filterItemsPriceChange(selectedItemsPrice: { [key: string]: { min: number; max: number; } }, min: number, max: number): { [key: string]: { min: number; max: number; } } {
+    const updatedSelectedItemsPrice = { ...selectedItemsPrice };
+    const key = `price${min}to${max}`;
+
+    if (updatedSelectedItemsPrice[key]) {
+      delete updatedSelectedItemsPrice[key];
+    } else {
+      updatedSelectedItemsPrice[key] = { min, max };
+    }
+
+    return updatedSelectedItemsPrice;
+  }
+
+
+  public getItemForMegaMenu(filters: IFilters): TreeNode[] {
     const treeMenuItems: TreeNode[] = [];
 
     treeMenuItems.push({
@@ -65,5 +85,15 @@ export class FilterService {
     });
 
     return treeMenuItems;
+  }
+
+  private getNormalFormatCase(filters: IFilters): { [room: string]: string[] } {
+    const formatRooms: { [room: string]: string[] } = {};
+    for (const room in filters.shopByRoom) {
+      let normalStr = room.replace(/([A-Z])/g, ' $1').trim().toLowerCase();
+      normalStr = normalStr.charAt(0).toUpperCase() + normalStr.slice(1);
+      formatRooms[normalStr] = filters.shopByRoom[room];
+    }
+    return formatRooms;
   }
 }

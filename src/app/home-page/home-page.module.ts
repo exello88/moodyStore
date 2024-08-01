@@ -7,20 +7,25 @@ import { FilterComponent } from './home-page/filter/filter.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { LoaderComponent } from './home-page/loader/loader.component';
+import { CatalogComponent } from './home-page/catalog/catalog.component';
+import { CatalogCardComponent } from './home-page/catalog/catalog-card/catalog-card.component';
+import { CardModule } from 'primeng/card';
 import { TreeModule } from 'primeng/tree';
-
 @NgModule({
   declarations: [
     HomePageComponent,
     PromotionFieldComponent,
     FilterComponent,
-    LoaderComponent
+    LoaderComponent,
+    CatalogComponent,
+    CatalogCardComponent
   ],
   imports: [
     CommonModule,
     HomePageRoutingModule,
     HttpClientModule,
     ProgressSpinnerModule,
+    CardModule,
     TreeModule
   ],
   exports: [
