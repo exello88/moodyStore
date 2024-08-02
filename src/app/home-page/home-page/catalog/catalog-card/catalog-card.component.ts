@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CardInfo, CatalogService } from '../catalog.service';
+import { CardInfo } from '../catalog.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-catalog-card',
@@ -11,11 +12,16 @@ export class CatalogCardComponent implements OnInit {
 
   public imageUrl!: string;
 
-  constructor(private catalogService: CatalogService) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
-    if(this.cardInfo.image[0]){
+    if (this.cardInfo.image[0]) {
       this.imageUrl = this.cardInfo.image[0];
     }
   }
+
+  public navigateToProductCard(): void {
+    this.router.navigate(['/product', this.cardInfo.art]);
+  }
+
 }

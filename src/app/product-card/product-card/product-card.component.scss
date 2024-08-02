@@ -1,0 +1,84 @@
+@import '../../variables';
+
+.product {
+    margin-top: 50px;
+    margin-left: 80px;
+
+    .first-level-content {
+        display: flex;
+
+        .image-content {
+            width: 60%;
+            .p-element{
+                margin-right: 4px;
+            }
+        }
+
+        .buy-content {
+            margin-left: 10px;
+
+            &__name {
+                margin-top: 60px;
+                color: $font-color;
+                font-weight: 600;
+                font-size: 28px;
+                font-family: 'Roboto', sans-serif;
+            }
+
+            &__price {
+                margin-top: 30px;
+                color: $font-color;
+                font-weight: 600;
+                font-size: 24px;
+                font-family: 'Roboto', sans-serif;
+            }
+
+            &__button {
+
+                button {
+                    width: 28.9vw;
+                    cursor: pointer;
+                    height: 54px;
+                    background-color: $font-color;
+
+                    .p-button-label {
+                        margin-top: 30px;
+                        color: white;
+                        font-weight: 600;
+                        font-size: 24px;
+                        font-family: 'Roboto', sans-serif;
+                    }
+                }
+            }
+        }
+    }
+
+    .p-card {
+        width: 57%;
+        margin-top: 50px;
+        background-color: #F0EFED;
+        color: $font-color;
+        padding: 10px 20px 10px 20px;
+
+        .description__header {
+            color: $font-color;
+            font-weight: 600;
+            font-size: 20px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .description__content{
+            color: $font-color;
+            font-weight: 400;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .description__art{
+            color: $font-color;
+            font-weight: 400;
+            font-size: 12px;
+            font-family: 'Roboto', sans-serif;
+        }
+    }
+}

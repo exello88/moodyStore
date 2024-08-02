@@ -1,0 +1,17 @@
+<div class="product" *ngIf="cardInfo">
+    <div class="first-level-content">
+        <div class="image-content">
+            <p-image *ngFor="let imageUrl of cardInfo.image" src="{{imageUrl}}" alt="Image" width="49%" />
+        </div>
+        <div class="buy-content">
+            <p class="buy-content__name">{{cardInfo.name}}</p>
+            <p class="buy-content__price">{{cardInfo.price}} $</p>
+            <p-button class="buy-content__button" label="Add to shopping bag" />
+        </div>
+    </div>
+    <p-card class="description">
+        <p class="description__header">DESCTIPTION</p>
+        <p class="description__content">{{cardInfo.description}}</p>
+        <p class="description__art">Art - {{cardInfo.art}}</p>
+    </p-card>
+</div>
