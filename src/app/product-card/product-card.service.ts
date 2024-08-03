@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../environments';
 
 export interface ICardInfo {
   art: string;
@@ -18,9 +19,9 @@ interface IAllCardsObject {
   providedIn: 'root'
 })
 export class ProductCardService {
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  public getCardInfo(): Observable<IAllCardsObject> {
-    return this.http.get<IAllCardsObject>('https://moodystore2-15929-default-rtdb.firebaseio.com/CATALOG/Products.json');
+  public getAllCard(): Observable<IAllCardsObject> {
+    return this.http.get<IAllCardsObject>(environment.apiFireBase + '/CATALOG/Products.json');
   }
 }

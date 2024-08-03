@@ -5,6 +5,7 @@ import { ProductCardRoutingModule } from './product-card-routing.module';
 import { ImageModule } from 'primeng/image';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
+import { MessagesModule } from 'primeng/messages';
 
 
 
@@ -17,7 +18,8 @@ import { CardModule } from 'primeng/card';
     ProductCardRoutingModule,
     ImageModule,
     ButtonModule,
-    CardModule
+    CardModule,
+    MessagesModule
   ]
 })
 export class ProductCardModule { }

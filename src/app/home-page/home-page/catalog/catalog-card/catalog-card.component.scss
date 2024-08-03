@@ -30,6 +30,10 @@
         }
     }
 
+    &__count-imgs {
+        display: flex;
+    }
+
     &__countImg {
         margin-right: 5px;
         width: 10px;

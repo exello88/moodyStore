@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 import { map, Observable } from 'rxjs';
+import { environment } from '../../../environments';
 
 export interface IFilters {
   'newArrivals': string[];
@@ -24,7 +25,7 @@ export class FilterService {
   constructor(private http: HttpClient) { }
 
   public getFilters(): Observable<IFilters> {
-    return this.http.get<IFilters>('https://moodystore2-15929-default-rtdb.firebaseio.com/FILTERS.json')
+    return this.http.get<IFilters>(environment.apiFireBase + '/FILTERS.json')
       .pipe(
         map(data => {
           data.shopByRoom = this.getNormalFormatCase(data);

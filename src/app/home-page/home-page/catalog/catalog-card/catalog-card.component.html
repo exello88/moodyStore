@@ -1,9 +1,9 @@
 <p-card class="card" (click)="navigateToProductCard()">
   <p class="card__title">{{cardInfo.name}}</p>
   <ng-template pTemplate="header">
-    <img *ngIf="imageUrl" class="card__img" [src]="imageUrl" alt="{{ cardInfo.name }}" />
+    <img *ngIf="cardInfo.image[0]" class="card__img" [src]="cardInfo.image[0]" alt="{{ cardInfo.name }}" />
   </ng-template>
-  <div class="card__count-imgs" style="display: flex;">
+  <div class="card__count-imgs">
     <div class="card__countImg" [ngStyle]="{'background-color': cardInfo.color}"></div>
     <div class="card__countImg" [ngStyle]="{'background-color': cardInfo.color}"></div>
   </div>
