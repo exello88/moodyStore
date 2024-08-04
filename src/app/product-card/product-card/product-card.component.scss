@@ -5,23 +5,17 @@
     margin-left: 80px;
 
     .first-level-content {
-        display: flex;
+        display: grid;
+        grid-template-columns: 60% 1fr;
+        gap: 10px;
 
         .image-content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            max-width: 100%;
-
-            p-image {
-                flex: 0 0 calc(50% - 4px);
-                margin-top: 4px;
-                margin-right: 4px;
-            }
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4px;
         }
 
         .buy-content {
-            margin-left: 10px;
 
             &__name {
                 margin-top: 60px;
@@ -40,8 +34,10 @@
             }
 
             &__button {
+                display: grid;
                 button {
-                    width: 400px;
+                    grid-row: 1;
+                    margin-right: 80px;
                     cursor: pointer;
                     height: 54px;
                     background-color: $font-color;
@@ -61,7 +57,8 @@
     }
 
     .description-field {
-        max-width: 60%;
+        display: grid;
+        grid-template-columns: 60% 1fr;
 
         .p-card {
             flex: 0 0 100%;
