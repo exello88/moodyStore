@@ -1,0 +1,25 @@
+<div class="product" *ngIf="cardInfo && !errorLoading">
+    <div class="first-level-content">
+        <div class="image-content">
+            <p-image *ngFor="let imageUrl of cardInfo.image" src="{{imageUrl}}" alt="Image" width="100%" />
+        </div>
+        <div class="buy-content">
+            <p class="buy-content__name">{{cardInfo.name}}</p>
+            <p class="buy-content__price">{{cardInfo.price}} $</p>
+            <p-button class="buy-content__button" label="Add to shopping bag" />
+        </div>
+    </div>
+    <p-card class="description-field">
+        <p class="description__header">DESCTIPTION</p>
+        <p class="description__content">{{cardInfo.description}}</p>
+        <p class="description__art">Art - {{cardInfo.art}}</p>
+    </p-card>
+</div>
+
+<div class="error-field" *ngIf="errorLoading">
+    <p-messages>
+        <ng-template pTemplate>
+            <div class="errorMessage">{{errorMessage}}</div>
+        </ng-template>
+    </p-messages>
+</div>

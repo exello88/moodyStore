@@ -1,4 +1,4 @@
-@import '../../variablesHomePage';
+@import '../../../../variables';
 
 .card {
     width: 306px;
@@ -28,6 +28,10 @@
             font-size: 18px;
             font-family: 'Roboto', sans-serif;
         }
+    }
+
+    &__count-imgs {
+        display: flex;
     }
 
     &__countImg {
