@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../environments';
+import { environment } from '../../environments';
 
 export interface ICardInfo {
   art: string;
@@ -18,23 +18,11 @@ interface IAllCardsObject {
 @Injectable({
   providedIn: 'root'
 })
-export class ProductCardService {
+export class CartService {
+
   constructor(private http: HttpClient) { }
 
   public getAllCard(): Observable<IAllCardsObject> {
     return this.http.get<IAllCardsObject>(environment.apiFireBase + '/CATALOG/Products.json');
-  }
-
-  public addToShopingBag(art: string): void {
-    const shopingBagJson = localStorage.getItem('shopingBag');
-    if (shopingBagJson) {
-      let shopingBag = JSON.parse(shopingBagJson);
-      if (!shopingBag.includes(art)) {
-        shopingBag.push(art);
-        localStorage.setItem('shopingBag', JSON.stringify(shopingBag));
-      }
-    }
-    else
-      localStorage.setItem('shopingBag', JSON.stringify([art]));
   }
 }

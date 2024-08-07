@@ -3,17 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductCardService } from '../product-card.service';
 import { catchError, Subscription, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-
-export interface ICardInfo {
-  art: string;
-  description: string;
-  image: string;
-  name: string;
-  price: number;
-  color: string;
-}
-
-
+import { ICardInfo } from '../product-card.service';
 
 @Component({
   selector: 'app-product-card',
@@ -38,6 +28,14 @@ export class ProductCardComponent implements OnInit, OnDestroy {
     this.getCardInfo();
   }
 
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe;
+  }
+
+  public addToShopingBag(): void {
+    this.cardService.addToShopingBag(this.art);
+  }
+
   private getCardInfo(): void {
     this.subscriptions = this.cardService.getAllCard().pipe(
       catchError(error => {
@@ -57,7 +55,4 @@ export class ProductCardComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe;
-  }
 }
