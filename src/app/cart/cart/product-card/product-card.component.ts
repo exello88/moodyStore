@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CartComponent } from '../cart.component'
 import { Router } from '@angular/router';
 import { ICardInfo } from '../cart.service';
-import { Card } from 'primeng/card';
 
 
 @Component({
