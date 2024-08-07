@@ -51,12 +51,15 @@ export class CartComponent implements OnInit, OnDestroy {
           data[key].forEach(card => {
             if (card.art === art) {
               this.elementsFromBag.push(card);
-              this.totalPrice = this.totalPrice + card.price;
-              this.totalPrice = +this.totalPrice.toFixed(2);
             }
           });
         });
       });
     });
+  }
+
+  public recalculationTotal(value : number) : void{
+    this.totalPrice = this.totalPrice + value;
+    this.totalPrice = +this.totalPrice.toFixed(2);
   }
 }
