@@ -1,14 +1,15 @@
 <p class="cart-title">SHOPPING BAG</p>
 
-<div class="cart-content" *ngIf = "!errorLoading">
+<div class="cart-content" *ngIf="!errorLoading">
     <div class="cart-content__card">
-        <app-product-card *ngFor = "let card of elementsFromBag" [cardInfo] = "card"></app-product-card>
+        <app-product-card *ngFor="let card of elementsFromBag" [cardInfo]="card"
+            (priceForRecalculating)="recalculationTotal($event)" (redrawingCards)="drawingCart()"></app-product-card>
         <p class="card__title">Total</p>
         <div class="dividing-line"></div>
         <p class="card__price">{{totalPrice}} $</p>
 
     </div>
-    
+
     <div class="cart-content__input-field">
         <div class="new-level">
             <p class="input-field__text">Order value:</p>
@@ -24,12 +25,4 @@
         </div>
         <p-button class="input-field__button" label="Add to shopping bag" />
     </div>
-</div>
-
-<div class="error-field" *ngIf="errorLoading">
-    <p-messages>
-        <ng-template pTemplate>
-            <div class="errorMessage">{{errorMessage}}</div>
-        </ng-template>
-    </p-messages>
 </div>

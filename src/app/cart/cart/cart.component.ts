@@ -2,7 +2,9 @@ import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { catchError, Subscription, throwError } from 'rxjs';
 import { CartService } from './cart.service';
 import { Router } from '@angular/router';
-import { ICardInfo } from './cart.service';
+import { ICardInfo, IAllCardsObject } from './cart.service';
+import { DialogService } from 'primeng/dynamicdialog';
+import { ErrorMessageComponent } from './error-message/error-message.component';
 
 @Component({
   selector: 'app-cart',
@@ -13,16 +15,52 @@ import { ICardInfo } from './cart.service';
 export class CartComponent implements OnInit, OnDestroy {
   public elementsFromBag!: ICardInfo[];
   public errorLoading: boolean = false;
-  public errorMessage!: string;
   public totalPrice!: number;
 
   private subscriptions: Subscription = new Subscription();
 
-  constructor(private cartServise: CartService, private router: Router) { }
+  constructor(private cartServise: CartService, private dialogService: DialogService, private router: Router) { }
 
   ngOnInit() {
+    this.drawingCart();
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+  }
+
+  public getElementFromBag(elementsFromBagArts: string[]): void {
+    this.subscriptions = this.cartServise.getAllCards().pipe(
+      catchError(error => {
+        this.errorLoading = true;
+        const errorDialog = this.dialogService.open(ErrorMessageComponent, {
+          data: {
+            errorMessage: 'Unable to retrieve data'
+          }
+        });
+        errorDialog.onClose.subscribe(() => {
+          this.router.navigate(['/home']);
+        });
+        return throwError(() => new Error(error.message));
+      })
+    ).subscribe(data => {
+      this.filterProductCards(data, elementsFromBagArts);
+    });
+  }
+
+
+  public recalculationTotal(value: number): void {
+    this.totalPrice = this.totalPrice + value;
+    this.totalPrice = +this.totalPrice.toFixed(2);
+  }
+
+  public drawingCart() : void {
     this.elementsFromBag = [];
     this.totalPrice = 0;
+    this.getCartItemsFromLocalStorage();
+  }
+
+  private getCartItemsFromLocalStorage() : void {
     if (typeof localStorage !== 'undefined') {
       const shopingBagJson = localStorage.getItem('shopingBag');
       if (shopingBagJson) {
@@ -32,36 +70,16 @@ export class CartComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe();
-  }
-
-  public getElementFromBag(elementsFromBagArts: string[]): void {
-    this.subscriptions = this.cartServise.getAllCard().pipe(
-      catchError(error => {
-        this.errorLoading = true;
-        this.errorMessage = 'Unable to retrieve data';
-        setTimeout(() => {
-          this.router.navigate(['/home']);
-        }, 1000);
-        return throwError(() => new Error(error.message));
-      })
-    ).subscribe(data => {
-      Object.keys(data).forEach(key => {
-        elementsFromBagArts.forEach(art => {
-
-          data[key].forEach(card => {
-            if (card.art === art) {
-              this.elementsFromBag.push(card);
-            }
-          });
+  private filterProductCards(allCards: IAllCardsObject, elementsFromBagArts: string[]) : void {
+    Object.keys(allCards).forEach(key => {
+      elementsFromBagArts.forEach(art => {
+        allCards[key].forEach(card => {
+          if (card.art === art) {
+            this.elementsFromBag.push(card);
+            this.totalPrice = this.totalPrice + card.price;
+          }
         });
       });
     });
-  }
-
-  public recalculationTotal(value : number) : void{
-    this.totalPrice = this.totalPrice + value;
-    this.totalPrice = +this.totalPrice.toFixed(2);
   }
 }

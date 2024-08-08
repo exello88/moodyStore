@@ -11,7 +11,7 @@ export interface ICardInfo {
   price: number;
   color: string;
 }
-interface IAllCardsObject {
+export interface IAllCardsObject {
   [key: string]: ICardInfo[];
 }
 
@@ -22,7 +22,7 @@ export class CartService {
 
   constructor(private http: HttpClient) { }
 
-  public getAllCard(): Observable<IAllCardsObject> {
+  public getAllCards(): Observable<IAllCardsObject> { 
     return this.http.get<IAllCardsObject>(environment.apiFireBase + '/CATALOG/Products.json');
   }
 }
