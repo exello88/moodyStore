@@ -23,10 +23,12 @@ export class CartComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.elementsFromBag = [];
     this.totalPrice = 0;
-    const shopingBagJson = localStorage.getItem('shopingBag');
-    if (shopingBagJson) {
-      let elementsFromBagArts = JSON.parse(shopingBagJson);
-      this.getElementFromBag(elementsFromBagArts);
+    if (typeof localStorage !== 'undefined') {
+      const shopingBagJson = localStorage.getItem('shopingBag');
+      if (shopingBagJson) {
+        let elementsFromBagArts = JSON.parse(shopingBagJson);
+        this.getElementFromBag(elementsFromBagArts);
+      }
     }
   }
 
@@ -47,7 +49,7 @@ export class CartComponent implements OnInit, OnDestroy {
     ).subscribe(data => {
       Object.keys(data).forEach(key => {
         elementsFromBagArts.forEach(art => {
-          
+
           data[key].forEach(card => {
             if (card.art === art) {
               this.elementsFromBag.push(card);
