@@ -7,6 +7,7 @@ import { HomePageModule } from './home-page/home-page.module';
 import { ProfileModule } from './profile/profile.module';
 import { WishlistModule } from './wishlist/wishlist.module';
 import { CartModule } from './cart/cart.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { CartModule } from './cart/cart.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HomePageModule,
     ProfileModule,

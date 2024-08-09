@@ -6,12 +6,14 @@ import { ImageModule } from 'primeng/image';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { MessagesModule } from 'primeng/messages';
+import { ErrorMessageComponent } from './error-message/error-message.component';
 
 
 
 @NgModule({
   declarations: [
-    ProductCardComponent
+    ProductCardComponent,
+    ErrorMessageComponent
   ],
   imports: [
     CommonModule,

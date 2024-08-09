@@ -24,4 +24,17 @@ export class ProductCardService {
   public getAllCard(): Observable<IAllCardsObject> {
     return this.http.get<IAllCardsObject>(environment.apiFireBase + '/CATALOG/Products.json');
   }
+
+  public addToShopingBag(art: string): void {
+    const shopingBagJson = localStorage.getItem('shopingBag');
+    if (shopingBagJson) {
+      let shopingBag = JSON.parse(shopingBagJson);
+      if (!shopingBag.includes(art)) {
+        shopingBag.push(art);
+        localStorage.setItem('shopingBag', JSON.stringify(shopingBag));
+      }
+    }
+    else
+      localStorage.setItem('shopingBag', JSON.stringify([art]));
+  }
 }
