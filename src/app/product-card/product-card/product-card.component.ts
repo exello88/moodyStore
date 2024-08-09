@@ -4,6 +4,8 @@ import { ProductCardService } from '../product-card.service';
 import { catchError, Subscription, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { ICardInfo } from '../product-card.service';
+import { DialogService } from 'primeng/dynamicdialog';
+import { ErrorMessageComponent } from '../error-message/error-message.component';
 
 @Component({
   selector: 'app-product-card',
@@ -15,11 +17,10 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   public cardInfo!: ICardInfo;
   public art!: string;
   public errorLoading: boolean = false;
-  public errorMessage!: string;
 
   private subscriptions!: Subscription;
 
-  constructor(private cardService: ProductCardService, private activeRoute: ActivatedRoute, private router: Router) { }
+  constructor(private cardService: ProductCardService, private activeRoute: ActivatedRoute, private router: Router, private dialogService: DialogService) { }
 
   ngOnInit() {
     this.subscriptions = this.activeRoute.paramMap.subscribe(params => {
@@ -40,10 +41,14 @@ export class ProductCardComponent implements OnInit, OnDestroy {
     this.subscriptions = this.cardService.getAllCard().pipe(
       catchError(error => {
         this.errorLoading = true;
-        this.errorMessage = 'Unable to retrieve data';
-        setTimeout(() => {
+        const errorDialog = this.dialogService.open(ErrorMessageComponent, {
+          data: {
+            errorMessage: 'Unable to retrieve data'
+          }
+        });
+        errorDialog.onClose.subscribe(() => {
           this.router.navigate(['/home']);
-        }, 1000);
+        });
         return throwError(() => new Error(error.message));
       })
     ).subscribe(data => {

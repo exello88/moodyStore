@@ -91,21 +91,13 @@
     }
 }
 
-.error-field {
-    margin-left: 5%;
-    margin-top: 30px;
-    width: 250px;
-    height: 50px;
-    border: 2px solid #FECACA;
-    border-radius: 15px;
-    background-color: #FEF3F3;
-
-    .errorMessage {
-        margin-top: 13px;
-        margin-left: 10px;
+.p-dialog-header-icons{
+    margin-bottom: -55px;
+    margin-right: 10px;
+    button{
+        background-color: #FEF3F3;
+        border: 0px;
         color: #DC2626;
-        font-weight: 600;
-        font-size: 18px;
-        font-family: 'Roboto', sans-serif;
-    }
+        cursor: pointer;
+    }   
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 
 @Component({
@@ -6,7 +6,7 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
   templateUrl: './error-message.component.html',
   styleUrl: './error-message.component.scss'
 })
-export class ErrorMessageComponent implements OnInit {
+export class ErrorMessageComponent {
   public message: string = '';
 
   constructor(public config: DynamicDialogConfig) { }
