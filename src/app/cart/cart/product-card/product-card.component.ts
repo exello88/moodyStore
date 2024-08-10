@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ICardInfo } from '../cart.service';
+import { AppComponent } from '../../../app.component';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class ProductCardComponent implements OnInit {
   @Output() priceForRecalculating: EventEmitter<number> = new EventEmitter<number>();
   @Output() redrawingCards: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private appComponent : AppComponent) { }
 
   ngOnInit() {
     this.lastPrice = this.cardInfo.price;
@@ -29,6 +30,7 @@ export class ProductCardComponent implements OnInit {
       shopingBag = shopingBag.filter((item: string) => item !== this.cardInfo.art);
       localStorage.setItem('shopingBag', JSON.stringify(shopingBag));
       this.redrawingCards.emit();
+      this.appComponent.changeCartItemCount();
     }
   }
 

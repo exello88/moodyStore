@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ICardInfo } from '../product-card.service';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-product-card',
@@ -17,14 +18,16 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   public cardInfo!: ICardInfo;
   public art!: string;
   public errorLoading: boolean = false;
+  public buttonText!: string;
 
   private subscriptions!: Subscription;
 
-  constructor(private cardService: ProductCardService, private activeRoute: ActivatedRoute, private router: Router, private dialogService: DialogService) { }
+  constructor(private cardService: ProductCardService, private activeRoute: ActivatedRoute, private router: Router, private dialogService: DialogService, private AppComponent: AppComponent) { }
 
   ngOnInit() {
     this.subscriptions = this.activeRoute.paramMap.subscribe(params => {
       this.art = params.get('art') || '';
+      this.initialButtonText();
     });
     this.getCardInfo();
   }
@@ -35,6 +38,8 @@ export class ProductCardComponent implements OnInit, OnDestroy {
 
   public addToShopingBag(): void {
     this.cardService.addToShopingBag(this.art);
+    this.changeButtonText();
+    this.AppComponent.changeCartItemCount();
   }
 
   private getCardInfo(): void {
@@ -58,6 +63,28 @@ export class ProductCardComponent implements OnInit, OnDestroy {
         });
       });
     });
+  }
+
+  private initialButtonText(): void {
+    if (typeof localStorage !== 'undefined') {
+      const shopingBagJson = localStorage.getItem('shopingBag');
+      if (shopingBagJson) {
+        let shopingBag = JSON.parse(shopingBagJson);
+        if (!shopingBag.includes(this.art)) {
+          this.buttonText = 'Add to shopping bag';
+        }
+        else {
+          this.buttonText = 'Clear of shopping bag';
+        }
+      }
+    }
+  }
+
+  private changeButtonText() : void {
+    if (this.buttonText === 'Add to shopping bag')
+      this.buttonText = 'Clear of shopping bag';
+    else
+      this.buttonText = 'Add to shopping bag';
   }
 
 }

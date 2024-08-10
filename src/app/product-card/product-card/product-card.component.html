@@ -6,7 +6,7 @@
         <div class="buy-content">
             <p class="buy-content__name">{{cardInfo.name}}</p>
             <p class="buy-content__price">{{cardInfo.price}} $</p>
-            <p-button class="buy-content__button" label="Add to shopping bag" (click) = "addToShopingBag()" />
+            <p-button class="buy-content__button" label="{{buttonText}}" (click) = "addToShopingBag()" />
         </div>
     </div>
     <p-card class="description-field">
