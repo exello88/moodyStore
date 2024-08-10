@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { environment } from '../../../environments';
 
 
-export interface CardInfo {
+export interface ICardInfo {
   art: string;
   description: string;
   image: string;
@@ -25,13 +25,21 @@ export interface ISelectedItems {
   Color: string[];
 }
 
+export interface IAllCardsObject {
+  [key: string]: ICardInfo[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class CatalogService {
   constructor(private http: HttpClient) { }
 
-  public getCardForDrawing(activeFilters: string[], mode: string): Observable<CardInfo[]> {
+  public getAllCards(): Observable<IAllCardsObject> {
+    return this.http.get<IAllCardsObject>(environment.apiFireBase + '/CATALOG/Products.json');
+  }
+
+  public getCardForDrawing(activeFilters: string[], mode: string): Observable<ICardInfo[]> {
     const observables = this.getFilteredCards(activeFilters, mode);
 
     return forkJoin(observables).pipe(
@@ -40,7 +48,7 @@ export class CatalogService {
     );
   }
 
-  public filterCards(allCards: CardInfo[], selectedItems: ISelectedItems): CardInfo[] {
+  public filterCards(allCards: ICardInfo[], selectedItems: ISelectedItems): ICardInfo[] {
     return allCards.filter(card => {
       if (selectedItems.Color.length > 0 && !selectedItems.Color.includes(card.color)) {
         return false;
@@ -57,17 +65,17 @@ export class CatalogService {
   }
 
 
-  private getFilteredCards(activeFilters: string[], mode: string): Observable<CardInfo[]>[] {
-    const observables: Observable<CardInfo[]>[] = [];
+  private getFilteredCards(activeFilters: string[], mode: string): Observable<ICardInfo[]>[] {
+    const observables: Observable<ICardInfo[]>[] = [];
     activeFilters.forEach(filter => {
       observables.push(this.getFilterCard(filter, mode));
     });
     return observables;
   }
 
-  private getFilterCard(filterName: string, mode: string): Observable<CardInfo[]> {
+  private getFilterCard(filterName: string, mode: string): Observable<ICardInfo[]> {
     filterName = this.convertToCamelCase(filterName);
-    return this.http.get<CardInfo[]>(environment.apiFireBase + `/CATALOG/${mode}/${filterName}.json`);
+    return this.http.get<ICardInfo[]>(environment.apiFireBase + `/CATALOG/${mode}/${filterName}.json`);
   }
 
   private convertToCamelCase(input: string): string {

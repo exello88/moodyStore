@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CardInfo } from '../catalog.service';
+import { ICardInfo } from '../catalog.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./catalog-card.component.scss']
 })
 export class CatalogCardComponent {
-  @Input() public cardInfo!: CardInfo;
+  @Input() public cardInfo!: ICardInfo;
 
   constructor(private router: Router) { }
 

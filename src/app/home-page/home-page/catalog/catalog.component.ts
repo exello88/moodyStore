@@ -1,5 +1,5 @@
 import { Component, DoCheck, EventEmitter, Input, OnDestroy, Output, SimpleChanges } from '@angular/core';
-import { CardInfo, CatalogService } from './catalog.service';
+import { ICardInfo, CatalogService } from './catalog.service';
 import { Subscription } from 'rxjs';
 
 export interface ISelectedItems {
@@ -21,7 +21,7 @@ export interface ISelectedItems {
 export class CatalogComponent implements DoCheck, OnDestroy {
   @Input() selectedItems!: ISelectedItems;
 
-  public ObjectForDrawing!: CardInfo[];
+  public ObjectForDrawing: ICardInfo[] = [];
   public modeStatus: string = 'Products';
   public lastModeStatus: string = 'Products';
   public filterStatus: boolean = false;
@@ -41,14 +41,7 @@ export class CatalogComponent implements DoCheck, OnDestroy {
 
   ngDoCheck() {
     if (JSON.stringify(this.selectedItems) !== JSON.stringify(this.lustSelectedItems)) {
-      this.catalogStatus = false;
-      this.lustSelectedItems = JSON.parse(JSON.stringify(this.selectedItems));
-      if (this.selectedItems.typeProduct.length === 0) this.selectedItems.typeProduct = ['newArrivals', 'beddingSets', 'blankets', 'classicCollection', 'coffeeTables', 'conscious', 'duvetCoverSets'] 
-      this.subscription = this.catalogServise.getCardForDrawing(this.selectedItems.typeProduct, this.modeStatus).subscribe(allCards => {
-        this.ObjectForDrawing = this.catalogServise.filterCards(allCards, this.selectedItems);
-        this.catalogStatusEvent.emit(true);
-        this.catalogStatus = true;
-      });
+      this.preparingElementsForDrawing();
     }
 
     if (this.modeStatus !== this.lastModeStatus) {
@@ -66,5 +59,26 @@ export class CatalogComponent implements DoCheck, OnDestroy {
 
   public changeModeStatus(mode: string): void {
     this.modeStatus = mode;
+  }
+
+  private preparingElementsForDrawing():void{
+    this.catalogStatus = false;
+    this.lustSelectedItems = JSON.parse(JSON.stringify(this.selectedItems));
+    if (this.selectedItems.typeProduct.length === 0) {
+      this.subscription = this.catalogServise.getAllCards().subscribe(allCards => {
+        Object.keys(allCards).forEach(key => {
+          allCards[key].forEach(card => {
+            this.ObjectForDrawing.push(card);
+          });
+        });
+        this.catalogStatus = true;
+      });
+    }
+    else {
+      this.subscription = this.catalogServise.getCardForDrawing(this.selectedItems.typeProduct, this.modeStatus).subscribe(allCards => {
+        this.ObjectForDrawing = this.catalogServise.filterCards(allCards, this.selectedItems);
+        this.catalogStatus = true;
+      });
+    }
   }
 }
