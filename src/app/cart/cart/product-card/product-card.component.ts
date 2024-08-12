@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { ICardInfo } from '../cart.service';
+import { CartService, ICardInfo } from '../cart.service';
 import { AppComponent } from '../../../app.component';
 
 
@@ -11,23 +11,27 @@ import { AppComponent } from '../../../app.component';
 })
 export class ProductCardComponent implements OnInit {
   @Input() cardInfo !: ICardInfo;
+  public productQuantity!: number;
 
   private lastPrice!: number;
 
   @Output() priceForRecalculating: EventEmitter<number> = new EventEmitter<number>();
   @Output() redrawingCards: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private router: Router, private appComponent : AppComponent) { }
+  constructor(private router: Router, private appComponent: AppComponent, private cartService: CartService) { }
 
   ngOnInit() {
     this.lastPrice = this.cardInfo.price;
+    this.initializationProductQuantity();
   }
 
   public deleteCard(): void {
     const shopingBagJson = localStorage.getItem('shopingBag');
     if (shopingBagJson) {
       let shopingBag = JSON.parse(shopingBagJson);
-      shopingBag = shopingBag.filter((item: string) => item !== this.cardInfo.art);
+      if (shopingBag[this.cardInfo.art]) {
+        delete shopingBag[this.cardInfo.art];
+      }
       localStorage.setItem('shopingBag', JSON.stringify(shopingBag));
       this.redrawingCards.emit();
       this.appComponent.changeCartItemCount();
@@ -40,8 +44,31 @@ export class ProductCardComponent implements OnInit {
 
   public inputValueChange(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
+    if (inputElement.value === '') return;
+
     let inputValue = +inputElement.value;
-    this.priceForRecalculating.emit(inputValue * this.cardInfo.price - this.lastPrice);
-    this.lastPrice = inputValue * this.cardInfo.price;
+    if (inputValue !== 0) {
+      this.priceForRecalculating.emit(inputValue * this.cardInfo.price - this.lastPrice);
+      this.lastPrice = inputValue * this.cardInfo.price;
+      this.cartService.changeProductQuantity(this.cardInfo.art, inputValue);
+    }
+    else {
+      this.deleteCard();
+      this.appComponent.changeCartItemCount();
+    }
+
+  }
+
+  private initializationProductQuantity(): void {
+    if (typeof localStorage !== 'undefined') {
+      const shopingBagJson = localStorage.getItem('shopingBag');
+      if (shopingBagJson) {
+        let shopingBag = JSON.parse(shopingBagJson);
+        if (shopingBag[this.cardInfo.art]) {
+          this.productQuantity = shopingBag[this.cardInfo.art];
+        }
+      }
+    }
+
   }
 }

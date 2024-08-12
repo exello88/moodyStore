@@ -6,7 +6,12 @@
         <div class="buy-content">
             <p class="buy-content__name">{{cardInfo.name}}</p>
             <p class="buy-content__price">{{cardInfo.price}} $</p>
-            <p-button class="buy-content__button" label="{{buttonText}}" (click) = "addToShopingBag()" />
+            <p-button class="buy-content__button" *ngIf = "!addedToCart" label="Add to shopping bag" (click) = "addToShopingBag()" />
+            <div class="buy-content-change-cart" *ngIf = "addedToCart">
+                <p class="buy-content-change-cart__less" (click) = "changeProductQuality(-1)">-</p>
+                <p class="buy-content-change-cart__count">{{productQuantity}}</p>
+                <p class="buy-content-change-cart__more"  (click) = "changeProductQuality(1)">+</p>
+            </div>
         </div>
     </div>
     <p-card class="description-field">

@@ -29,7 +29,7 @@ export class CartComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  public getElementFromBag(elementsFromBagArts: string[]): void {
+  public getElementFromBag(elementsFromBagArts: { [key: string]: number }): void {
     this.subscriptions = this.cartServise.getAllCards().pipe(
       catchError(error => {
         this.errorLoading = true;
@@ -54,13 +54,13 @@ export class CartComponent implements OnInit, OnDestroy {
     this.totalPrice = +this.totalPrice.toFixed(2);
   }
 
-  public drawingCart() : void {
+  public drawingCart(): void {
     this.elementsFromBag = [];
     this.totalPrice = 0;
     this.getCartItemsFromLocalStorage();
   }
 
-  private getCartItemsFromLocalStorage() : void {
+  private getCartItemsFromLocalStorage(): void {
     if (typeof localStorage !== 'undefined') {
       const shopingBagJson = localStorage.getItem('shopingBag');
       if (shopingBagJson) {
@@ -70,9 +70,9 @@ export class CartComponent implements OnInit, OnDestroy {
     }
   }
 
-  private filterProductCards(allCards: IAllCardsObject, elementsFromBagArts: string[]) : void {
+  private filterProductCards(allCards: IAllCardsObject, elementsFromBagArts: { [key: string]: number }): void {
     Object.keys(allCards).forEach(key => {
-      elementsFromBagArts.forEach(art => {
+      Object.keys(elementsFromBagArts).forEach(art => {
         allCards[key].forEach(card => {
           if (card.art === art) {
             this.elementsFromBag.push(card);

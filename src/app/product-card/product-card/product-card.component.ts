@@ -17,8 +17,9 @@ import { AppComponent } from '../../app.component';
 export class ProductCardComponent implements OnInit, OnDestroy {
   public cardInfo!: ICardInfo;
   public art!: string;
-  public errorLoading: boolean = false;
-  public buttonText!: string;
+  public errorLoading!: boolean;
+  public addedToCart!: boolean;
+  public productQuantity: number = 0;
 
   private subscriptions!: Subscription;
 
@@ -27,8 +28,8 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscriptions = this.activeRoute.paramMap.subscribe(params => {
       this.art = params.get('art') || '';
-      this.initialButtonText();
     });
+    this.initialButton();
     this.getCardInfo();
   }
 
@@ -37,9 +38,40 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   }
 
   public addToShopingBag(): void {
+    this.productQuantity = 1;
+    this.addedToCart = true;
     this.cardService.addToShopingBag(this.art);
-    this.changeButtonText();
     this.AppComponent.changeCartItemCount();
+  }
+
+  public changeProductQuality(changeValue: number) : void {
+    this.productQuantity += changeValue;
+
+    if (this.productQuantity !== 0) {
+      if (typeof localStorage !== 'undefined') {
+        const shopingBagJson = localStorage.getItem('shopingBag');
+        if (shopingBagJson) {
+          let elementsFromBagArts = JSON.parse(shopingBagJson);
+          elementsFromBagArts[this.art] = this.productQuantity;
+          localStorage.setItem('shopingBag', JSON.stringify(elementsFromBagArts));
+        }
+      }
+    }
+    else
+      this.deleteCard();
+      this.AppComponent.changeCartItemCount();
+  }
+
+  private deleteCard(): void {
+    const shopingBagJson = localStorage.getItem('shopingBag');
+    if (shopingBagJson) {
+      let shopingBag = JSON.parse(shopingBagJson);
+      if (shopingBag[this.cardInfo.art]) {
+        delete shopingBag[this.cardInfo.art];
+      }
+      localStorage.setItem('shopingBag', JSON.stringify(shopingBag));
+    }
+    this.addedToCart = false;
   }
 
   private getCardInfo(): void {
@@ -65,26 +97,18 @@ export class ProductCardComponent implements OnInit, OnDestroy {
     });
   }
 
-  private initialButtonText(): void {
+  private initialButton(): void {
     if (typeof localStorage !== 'undefined') {
       const shopingBagJson = localStorage.getItem('shopingBag');
       if (shopingBagJson) {
         let shopingBag = JSON.parse(shopingBagJson);
-        if (!shopingBag.includes(this.art)) {
-          this.buttonText = 'Add to shopping bag';
-        }
+        if (!shopingBag[this.art])
+          this.addedToCart = false;
         else {
-          this.buttonText = 'Clear of shopping bag';
+          this.addedToCart = true;
+          this.productQuantity = shopingBag[this.art];
         }
       }
     }
   }
-
-  private changeButtonText() : void {
-    if (this.buttonText === 'Add to shopping bag')
-      this.buttonText = 'Clear of shopping bag';
-    else
-      this.buttonText = 'Add to shopping bag';
-  }
-
 }

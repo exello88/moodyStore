@@ -10,7 +10,7 @@
                 <span class="pi pi-heart"></span>
             </div>
             <div class="quantity-input">
-                <input type="number" value="1" min="1"  (input)="inputValueChange($event)" (click)="$event.stopPropagation()">
+                <input type="number" value="{{productQuantity}}" min="1"  (input)="inputValueChange($event)" (click)="$event.stopPropagation()">
             </div>
         </div>
     </div>

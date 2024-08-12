@@ -32,11 +32,14 @@ export class AppComponent implements OnInit {
   }
 
   public changeCartItemCount(): void {
+    this.cartItemCount = 0;
     if (typeof localStorage !== "undefined") {
       const shopingBagJson = localStorage.getItem('shopingBag');
       if (shopingBagJson) {
         let shopingBag = JSON.parse(shopingBagJson);
-        this.cartItemCount = shopingBag.length;
+        Object.keys(shopingBag).forEach(art => {      
+        this.cartItemCount += shopingBag[art];
+        })
       }
     }
   }

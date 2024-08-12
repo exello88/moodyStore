@@ -28,16 +28,10 @@ export class ProductCardService {
   public addToShopingBag(art: string): void {
     const shopingBagJson = localStorage.getItem('shopingBag');
     if (shopingBagJson) {
-      let shopingBag = JSON.parse(shopingBagJson);
-      if (!shopingBag.includes(art)) {
-        shopingBag.push(art);
-      }
-      else {
-        shopingBag = shopingBag.filter((item: string) => item !== art);
-      }
+      let shopingBag: { [key: string]: number } = JSON.parse(shopingBagJson);
+      shopingBag[art] = 1;
       localStorage.setItem('shopingBag', JSON.stringify(shopingBag));
     }
-    else
-      localStorage.setItem('shopingBag', JSON.stringify([art]));
   }
+  
 }
