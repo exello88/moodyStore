@@ -33,6 +33,10 @@ export class CartService {
         let elementsFromBagArts = JSON.parse(shopingBagJson);
         elementsFromBagArts[art] = quantity;
         localStorage.setItem('shopingBag', JSON.stringify(elementsFromBagArts)); 
+      } else {
+        let shopingBag: { [key: string]: number } = {};
+        shopingBag[art] = 1;
+        localStorage.setItem('shopingBag', JSON.stringify(shopingBag));
       }
     }
   }

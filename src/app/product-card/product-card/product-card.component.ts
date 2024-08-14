@@ -44,7 +44,7 @@ export class ProductCardComponent implements OnInit, OnDestroy {
     this.AppComponent.changeCartItemCount();
   }
 
-  public changeProductQuality(changeValue: number) : void {
+  public changeProductQuality(changeValue: number): void {
     this.productQuantity += changeValue;
 
     if (this.productQuantity !== 0) {
@@ -59,7 +59,7 @@ export class ProductCardComponent implements OnInit, OnDestroy {
     }
     else
       this.deleteCard();
-      this.AppComponent.changeCartItemCount();
+    this.AppComponent.changeCartItemCount();
   }
 
   private deleteCard(): void {

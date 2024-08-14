@@ -21,7 +21,6 @@ export class ProductCardComponent implements OnInit {
   constructor(private router: Router, private appComponent: AppComponent, private cartService: CartService) { }
 
   ngOnInit() {
-    this.lastPrice = this.cardInfo.price;
     this.initializationProductQuantity();
   }
 
@@ -47,7 +46,7 @@ export class ProductCardComponent implements OnInit {
     if (inputElement.value === '') return;
 
     let inputValue = +inputElement.value;
-    if (inputValue !== 0) {
+    if (inputValue > 0) {
       this.priceForRecalculating.emit(inputValue * this.cardInfo.price - this.lastPrice);
       this.lastPrice = inputValue * this.cardInfo.price;
       this.cartService.changeProductQuantity(this.cardInfo.art, inputValue);
@@ -56,7 +55,7 @@ export class ProductCardComponent implements OnInit {
       this.deleteCard();
       this.appComponent.changeCartItemCount();
     }
-
+    this.appComponent.changeCartItemCount();
   }
 
   private initializationProductQuantity(): void {
@@ -66,6 +65,7 @@ export class ProductCardComponent implements OnInit {
         let shopingBag = JSON.parse(shopingBagJson);
         if (shopingBag[this.cardInfo.art]) {
           this.productQuantity = shopingBag[this.cardInfo.art];
+          this.lastPrice = this.productQuantity * this.cardInfo.price;
         }
       }
     }

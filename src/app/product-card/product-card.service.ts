@@ -31,7 +31,11 @@ export class ProductCardService {
       let shopingBag: { [key: string]: number } = JSON.parse(shopingBagJson);
       shopingBag[art] = 1;
       localStorage.setItem('shopingBag', JSON.stringify(shopingBag));
+    } else {
+      let shopingBag: { [key: string]: number } = {};
+      shopingBag[art] = 1;
+      localStorage.setItem('shopingBag', JSON.stringify(shopingBag));
     }
   }
-  
+
 }
