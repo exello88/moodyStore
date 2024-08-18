@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService, ICardInfo } from '../cart.service';
 import { AppComponent } from '../../../app.component';
+import { LocalStorageService } from '../../../local-storage.service';
 
 
 @Component({
@@ -18,23 +19,16 @@ export class ProductCardComponent implements OnInit {
   @Output() priceForRecalculating: EventEmitter<number> = new EventEmitter<number>();
   @Output() redrawingCards: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private router: Router, private appComponent: AppComponent, private cartService: CartService) { }
+  constructor(private router: Router, private appComponent: AppComponent, private cartService: CartService, private localStorageService: LocalStorageService) { }
 
   ngOnInit() {
     this.initializationProductQuantity();
   }
 
   public deleteCard(): void {
-    const shopingBagJson = localStorage.getItem('shopingBag');
-    if (shopingBagJson) {
-      let shopingBag = JSON.parse(shopingBagJson);
-      if (shopingBag[this.cardInfo.art]) {
-        delete shopingBag[this.cardInfo.art];
-      }
-      localStorage.setItem('shopingBag', JSON.stringify(shopingBag));
-      this.redrawingCards.emit();
-      this.appComponent.changeCartItemCount();
-    }
+    this.localStorageService.deleteForCartProductCard(this.cardInfo);
+    this.redrawingCards.emit();
+    this.appComponent.changeCartItemCount();
   }
 
   public navigateToCard(): void {
@@ -49,7 +43,7 @@ export class ProductCardComponent implements OnInit {
     if (inputValue > 0) {
       this.priceForRecalculating.emit(inputValue * this.cardInfo.price - this.lastPrice);
       this.lastPrice = inputValue * this.cardInfo.price;
-      this.cartService.changeProductQuantity(this.cardInfo.art, inputValue);
+      this.localStorageService.changeProductQuantityCart(this.cardInfo.art, inputValue);
     }
     else {
       this.deleteCard();
@@ -59,16 +53,10 @@ export class ProductCardComponent implements OnInit {
   }
 
   private initializationProductQuantity(): void {
-    if (typeof localStorage !== 'undefined') {
-      const shopingBagJson = localStorage.getItem('shopingBag');
-      if (shopingBagJson) {
-        let shopingBag = JSON.parse(shopingBagJson);
-        if (shopingBag[this.cardInfo.art]) {
-          this.productQuantity = shopingBag[this.cardInfo.art];
-          this.lastPrice = this.productQuantity * this.cardInfo.price;
-        }
-      }
+    const result = this.localStorageService.initializationProductQuantityCart(this.cardInfo);
+    if (result) {
+      this.productQuantity = result.productQuantity;
+      this.lastPrice = result.lastPrice;
     }
-
   }
 }

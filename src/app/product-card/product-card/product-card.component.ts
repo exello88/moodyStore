@@ -7,6 +7,7 @@ import { ICardInfo } from '../product-card.service';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 import { AppComponent } from '../../app.component';
+import { LocalStorageService } from '../../local-storage.service';
 
 @Component({
   selector: 'app-product-card',
@@ -23,7 +24,7 @@ export class ProductCardComponent implements OnInit, OnDestroy {
 
   private subscriptions!: Subscription;
 
-  constructor(private cardService: ProductCardService, private activeRoute: ActivatedRoute, private router: Router, private dialogService: DialogService, private AppComponent: AppComponent) { }
+  constructor(private cardService: ProductCardService, private activeRoute: ActivatedRoute, private router: Router, private dialogService: DialogService, private AppComponent: AppComponent, private localStorageServise: LocalStorageService) { }
 
   ngOnInit() {
     this.subscriptions = this.activeRoute.paramMap.subscribe(params => {
@@ -40,7 +41,7 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   public addToShopingBag(): void {
     this.productQuantity = 1;
     this.addedToCart = true;
-    this.cardService.addToShopingBag(this.art);
+    this.localStorageServise.addToShopingBagProductCard(this.art);
     this.AppComponent.changeCartItemCount();
   }
 
@@ -48,14 +49,7 @@ export class ProductCardComponent implements OnInit, OnDestroy {
     this.productQuantity += changeValue;
 
     if (this.productQuantity !== 0) {
-      if (typeof localStorage !== 'undefined') {
-        const shopingBagJson = localStorage.getItem('shopingBag');
-        if (shopingBagJson) {
-          let elementsFromBagArts = JSON.parse(shopingBagJson);
-          elementsFromBagArts[this.art] = this.productQuantity;
-          localStorage.setItem('shopingBag', JSON.stringify(elementsFromBagArts));
-        }
-      }
+      this.localStorageServise.changeProductQualityProductCard(this.art, this.productQuantity)
     }
     else
       this.deleteCard();
@@ -63,14 +57,7 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   }
 
   private deleteCard(): void {
-    const shopingBagJson = localStorage.getItem('shopingBag');
-    if (shopingBagJson) {
-      let shopingBag = JSON.parse(shopingBagJson);
-      if (shopingBag[this.cardInfo.art]) {
-        delete shopingBag[this.cardInfo.art];
-      }
-      localStorage.setItem('shopingBag', JSON.stringify(shopingBag));
-    }
+    this.localStorageServise.deleteForCartProductCard(this.cardInfo);
     this.addedToCart = false;
   }
 
@@ -98,17 +85,10 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   }
 
   private initialButton(): void {
-    if (typeof localStorage !== 'undefined') {
-      const shopingBagJson = localStorage.getItem('shopingBag');
-      if (shopingBagJson) {
-        let shopingBag = JSON.parse(shopingBagJson);
-        if (!shopingBag[this.art])
-          this.addedToCart = false;
-        else {
-          this.addedToCart = true;
-          this.productQuantity = shopingBag[this.art];
-        }
-      }
+    let buttonInformation = this.localStorageServise.initialProductCardButton(this.art);
+    if (buttonInformation) {
+      this.addedToCart = buttonInformation.addedToCart;
+      this.productQuantity = buttonInformation.productQuantity;
     }
   }
 }
