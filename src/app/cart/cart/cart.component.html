@@ -1,1 +1,28 @@
-<p>cart works!</p>
+<p class="cart-title">SHOPPING BAG</p>
+
+<div class="cart-content" *ngIf="!errorLoading">
+    <div class="cart-content__card">
+        <app-product-card *ngFor="let card of elementsFromBag" [cardInfo]="card"
+            (priceForRecalculating)="recalculationTotal($event)" (redrawingCards)="drawingCart()"></app-product-card>
+        <p class="card__title">Total</p>
+        <div class="dividing-line"></div>
+        <p class="card__price">{{totalPrice}} $</p>
+
+    </div>
+
+    <div class="cart-content__input-field">
+        <div class="new-level">
+            <p class="input-field__text">Order value:</p>
+            <p class="input-field__text-end">{{totalPrice}} $</p>
+        </div>
+        <div class="new-level">
+            <p class="input-field__text second-level__text">Shipping:</p>
+            <p class="input-field__text-end second-level__text">0.0 $</p>
+        </div>
+        <div class="new-level">
+            <p class="input-field__text">Total:</p>
+            <p class="input-field__text-end">{{totalPrice}} $</p>
+        </div>
+        <p-button class="input-field__button" label="Continue to checkout" />
+    </div>
+</div>

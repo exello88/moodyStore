@@ -1,0 +1,53 @@
+@import '../../../variables';
+@import "primeicons/primeicons.css";
+
+.card-content{
+    padding: 3px;
+    margin-top: 10px;
+    border: 1px solid $font-color;
+    display: grid;    
+    grid-template-columns: 170px 1fr 5%;
+    grid-template-rows: 200px;
+    cursor: pointer;
+
+    &__info{
+        margin-left: 10px;
+        .info__name, .info__price, .info__art{
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: $font-color;
+        }
+
+        .info__art{
+            margin-top: 25px;
+            font-size: 12px;
+            font-weight: 300;
+        }
+
+        .info__quantity{
+            margin-top: 40px;
+            display: flex;
+            gap: 10px;
+            .quantity-heart{
+                border: 1px solid $font-color;
+                .pi-heart{
+                    margin: 4px;
+                }
+            }
+
+            .quantity-input{
+                input{
+                    width: 50px;
+                    height: 25px;
+                    text-align: center;
+                }
+            }
+        }
+    }
+
+    .pi-times{
+        cursor: pointer;
+        margin-top: 20px;
+    }
+}

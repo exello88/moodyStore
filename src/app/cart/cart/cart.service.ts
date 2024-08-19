@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../environments';
+import { environment } from '../../environments';
 
 export interface ICardInfo {
   art: string;
@@ -11,19 +11,18 @@ export interface ICardInfo {
   price: number;
   color: string;
 }
-interface IAllCardsObject {
+export interface IAllCardsObject {
   [key: string]: ICardInfo[];
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductCardService {
+export class CartService {
+
   constructor(private http: HttpClient) { }
 
-  public getAllCard(): Observable<IAllCardsObject> {
+  public getAllCards(): Observable<IAllCardsObject> { 
     return this.http.get<IAllCardsObject>(environment.apiFireBase + '/CATALOG/Products.json');
   }
-
-
 }

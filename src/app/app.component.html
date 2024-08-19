@@ -4,7 +4,10 @@
     <div class="main-menu-actions">
         <button class="main-menu-actions__search pi pi-search"></button>
         <button class="main-menu-actions__user pi pi-user" (click)="navigateToProfile()"></button>
-        <button class="main-menu-actions__cart pi pi-shopping-cart" (click)="navigateToCart()"></button>
+        <div class="main-menu-actions__cart-field" (click)="navigateToCart()">
+            <button class="main-menu-actions__cart pi pi-shopping-cart"></button>
+            <div class="main-menu-actions__cart-value" *ngIf="cartItemCount > 0">{{cartItemCount}}</div>
+        </div>
         <button class="main-menu-actions__wishlist pi pi-heart" (click)="navigateToWishlist()"></button>
     </div>
 </div>

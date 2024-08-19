@@ -4,7 +4,8 @@
 @import '../../../variables';
 
 .catalog-field {
-    margin-left: 130px;
+    margin-left: 5%;
+    margin-right: 5%;
 
     &__main-title {
         margin-top: 20px;
@@ -31,7 +32,7 @@
         }
 
         .filter__title {
-            margin-top: -1px;
+            margin-top: 17px;
             color: $font-color;
             font-weight: 300;
             font-size: 16px;
@@ -40,6 +41,7 @@
         }
 
         .filter__icon {
+            margin-top: 17px;
             width: 19px;
             height: 16px;
         }
@@ -47,7 +49,7 @@
         .filer-mode {
             display: flex;
             margin-left: auto;
-            margin-right: 80px;
+            margin-right: 5%;
 
             .filter-mode__title {
                 margin-left: 10px;
@@ -68,7 +70,7 @@
         margin-top: 20px;
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: space-around;
         gap: 20px;
     }
     

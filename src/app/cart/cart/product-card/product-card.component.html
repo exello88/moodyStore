@@ -1,0 +1,19 @@
+<div class="card-content">
+    <p-image [src]="cardInfo.image[0]" alt="Image" width="100%" height="200px" (click) = "navigateToCard()"/>
+
+    <div class="card-content__info" (click) = "navigateToCard()">
+        <p class="info__name">{{cardInfo.name}}</p>
+        <p class="info__price">{{cardInfo.price}} $</p> 
+        <p class="info__art">Art. No.: {{cardInfo.art}}</p>
+        <div class="info__quantity">
+            <div class="quantity-heart">
+                <span class="pi pi-heart"></span>
+            </div>
+            <div class="quantity-input">
+                <input type="number" value="{{productQuantity}}" min="1"  (input)="inputValueChange($event)" (click)="$event.stopPropagation()">
+            </div>
+        </div>
+    </div>
+
+    <span class="pi pi-times" (click) = "deleteCard()"></span>
+</div>

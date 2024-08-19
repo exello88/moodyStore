@@ -21,7 +21,7 @@ export interface ISelectedItems {
   encapsulation: ViewEncapsulation.None
 })
 export class FilterComponent implements OnInit, OnDestroy {
-  @Input() public selectedItems!: ISelectedItems;
+  @Input() selectedItems!: ISelectedItems;
 
   public treeMenuItems!: TreeNode[];
   public filters!: IFilters;
@@ -68,15 +68,15 @@ export class FilterComponent implements OnInit, OnDestroy {
   }
 
   public selectionChange(selectedItem: TreeNode | TreeNode[] | null) {
-
-
-    if (Array.isArray(selectedItem)) {
-      selectedItem.forEach((item: TreeNode) => this.extractLabels(item));
-    } else if (selectedItem) {
-      this.extractLabels(selectedItem);
-    }
-
-    this.selectedItemsEvent.emit(this.selectedItems);
+      this.selectedItems.typeProduct.splice(0, this.selectedItems.typeProduct.length);
+  
+      if (Array.isArray(selectedItem)) {
+        selectedItem.forEach((item: TreeNode) => this.extractLabels(item));
+      } else if (selectedItem) {
+        this.extractLabels(selectedItem);
+      }
+  
+      this.selectedItemsEvent.emit(this.selectedItems);
   }
 
   private extractLabels(selectedItem: TreeNode) {
