@@ -64,16 +64,17 @@
         }
     }
 
-    &__card-field { 
+    &__card-field {
         margin-left: auto;
         margin-right: auto;
         margin-top: 20px;
+        margin-bottom: 10px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
         gap: 20px;
     }
-    
+
     .selected-mod {
         color: $selected-mod;
     }

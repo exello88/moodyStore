@@ -18,7 +18,7 @@ export interface ISelectedItems {
   selector: 'app-filter',
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class FilterComponent implements OnInit, OnDestroy {
   @Input() selectedItems!: ISelectedItems;
