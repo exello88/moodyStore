@@ -47,6 +47,7 @@ export class CatalogComponent implements DoCheck, OnDestroy {
 
   ngDoCheck() {
     if (JSON.stringify(this.selectedItems) !== JSON.stringify(this.lustSelectedItems)) {
+      this.paginationModeStatus = false;
       this.preparingElementsForDrawing();
     }
 
@@ -66,7 +67,7 @@ export class CatalogComponent implements DoCheck, OnDestroy {
   public changeModeStatus(mode: string): void {
     this.modeStatus = mode;
   }
-  
+
   public paginatorPageChange(event: PaginatorState) {
     if (event.first !== undefined)
       this.firstInPagination = event.first;
@@ -75,7 +76,8 @@ export class CatalogComponent implements DoCheck, OnDestroy {
   }
 
   private preparingElementsForDrawing(): void {
-    this.paginationModeStatus = false;
+    this.ObjectForDrawing = [];
+    this.PaginationObjectForDrawing = [];
     this.catalogStatus = false;
     this.lustSelectedItems = JSON.parse(JSON.stringify(this.selectedItems));
     if (this.selectedItems.typeProduct.length === 0) {
@@ -85,6 +87,7 @@ export class CatalogComponent implements DoCheck, OnDestroy {
             this.ObjectForDrawing.push(card);
           });
         });
+        this.ObjectForDrawing = this.catalogServise.filterCards(this.ObjectForDrawing, this.selectedItems);
         this.catalogStatus = true;
         this.checkPagination();
       });
@@ -99,6 +102,7 @@ export class CatalogComponent implements DoCheck, OnDestroy {
   }
 
   private checkPagination() {
+    this.paginationModeStatus = false;
     if (this.ObjectForDrawing.length >= 10) {
       this.PaginationObjectForDrawing = this.ObjectForDrawing;
       this.ObjectForDrawing = this.PaginationObjectForDrawing.slice(0, 9);

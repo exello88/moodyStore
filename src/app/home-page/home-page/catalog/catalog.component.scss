@@ -4,8 +4,9 @@
 @import '../../../variables';
 
 .catalog-field {
-    margin-left: 5%;
-    margin-right: 5%;
+    position: absolute;
+    left: 0;
+    right: 0;
 
     &__main-title {
         margin-top: 20px;
@@ -65,6 +66,7 @@
     }
 
     &__card-field {
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
         margin-top: 20px;
@@ -72,10 +74,16 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
-        gap: 20px;
+        gap: 15px;
+
+
     }
 
     .selected-mod {
         color: $selected-mod;
     }
+}
+
+.filter-enabled {
+    margin-left: 250px;
 }
