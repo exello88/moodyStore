@@ -18,6 +18,7 @@ import { LocalStorageService } from '../../local-storage.service';
 export class ProductCardComponent implements OnInit, OnDestroy {
   public cardInfo!: ICardInfo;
   public art!: string;
+  public btnWishlistColor!: string;
   public errorLoading!: boolean;
   public addedToCart!: boolean;
   public productQuantity: number = 0;
@@ -32,6 +33,7 @@ export class ProductCardComponent implements OnInit, OnDestroy {
     });
     this.initialButton();
     this.getCardInfo();
+    this.initializingButtonColor();
   }
 
   ngOnDestroy() {
@@ -54,6 +56,29 @@ export class ProductCardComponent implements OnInit, OnDestroy {
     else
       this.deleteCard();
     this.AppComponent.changeCartItemCount();
+  }
+
+  public initializingButtonColor(): void {
+    this.btnWishlistColor = this.localStorageServise.initializingButtonColor(this.art);
+  }
+
+  public updateWishlist(): void {
+    if (typeof localStorage !== 'undefined') {
+      const wishlistJson = localStorage.getItem('wishlist');
+      if (wishlistJson) {
+        let wishlist = JSON.parse(wishlistJson);
+        if (wishlist.includes(this.cardInfo.art)) {
+          this.btnWishlistColor = 'black';
+          this.localStorageServise.deleteWishlistCard(this.art);
+        }
+        else {
+          wishlist.push(this.cardInfo.art);
+          this.btnWishlistColor = 'red';
+          localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        }
+        this.AppComponent.changeWishlistItemCount();
+      }
+    }
   }
 
   private deleteCard(): void {

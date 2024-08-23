@@ -1,0 +1,145 @@
+@import "primeicons/primeicons.css";
+@import '../../../variables';
+
+.card {
+    width: 306px;
+    cursor: pointer;
+
+    &__img {
+        width: 306px;
+        height: 365px;
+        object-fit: cover;
+        margin-top: 10px;
+        border-radius: 10px;
+    }
+
+    .card-title-field {
+        display: grid;
+        grid-template-columns: 85% 1fr;
+
+        .card__title {
+            margin-top: 20px;
+            color: $font-color;
+            font-weight: 600;
+            font-size: 18px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .pi-heart {
+            font-size: 0px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+    }
+
+
+
+    .p-card {
+        .p-card-header {
+            margin-top: 20px;
+            color: $font-color;
+            font-weight: 600;
+            font-size: 18px;
+            font-family: 'Roboto', sans-serif;
+        }
+    }
+
+    &__count-imgs {
+        display: flex;
+    }
+
+    &__countImg {
+        margin-right: 5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+    }
+
+    &__price {
+        margin-top: 20px;
+        color: $font-color;
+        font-weight: 600;
+        font-size: 24px;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    button {
+        width: 306px;
+        margin-bottom: 10px;
+        grid-row: 1;
+        cursor: pointer;
+        height: 54px;
+        border-radius: 10px;
+        background-color: $font-color;
+
+        .p-button-label {
+            margin-top: 30px;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            font-family: 'Roboto', sans-serif;
+        }
+    }
+
+    &-change {
+        display: flex;
+        justify-content: space-around;
+        margin-right: 10px;
+        margin-top: -35px;
+        user-select: none;
+
+        &__less,
+        &__more {
+            font-weight: 600;
+            color: white;
+            background-color: red;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-family: 'Roboto', sans-serif;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        &__less {
+            margin-right: -40px;
+        }
+
+        &__more {
+            margin-left: -40px;
+        }
+
+        &__count {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-family: 'Roboto', sans-serif;
+            color: $font-color;
+            background-color: #EEF2F8;
+            border-radius: 20px;
+            z-index: 0;
+        }
+    }
+}
+
+.card-shadow {
+    width: 316px;
+    padding-left: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+
+    &:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+        .pi-heart {
+            font-size: 25px;
+            color: red;
+        }
+    }
+}

@@ -8,7 +8,10 @@
             <button class="main-menu-actions__cart pi pi-shopping-cart"></button>
             <div class="main-menu-actions__cart-value" *ngIf="cartItemCount > 0">{{cartItemCount}}</div>
         </div>
-        <button class="main-menu-actions__wishlist pi pi-heart" (click)="navigateToWishlist()"></button>
+        <div class="main-menu-actions__wishlist-field" (click)="navigateToWishlist()">
+            <button class="main-menu-actions__wishlist pi pi-heart"></button>
+            <div class="main-menu-actions__wishlist-value" *ngIf="wishlistItemCount > 0">{{wishlistItemCount}}</div>
+        </div>
     </div>
 </div>
 

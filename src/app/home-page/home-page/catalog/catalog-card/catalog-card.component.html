@@ -1,11 +1,16 @@
-<p-card class="card" (click)="navigateToProductCard()">
-  <p class="card__title">{{cardInfo.name}}</p>
-  <ng-template pTemplate="header">
-    <img *ngIf="cardInfo.image[0]" class="card__img" [src]="cardInfo.image[0]" alt="{{ cardInfo.name }}" />
-  </ng-template>
-  <div class="card__count-imgs">
-    <div class="card__countImg" [ngStyle]="{'background-color': cardInfo.color}"></div>
-    <div class="card__countImg" [ngStyle]="{'background-color': cardInfo.color}"></div>
-  </div>
-  <p class="card__price">{{cardInfo.price}}$</p>
-</p-card>
+<div class="card-shadow">
+  <p-card class="card" (click)="navigateToProductCard()">
+    <div class="card-title-field">
+      <p class="card__title">{{cardInfo.name}}</p>
+      <div class="pi pi-heart" (click) = "updateWishlist()" (click)="$event.stopPropagation()" [ngStyle]="{'color': btnWishlistColor}"></div>
+    </div>
+    <ng-template pTemplate="header">
+      <img *ngIf="cardInfo.image[0]" class="card__img" [src]="cardInfo.image[0]" alt="{{ cardInfo.name }}"/>
+    </ng-template>
+    <div class="card__count-imgs">
+      <div class="card__countImg" [ngStyle]="{'background-color': cardInfo.color}"></div>
+      <div class="card__countImg" [ngStyle]="{'background-color': cardInfo.color}"></div>
+    </div>
+    <p class="card__price">{{cardInfo.price}}$</p>
+  </p-card>
+</div>

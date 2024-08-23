@@ -4,13 +4,18 @@
             <p-image *ngFor="let imageUrl of cardInfo.image" src="{{imageUrl}}" alt="Image" width="100%" />
         </div>
         <div class="buy-content">
-            <p class="buy-content__name">{{cardInfo.name}}</p>
+            <div class="buy-content__first-level">
+                <p class="buy-content__name">{{cardInfo.name}}</p>
+                <div class="pi pi-heart" (click)="updateWishlist()" (click)="$event.stopPropagation()"
+                    [ngStyle]="{'color': btnWishlistColor}"></div>
+            </div>
             <p class="buy-content__price">{{cardInfo.price}} $</p>
-            <p-button class="buy-content__button" *ngIf = "!addedToCart" label="Add to shopping bag" (click) = "addToShopingBag()" />
-            <div class="buy-content-change-cart" *ngIf = "addedToCart">
-                <p class="buy-content-change-cart__less" (click) = "changeProductQuality(-1)">-</p>
+            <p-button class="buy-content__button" *ngIf="!addedToCart" label="Add to shopping bag"
+                (click)="addToShopingBag()" />
+            <div class="buy-content-change-cart" *ngIf="addedToCart">
+                <p class="buy-content-change-cart__less" (click)="changeProductQuality(-1)">-</p>
                 <p class="buy-content-change-cart__count">{{productQuantity}}</p>
-                <p class="buy-content-change-cart__more"  (click) = "changeProductQuality(1)">+</p>
+                <p class="buy-content-change-cart__more" (click)="changeProductQuality(1)">+</p>
             </div>
         </div>
     </div>
@@ -20,4 +25,3 @@
         <p class="description__art">Art - {{cardInfo.art}}</p>
     </p-card>
 </div>
-
