@@ -1,4 +1,4 @@
-import {  NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomePageComponent } from './home-page/home-page.component';
 import { PromotionFieldComponent } from './home-page/promotion-field/promotion-field.component';
@@ -11,6 +11,7 @@ import { CatalogComponent } from './home-page/catalog/catalog.component';
 import { CatalogCardComponent } from './home-page/catalog/catalog-card/catalog-card.component';
 import { CardModule } from 'primeng/card';
 import { TreeModule } from 'primeng/tree';
+import { PaginatorModule } from 'primeng/paginator';
 @NgModule({
   declarations: [
     HomePageComponent,
@@ -26,7 +27,8 @@ import { TreeModule } from 'primeng/tree';
     HttpClientModule,
     ProgressSpinnerModule,
     CardModule,
-    TreeModule
+    TreeModule,
+    PaginatorModule
   ],
   exports: [
     HomePageComponent

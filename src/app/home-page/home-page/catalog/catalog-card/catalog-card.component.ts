@@ -1,11 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { ICardInfo } from '../catalog.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-catalog-card',
   templateUrl: './catalog-card.component.html',
-  styleUrls: ['./catalog-card.component.scss']
+  styleUrls: ['./catalog-card.component.scss'],
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class CatalogCardComponent {
   @Input() public cardInfo!: ICardInfo;
