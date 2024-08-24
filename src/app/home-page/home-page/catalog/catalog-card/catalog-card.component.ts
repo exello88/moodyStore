@@ -29,7 +29,8 @@ export class CatalogCardComponent implements OnInit {
     this.btnWishlistColor = this.localStorageService.initializingButtonColor(this.cardInfo.art);
   }
 
-  public updateWishlist(): void {
+  public updateWishlist(event: MouseEvent): void {
+    event.stopPropagation();
     if (typeof localStorage !== 'undefined') {
       const wishlistJson = localStorage.getItem('wishlist');
       if (wishlistJson) {

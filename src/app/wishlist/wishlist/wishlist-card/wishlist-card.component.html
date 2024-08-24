@@ -1,23 +1,22 @@
 <div class="card-shadow">
-    <p-card class="card" (click)="navigateToProductCard()">
-      <div class="card-title-field">
-        <p class="card__title">{{cardInfo.name}}</p>
-        <div class="pi pi-heart" (click)="deleteCard()" (click)="$event.stopPropagation()"></div>
-      </div>
-      <ng-template pTemplate="header">
-        <img *ngIf="cardInfo.image[0]" class="card__img" [src]="cardInfo.image[0]" alt="{{ cardInfo.name }}" />
-      </ng-template>
-      <div class="card__count-imgs">
-        <div class="card__countImg" [ngStyle]="{'background-color': cardInfo.color}"></div>
-        <div class="card__countImg" [ngStyle]="{'background-color': cardInfo.color}"></div>
-      </div>
-      <p class="card__price">{{cardInfo.price}}$</p>
-      <p-button class="input-field__button" *ngIf="!addedToCart" label="Add to cart" (click)="addToShopingBag()"
-        (click)="$event.stopPropagation()" />
-      <div class="card-change" *ngIf="addedToCart" (click)="$event.stopPropagation()">
-        <p class="card-change__less" (click)="changeProductQuality(-1)">-</p>
-        <p class="card-change__count">{{productQuantity}}</p>
-        <p class="card-change__more" (click)="changeProductQuality(1)">+</p>
-      </div>
-    </p-card>
-  </div>
+  <p-card class="card" (click)="navigateToProductCard()">
+    <div class="card-title-field">
+      <p class="card__title">{{cardInfo.name}}</p>
+      <div class="pi pi-heart" (click)="deleteCard($event)"></div>
+    </div>
+    <ng-template pTemplate="header">
+      <img *ngIf="cardInfo.image[0]" class="card__img" [src]="cardInfo.image[0]" alt="{{ cardInfo.name }}" />
+    </ng-template>
+    <div class="card__count-imgs">
+      <div class="card__countImg" [ngStyle]="{'background-color': cardInfo.color}"></div>
+      <div class="card__countImg" [ngStyle]="{'background-color': cardInfo.color}"></div>
+    </div>
+    <p class="card__price">{{cardInfo.price}}$</p>
+    <p-button class="input-field__button" *ngIf="!addedToCart" label="Add to cart" (click)="addToShopingBag($event)" />
+    <div class="card-change" *ngIf="addedToCart" (click)="$event.stopPropagation()">
+      <p class="card-change__less" (click)="changeProductQuality(-1)">-</p>
+      <p class="card-change__count">{{productQuantity}}</p>
+      <p class="card-change__more" (click)="changeProductQuality(1)">+</p>
+    </div>
+  </p-card>
+</div>

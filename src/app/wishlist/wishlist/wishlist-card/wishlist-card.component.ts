@@ -29,7 +29,8 @@ export class WishlistCardComponent implements OnInit {
     this.router.navigate(['/product', this.cardInfo.art]);
   }
 
-  public deleteCard(): void {
+  public deleteCard(event: MouseEvent): void {
+    event.stopPropagation();
     this.localStorageService.deleteWishlistCard(this.cardInfo.art);
     this.redrawingCards.emit();
     this.appComponent.changeWishlistItemCount();
@@ -54,7 +55,8 @@ export class WishlistCardComponent implements OnInit {
     this.appComponent.changeCartItemCount();
   }
 
-  public addToShopingBag(): void {
+  public addToShopingBag(event: MouseEvent): void {
+    event.stopPropagation();
     this.productQuantity = 1;
     this.addedToCart = true;
     this.localStorageService.addToShopingBagProductCard(this.cardInfo.art);

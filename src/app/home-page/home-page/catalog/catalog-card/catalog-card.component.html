@@ -2,7 +2,7 @@
   <p-card class="card" (click)="navigateToProductCard()">
     <div class="card-title-field">
       <p class="card__title">{{cardInfo.name}}</p>
-      <div class="pi pi-heart" (click) = "updateWishlist()" (click)="$event.stopPropagation()" [ngStyle]="{'color': btnWishlistColor}"></div>
+      <div class="pi pi-heart" (click) = "updateWishlist($event)" [ngStyle]="{'color': btnWishlistColor}"></div>
     </div>
     <ng-template pTemplate="header">
       <img *ngIf="cardInfo.image[0]" class="card__img" [src]="cardInfo.image[0]" alt="{{ cardInfo.name }}"/>
