@@ -21,8 +21,8 @@ interface IAllCardsObject {
 export class ProductCardService {
   constructor(private http: HttpClient) { }
 
-  public getAllCard(): Observable<IAllCardsObject> {
-    return this.http.get<IAllCardsObject>(environment.apiFireBase + '/CATALOG/Products.json');
+  public getAllCard(mode: string): Observable<IAllCardsObject> {
+    return this.http.get<IAllCardsObject>(environment.apiFireBase + '/CATALOG/'+ mode +'.json');
   }
 
 

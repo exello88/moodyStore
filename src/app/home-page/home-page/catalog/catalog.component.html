@@ -14,7 +14,8 @@
         </div>
     </div>
     <div class="catalog-field__card-field" *ngIf="catalogStatus">
-        <app-catalog-card *ngFor="let cardInfo of ObjectForDrawing" [cardInfo]="cardInfo"></app-catalog-card>
+        <app-catalog-card *ngFor="let cardInfo of ObjectForDrawing" [cardInfo]="cardInfo" [adminStatus]="adminStatus"
+            [modeStatus]="modeStatus" (redrawing) = "preparingElementsForDrawing()"></app-catalog-card>
     </div>
     <p-paginator *ngIf="paginationModeStatus" [rows]="9" [totalRecords]="PaginationObjectForDrawing.length"
         (onPageChange)="paginatorPageChange($event)" />

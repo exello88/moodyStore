@@ -12,6 +12,9 @@ import { CatalogCardComponent } from './home-page/catalog/catalog-card/catalog-c
 import { CardModule } from 'primeng/card';
 import { TreeModule } from 'primeng/tree';
 import { PaginatorModule } from 'primeng/paginator';
+import { ButtonModule } from 'primeng/button';
+
+
 @NgModule({
   declarations: [
     HomePageComponent,
@@ -28,6 +31,7 @@ import { PaginatorModule } from 'primeng/paginator';
     ProgressSpinnerModule,
     CardModule,
     TreeModule,
+    ButtonModule,
     PaginatorModule
   ],
   exports: [

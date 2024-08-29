@@ -1,0 +1,16 @@
+<div class="authenticationField">
+    <div class="authenticationField-mode">
+        <p class="authenticationField-mode__title logIn-title" (click)="logInStatus = true">Login</p>
+        <p class="authenticationField-mode__title" (click)="logInStatus = false">Register</p>
+    </div>
+    <div class="authenticationField-inputField">
+        <input type="email" [(ngModel)]="email" class="authenticationField-inputField__input" placeholder="E-mail">
+        <input type="password" [(ngModel)]="password" class="authenticationField-inputField__input" placeholder="Password">
+        <input type="password" [(ngModel)]="repeatPassword" class="authenticationField-inputField__input" *ngIf="!logInStatus"
+            placeholder="Confirm password" #inputRepeatPassword>
+    </div>
+    <p class="errorField">{{errorMessage}}</p>
+    <div class="authenticationField-btn" (click) = "authentication()">
+        <p class="authenticationField-btn__title">{{ logInStatus ? 'Login' : 'Register' }} </p>
+    </div>
+</div>

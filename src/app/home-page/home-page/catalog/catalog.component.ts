@@ -25,11 +25,12 @@ export class CatalogComponent implements DoCheck, OnDestroy {
 
   public ObjectForDrawing: ICardInfo[] = [];
   public PaginationObjectForDrawing: ICardInfo[] = [];
-  public modeStatus: string = 'Products';
-  public lastModeStatus: string = 'Products';
+  public modeStatus: string = 'Models';
+  public lastModeStatus: string = 'Models';
   public filterStatus: boolean = false;
   public catalogStatus: boolean = false;
   public paginationModeStatus!: boolean;
+  public adminStatus: boolean = true;
   public firstInPagination: number = 0;
   public lastInPagination: number = 0;
 
@@ -47,15 +48,33 @@ export class CatalogComponent implements DoCheck, OnDestroy {
 
   ngDoCheck() {
     if (JSON.stringify(this.selectedItems) !== JSON.stringify(this.lustSelectedItems)) {
-      this.paginationModeStatus = false;
       this.preparingElementsForDrawing();
     }
 
     if (this.modeStatus !== this.lastModeStatus) {
+      this.paginationModeStatus = false;
+      this.ObjectForDrawing = [];
+      this.PaginationObjectForDrawing = [];
+      this.catalogStatus = false;
       this.lastModeStatus = this.modeStatus;
-      this.subscription = this.catalogServise.getCardForDrawing(this.selectedItems.typeProduct, this.modeStatus).subscribe(data => {
-        this.ObjectForDrawing = data;
-      });
+      if (this.selectedItems.typeProduct.length === 0) {
+        this.subscription = this.catalogServise.getAllCards(this.modeStatus).subscribe(allCards => {
+          console.log(allCards)
+          Object.keys(allCards).forEach(key => {
+            allCards[key].forEach(card => {
+              this.ObjectForDrawing.push(card);
+            });
+          });
+          this.ObjectForDrawing = this.catalogServise.filterCards(this.ObjectForDrawing, this.selectedItems);
+          this.catalogStatus = true;
+          this.checkPagination();
+        });
+      }
+      else
+        this.subscription = this.catalogServise.getCardForDrawing(this.selectedItems.typeProduct, this.modeStatus).subscribe(data => {
+          console.log(data)
+          this.ObjectForDrawing = data;
+        });
     }
   }
 
@@ -75,13 +94,14 @@ export class CatalogComponent implements DoCheck, OnDestroy {
     this.ObjectForDrawing = this.PaginationObjectForDrawing.slice(this.firstInPagination, this.lastInPagination);
   }
 
-  private preparingElementsForDrawing(): void {
+  public preparingElementsForDrawing(): void {
     this.ObjectForDrawing = [];
     this.PaginationObjectForDrawing = [];
     this.catalogStatus = false;
+    this.paginationModeStatus = false;
     this.lustSelectedItems = JSON.parse(JSON.stringify(this.selectedItems));
     if (this.selectedItems.typeProduct.length === 0) {
-      this.subscription = this.catalogServise.getAllCards().subscribe(allCards => {
+      this.subscription = this.catalogServise.getAllCards(this.modeStatus).subscribe(allCards => {
         Object.keys(allCards).forEach(key => {
           allCards[key].forEach(card => {
             this.ObjectForDrawing.push(card);

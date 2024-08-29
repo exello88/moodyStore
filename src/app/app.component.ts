@@ -10,6 +10,8 @@ import { LocalStorageService } from './local-storage.service';
 export class AppComponent implements OnInit {
   public cartItemCount: number = 0;
   public wishlistItemCount: number = 0;
+  public admin: boolean = false;
+  public auth: boolean = false;
 
   constructor(private router: Router, private localStorageService: LocalStorageService) { }
 

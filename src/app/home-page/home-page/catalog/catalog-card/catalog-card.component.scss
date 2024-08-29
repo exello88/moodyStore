@@ -61,7 +61,23 @@
         font-family: 'Roboto', sans-serif;
     }
 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    button {
+        width: 306px;
+        margin-bottom: 10px;
+        grid-row: 1;
+        cursor: pointer;
+        height: 54px;
+        border-radius: 10px;
+        background-color: $font-color;
+
+        .p-button-label {
+            margin-top: 30px;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            font-family: 'Roboto', sans-serif;
+        }
+    }
 }
 
 .card-shadow {
@@ -79,5 +95,5 @@
         }
     }
 
-    
+
 }

@@ -1,0 +1,42 @@
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+@import '../../variables';
+
+.user-profile{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 20px;
+    &__title{
+        font-family: 'Roboto', sans-serif;
+        font-size: 24px;
+        font-weight: 600;
+        color: $font-color;
+    }
+
+    &__overview{
+        font-family: 'Roboto', sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        color: $font-color;
+    }
+
+    .flex-content{
+        display: flex;
+    }
+
+    &__search,
+    &__wishlist,
+    &__cart {
+        border: 0px;
+        background-color: white;
+        font-size: 24px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    &__object-title{
+        font-family: 'Roboto', sans-serif;
+        font-size: 18px;
+        color: $font-color;
+    }
+}

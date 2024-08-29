@@ -1,0 +1,53 @@
+<div class="admin-field">
+    <p class="admin-field__title">Admin Page</p>
+
+    <div class="admin-field__add-card">
+        <p class="admin-field__add-card-title">Add Card</p>
+
+        <div class="admin-field__add-card-mode">
+            <p class="admin-field__add-card-mode-title">Select mode:</p>
+            <p-dropdown class="admin-field__add-card-mode-input" [options]="['Models', 'Products']"
+                [(ngModel)]="selectedMode" placeholder="Select a Mode"></p-dropdown>
+
+        </div>
+
+        <div class="admin-field__add-card-category">
+            <p class="admin-field__add-card-category-title">Select category:</p>
+            <p-dropdown class="admin-field__add-card-category-input" [options]="allCategory"
+                [(ngModel)]="selectedCategory" placeholder="Select a Category"></p-dropdown>
+        </div>
+
+        <div class="admin-field__add-card-color">
+            <p class="admin-field__add-card-color-title">Color</p>
+            <div class="admin-field__add-card-color-input">
+                <div class="color__block" *ngFor="let item of colors" [style.background-color]="item"
+                    (click)="selectedColor = item" [class.activeColor]="item === selectedColor"></div>
+            </div>
+        </div>
+
+        <div class="admin-field__add-card-name">
+            <p class="admin-field__add-card-name-title">Enter product name:</p>
+            <input type="text" pInputText [(ngModel)]="selectedName" class="admin-field__add-card-name-input" />
+        </div>
+
+        <div class="admin-field__add-card-price">
+            <p class="admin-field__add-card-price-title">Enter product price:</p>
+            <input type="number" pInputText [(ngModel)]="selectedPrice" class="admin-field__add-card-price-input" [min] = "1">
+        </div>
+
+        <div class="admin-field__add-card-description">
+            <p class="admin-field__add-card-description-title">Enter description:</p>
+            <textarea rows="5" cols="32" pInputTextarea [(ngModel)]="selectedDescription"
+                class="admin-field__add-card-description-input"></textarea>
+        </div>
+
+
+        <div class="admin-field__add-card-image">
+            <p class="admin-field__add-card-image-title">Enter image link:</p>
+            <input type="text" pInputText [(ngModel)]="selectedImage" class="admin-field__add-card-image-input" />
+        </div>
+
+        <p class="admin-field__add-card-error" *ngIf="error">Error while entering data</p>
+        <p-button label="Submit" class="admin-field__add-card-btn" (click)="addCard()" />
+    </div>
+</div>

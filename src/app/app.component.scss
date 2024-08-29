@@ -5,13 +5,15 @@
 
 .main-menu {
     display: flex;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-bottom: 1px solid $font-color;
 
     &__tittle {
         font-family: 'Roboto', sans-serif;
         color: $font-color;
         font-size: 28px;
         font-weight: bold;
-        margin-left: 5%;
         margin-top: 35px;
         cursor: pointer;
     }
@@ -20,7 +22,6 @@
         align-items: center;
         display: flex;
         margin-left: auto;
-        margin-right: 5%;
 
         &__search,
         &__user,
@@ -32,7 +33,8 @@
             cursor: pointer;
         }
 
-        &__cart-field, &__wishlist-field {
+        &__cart-field,
+        &__wishlist-field {
             margin-right: 10px;
             cursor: pointer;
 
@@ -43,7 +45,8 @@
                 cursor: pointer;
             }
 
-            .main-menu-actions__cart-value, .main-menu-actions__wishlist-value {
+            .main-menu-actions__cart-value,
+            .main-menu-actions__wishlist-value {
                 position: absolute;
                 margin-left: 20px;
                 margin-top: -35px;
@@ -56,10 +59,4 @@
             }
         }
     }
-}
-
-.dividing__line {
-    height: 1px;
-    background-color: $font-color;
-    margin: 0px 5% 0px 5%;
 }

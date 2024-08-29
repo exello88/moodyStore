@@ -18,6 +18,7 @@ import { LocalStorageService } from '../../local-storage.service';
 export class ProductCardComponent implements OnInit, OnDestroy {
   public cardInfo!: ICardInfo;
   public art!: string;
+  public mode!: string;
   public btnWishlistColor!: string;
   public errorLoading!: boolean;
   public addedToCart!: boolean;
@@ -30,6 +31,7 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscriptions = this.activeRoute.paramMap.subscribe(params => {
       this.art = params.get('art') || '';
+      this.mode = params.get('mode') || '';
     });
     this.initialButton();
     this.getCardInfo();
@@ -87,7 +89,7 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   }
 
   private getCardInfo(): void {
-    this.subscriptions = this.cardService.getAllCard().pipe(
+    this.subscriptions = this.cardService.getAllCard(this.mode).pipe(
       catchError(error => {
         this.errorLoading = true;
         const errorDialog = this.dialogService.open(ErrorMessageComponent, {

@@ -35,8 +35,8 @@ export interface IAllCardsObject {
 export class CatalogService {
   constructor(private http: HttpClient) { }
 
-  public getAllCards(): Observable<IAllCardsObject> {
-    return this.http.get<IAllCardsObject>(environment.apiFireBase + '/CATALOG/Products.json');
+  public getAllCards(mode: string): Observable<IAllCardsObject> {
+    return this.http.get<IAllCardsObject>(environment.apiFireBase + '/CATALOG/' + mode + '.json');
   }
 
   public getCardForDrawing(activeFilters: string[], mode: string): Observable<ICardInfo[]> {
@@ -64,9 +64,20 @@ export class CatalogService {
     });
   }
 
+  public deleteCardFromFB(allCardss: IAllCardsObject, mode : string, callback : () => void): void {
+    fetch(environment.apiFireBase + '/CATALOG/' + mode + '.json', {
+      method: 'PUT',
+      body: JSON.stringify(allCardss)
+    }).then(data => {
+      callback()
+    })
+  }
+
+
 
   private getFilteredCards(activeFilters: string[], mode: string): Observable<ICardInfo[]>[] {
     const observables: Observable<ICardInfo[]>[] = [];
+
     activeFilters.forEach(filter => {
       observables.push(this.getFilterCard(filter, mode));
     });

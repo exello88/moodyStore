@@ -1,1 +1,26 @@
-<p>profile works!</p>
+<app-authentication *ngIf="!auth" (changeAuthStatus)="changeAuthStatus($event)"></app-authentication>
+
+<app-admin *ngIf="auth && admin"></app-admin>
+
+<div class="user-profile" *ngIf="auth && !admin">
+    <p class="user-profile__title">Welcome to your personal account! Here you can manage your orders, view your purchase
+        history, and update your account settings.</p>
+    <p class="user-profile__overview">Feature overview</p>
+
+    <div class="flex-content">
+        <button class="user-profile__cart pi pi-shopping-cart" (click) = "navigateToCart()"></button>
+        <p class="user-profile__object-title"> - Conveniently add products for purchase and change their quantity. Check
+            what you want to buy before placing your order</p>
+    </div>
+
+    <div class="flex-content">
+        <button class="user-profile__cart pi pi-heart" (click) = "navigateToWishlist()"></button>
+        <p class="user-profile__object-title"> - Save your favorite items for future purchases</p>
+    </div>
+    <div class="flex-content">
+        <button class="user-profile__cart pi pi-search"></button>
+        <p class="user-profile__object-title"> - Quickly find the products you need using the convenient search
+            function. Just enter a title or category and we'll show you all the matching options.
+        </p>
+    </div>
+</div>
