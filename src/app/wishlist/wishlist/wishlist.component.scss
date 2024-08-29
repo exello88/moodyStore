@@ -1,0 +1,63 @@
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import '../../variables';
+
+.wishlist-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 34px;
+    font-weight: 600;
+    color: $font-color;
+    display: flex;
+    justify-content: center;
+}
+
+.wishlist-content {
+    margin-top: 50px;
+    margin-left: 5%;
+    margin-right: 5%;
+
+    .wishlist-content__card {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 20px;
+    }
+}
+
+.wishlist-empty {
+    margin-top: 80px;
+    margin-left: 5%;
+    margin-right: 5%;
+
+    &__title {
+        font-family: 'Roboto', sans-serif;
+        font-size: 30px;
+        font-weight: 600;
+        color: $font-color;
+    }
+
+    &__main-text {
+        font-family: 'Roboto', sans-serif;
+        font-size: 18px;
+        font-weight: 400;
+        color: $font-color;
+    }
+}
+
+
+.p-dialog-header-icons {
+    margin-bottom: -55px;
+    margin-right: 10px;
+
+    button {
+        background-color: #FEF3F3;
+        border: 0px;
+        color: #DC2626;
+        cursor: pointer;
+    }
+
+}

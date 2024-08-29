@@ -1,23 +1,35 @@
+@import "primeicons/primeicons.css";
 @import '../../../../variables';
 
 .card {
     width: 306px;
-    margin-top: 25px;
     cursor: pointer;
 
     &__img {
         width: 306px;
         height: 365px;
         object-fit: cover;
-
+        margin-top: 10px;
+        border-radius: 10px;
     }
 
-    &__title {
-        margin-top: 20px;
-        color: $font-color;
-        font-weight: 600;
-        font-size: 18px;
-        font-family: 'Roboto', sans-serif;
+    .card-title-field {
+        display: grid;
+        grid-template-columns: 85% 1fr;
+
+        .card__title {
+            margin-top: 20px;
+            color: $font-color;
+            font-weight: 600;
+            font-size: 18px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .pi-heart {
+            font-size: 0px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
     }
 
     .p-card {
@@ -48,4 +60,24 @@
         font-size: 24px;
         font-family: 'Roboto', sans-serif;
     }
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-shadow {
+    width: 316px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+
+    &:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+        .pi-heart {
+            font-size: 25px;
+        }
+    }
+
+    
 }

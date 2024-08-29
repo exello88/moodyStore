@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocalStorageService } from './local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +9,13 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   public cartItemCount: number = 0;
+  public wishlistItemCount: number = 0;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private localStorageService: LocalStorageService) { }
 
   ngOnInit() {
     this.changeCartItemCount();
+    this.changeWishlistItemCount();
   }
 
   public navigateToHome(): void {
@@ -32,15 +35,14 @@ export class AppComponent implements OnInit {
   }
 
   public changeCartItemCount(): void {
-    this.cartItemCount = 0;
-    if (typeof localStorage !== "undefined") {
-      const shopingBagJson = localStorage.getItem('shopingBag');
-      if (shopingBagJson) {
-        let shopingBag = JSON.parse(shopingBagJson);
-        Object.keys(shopingBag).forEach(art => {      
-        this.cartItemCount += shopingBag[art];
-        })
-      }
-    }
+    let cartItemCount = this.localStorageService.changeCartItemCount();
+    if (cartItemCount !== null)
+      this.cartItemCount = cartItemCount;
+  }
+
+  public changeWishlistItemCount(): void {
+    let wishlistItemCount = this.localStorageService.changeWishlistItemCount();
+    if (wishlistItemCount !== null)
+      this.wishlistItemCount = wishlistItemCount;
   }
 }

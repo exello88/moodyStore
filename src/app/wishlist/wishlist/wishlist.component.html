@@ -1,1 +1,14 @@
-<p>wishlist works!</p>
+<p class="wishlist-title">Wishlist Page</p>
+
+<div class="wishlist-content" *ngIf="!errorLoading && ObjectForDrawing.length > 0">
+    <div class="wishlist-content__card">
+        <app-wishlist-card *ngFor="let cardInfo of ObjectForDrawing" [cardInfo]="cardInfo"
+            (redrawingCards)="drawingCart()"></app-wishlist-card>
+    </div>
+    <p-paginator *ngIf="paginationModeStatus" [rows]="9" [totalRecords]="PaginationObjectForDrawing.length"
+        (onPageChange)="paginatorPageChange($event)" />
+</div>
+<div class="wishlist-empty" *ngIf="ObjectForDrawing.length < 1">
+    <p class="wishlist-empty__title">Your wishlist is empty!</p>
+    <p class="wishlist-empty__main-text">Add items to your wishlist to save them for future purchases.</p>
+</div>
