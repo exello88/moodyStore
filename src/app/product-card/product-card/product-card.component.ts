@@ -12,7 +12,7 @@ import { LocalStorageService } from '../../local-storage.service';
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
-  styleUrls: ['./product-card.component.scss', './media.scss'],
+  styleUrl: './product-card.component.scss' ,
   encapsulation: ViewEncapsulation.None
 })
 export class ProductCardComponent implements OnInit, OnDestroy {
