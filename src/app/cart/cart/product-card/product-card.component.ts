@@ -32,7 +32,7 @@ export class ProductCardComponent implements OnInit {
   }
 
   public navigateToCard(): void {
-    this.router.navigate(['/product/' + this.cardInfo.art]);
+    this.router.navigate(['/product', this.cardInfo.art]);
   }
 
   public inputValueChange(event: Event): void {

@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ICardInfo, ProfileService } from '../../profile.service';
+import { ICardsInfo, ProfileService } from '../../profile.service';
 import { Subscription } from 'rxjs';
 import { environment } from '../../../environments';
 
@@ -64,8 +64,8 @@ export class AdminComponent implements OnInit, OnDestroy {
     else {
       this.error = false;
       this.selectedCategory = this.profileServise.convertToCamelCase(this.selectedCategory);
-      this.profileServise.generateArt(this.selectedMode, (art) => {
-        let newCard : ICardInfo = {
+      this.profileServise.generateArt((art) => {
+        let newCard : ICardsInfo = {
           art: art,
           name: this.selectedName,
           price: +this.selectedPrice,

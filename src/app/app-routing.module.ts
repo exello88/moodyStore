@@ -7,7 +7,7 @@ const routes: Routes = [
   { path: 'cart', loadChildren: () => import('./cart/cart.module').then(module => module.CartModule) },
   { path: 'profile', loadChildren: () => import('./profile/profile.module').then(module => module.ProfileModule) },
   { path: 'wishlist', loadChildren: () => import('./wishlist/wishlist.module').then(module => module.WishlistModule) },
-  { path: 'product/:mode/:art', loadChildren: () => import('./product-card/product-card.module').then(module => module.ProductCardModule) }
+  { path: 'product/:art', loadChildren: () => import('./product-card/product-card.module').then(module => module.ProductCardModule) }
 ];
 
 @NgModule({

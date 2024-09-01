@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../environments';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { forkJoin, map, Observable } from 'rxjs';
 import { TreeNode } from 'primeng/api';
 import { EmailValidator } from '@angular/forms';
+import { IAllCardsObject, ICardInfo } from '../home-page/home-page/catalog/catalog.service';
 
-export interface ICardInfo {
+export interface ICardsInfo {
   art: string;
   description: string;
   image: string[];
@@ -124,36 +125,49 @@ export class ProfileService {
     });
   }
 
-  public generateArt(mode: string, callback: (art: string) => void): void {
-    fetch(environment.apiFireBase + '/CATALOG/' + mode + '.json', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => response.json())
-      .then(cardsArray => {
-        console.log(cardsArray)
-        let art = '0';
-        Object.keys(cardsArray).forEach(key => {
-          const cards = cardsArray[key];
-          cards.forEach((card: ICardInfo) => {
-            if (+art < +card.art)
-              art = card.art;
-          });
+  public generateArt(callback: (art: string) => void): void {
 
-        });
-        art = (+art + 1).toString()
-        callback(art);
-      })
+    this.getAllCards().subscribe(cardsArray => {
+      let art = '0';
+
+      cardsArray.forEach((card: ICardInfo) => {
+        if (+art < +card.art) {
+          art = card.art;
+        }
+      });
+
+      art = (+art + 1).toString();
+      callback(art);
+    });
   }
 
-  public addCardToFB(selectedMode: string, selectedCategory: string, newCard: ICardInfo): void {
+  private getAllCards(): Observable<ICardInfo[]> {
+    return forkJoin([
+      this.http.get<IAllCardsObject>(environment.apiFireBase + '/CATALOG/Products.json'),
+      this.http.get<IAllCardsObject>(environment.apiFireBase + '/CATALOG/Models.json')
+    ]).pipe(
+      map(results => {
+        const allCards: ICardInfo[] = [];
+
+
+        for (const result of results) {
+          for (const key in result) {
+            if (result.hasOwnProperty(key)) {
+              allCards.push(...result[key]);
+            }
+          }
+        }
+
+        return allCards;
+      })
+    );
+  }
+
+  public addCardToFB(selectedMode: string, selectedCategory: string, newCard: ICardsInfo): void {
     fetch(environment.apiFireBase + '/CATALOG/' + selectedMode + '/' + selectedCategory + '.json')
       .then(response => response.json())
       .then(lustCards => {
         const newCards = lustCards ? [...lustCards, newCard] : [newCard];
-        console.log(newCards)
         return fetch(environment.apiFireBase + '/CATALOG/' + selectedMode + '/' + selectedCategory + '.json', {
           method: 'PUT',
           body: JSON.stringify(newCards),

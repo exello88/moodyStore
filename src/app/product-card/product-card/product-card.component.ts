@@ -18,7 +18,6 @@ import { LocalStorageService } from '../../local-storage.service';
 export class ProductCardComponent implements OnInit, OnDestroy {
   public cardInfo!: ICardInfo;
   public art!: string;
-  public mode!: string;
   public btnWishlistColor!: string;
   public errorLoading!: boolean;
   public addedToCart!: boolean;
@@ -31,7 +30,6 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscriptions = this.activeRoute.paramMap.subscribe(params => {
       this.art = params.get('art') || '';
-      this.mode = params.get('mode') || '';
     });
     this.initialButton();
     this.getCardInfo();
@@ -89,7 +87,7 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   }
 
   private getCardInfo(): void {
-    this.subscriptions = this.cardService.getAllCard(this.mode).pipe(
+    this.subscriptions = this.cardService.getAllCard().pipe(
       catchError(error => {
         this.errorLoading = true;
         const errorDialog = this.dialogService.open(ErrorMessageComponent, {
@@ -103,10 +101,8 @@ export class ProductCardComponent implements OnInit, OnDestroy {
         return throwError(() => new Error(error.message));
       })
     ).subscribe(data => {
-      Object.keys(data).forEach(key => {
-        data[key].forEach(card => {
-          if (card.art === this.art) this.cardInfo = card;
-        });
+      data.forEach(card => {
+        if (card.art === this.art) this.cardInfo = card;
       });
     });
   }

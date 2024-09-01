@@ -38,7 +38,7 @@ export class CatalogCardComponent implements OnInit, OnDestroy {
   }
 
   public navigateToProductCard(): void {
-    this.router.navigate(['/product', this.modeStatus, this.cardInfo.art]);
+    this.router.navigate(['/product', this.cardInfo.art]);
   }
 
   public initializingButtonColor(): void {

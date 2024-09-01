@@ -59,7 +59,6 @@ export class CatalogComponent implements DoCheck, OnDestroy {
       this.lastModeStatus = this.modeStatus;
       if (this.selectedItems.typeProduct.length === 0) {
         this.subscription = this.catalogServise.getAllCards(this.modeStatus).subscribe(allCards => {
-          console.log(allCards)
           Object.keys(allCards).forEach(key => {
             allCards[key].forEach(card => {
               this.ObjectForDrawing.push(card);
@@ -72,7 +71,6 @@ export class CatalogComponent implements DoCheck, OnDestroy {
       }
       else
         this.subscription = this.catalogServise.getCardForDrawing(this.selectedItems.typeProduct, this.modeStatus).subscribe(data => {
-          console.log(data)
           this.ObjectForDrawing = data;
         });
     }
