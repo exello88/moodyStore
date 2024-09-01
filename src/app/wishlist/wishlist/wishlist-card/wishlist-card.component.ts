@@ -26,7 +26,7 @@ export class WishlistCardComponent implements OnInit {
   }
 
   public navigateToProductCard(): void {
-    this.router.navigate(['/product', this.cardInfo.art]);
+    this.router.navigate(['/product', 'Products', this.cardInfo.art]);
   }
 
   public deleteCard(event: MouseEvent): void {
