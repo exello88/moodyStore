@@ -11,6 +11,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { PasswordModule } from 'primeng/password';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { ButtonModule } from 'primeng/button';
     InputTextModule,
     FormsModule, 
     DropdownModule,
-    ButtonModule
+    ProgressSpinnerModule,
+    ButtonModule,
+    PasswordModule
   ],
   providers: [
     ProfileService

@@ -32,4 +32,12 @@ export class ProfileComponent {
   public navigateToWishlist(): void {
     this.router.navigate(['/wishlist']);
   }
+
+  public logOut(): void {
+    this.auth = false;
+    this.admin = false;
+    this.appComponent.auth = false;
+    this.appComponent.admin = false;
+    this.appComponent.email = '';
+  }
 }

@@ -22,6 +22,14 @@
         align-items: center;
         display: flex;
         margin-left: auto;
+        
+        &__email{
+            font-family: 'Roboto', sans-serif;
+            color: $font-color;
+            font-size: 20px;
+            font-weight: 500;
+            margin-left: 10px;
+        }
 
         &__search,
         &__user,

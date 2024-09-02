@@ -1,16 +1,18 @@
 <div class="authenticationField">
     <div class="authenticationField-mode">
-        <p class="authenticationField-mode__title logIn-title" (click)="logInStatus = true">Login</p>
-        <p class="authenticationField-mode__title" (click)="logInStatus = false">Register</p>
+        <p class="authenticationField-mode__title logIn-title" (click)="logInStatus = true; errorMessage = ''"
+            [class.authenticationField-mode__active]="logInStatus">Login</p>
+        <p class="authenticationField-mode__title" (click)="logInStatus = false; errorMessage = ''"
+            [class.authenticationField-mode__active]="!logInStatus">Register</p>
     </div>
     <div class="authenticationField-inputField">
-        <input type="email" [(ngModel)]="email" class="authenticationField-inputField__input" placeholder="E-mail">
-        <input type="password" [(ngModel)]="password" class="authenticationField-inputField__input" placeholder="Password">
-        <input type="password" [(ngModel)]="repeatPassword" class="authenticationField-inputField__input" *ngIf="!logInStatus"
-            placeholder="Confirm password" #inputRepeatPassword>
+        <input type="email" [(ngModel)]="email" pInputText placeholder="E-mail">
+        <p-password  [(ngModel)]="password" [feedback]="false" [toggleMask]="true" placeholder="Password"/>
+        <p-password  [(ngModel)]="repeatPassword" [feedback]="false" [toggleMask]="true" placeholder="Confirm password" *ngIf="!logInStatus"/>
     </div>
     <p class="errorField">{{errorMessage}}</p>
-    <div class="authenticationField-btn" (click) = "authentication()">
+    <div class="authenticationField-btn" (click)="authentication()" *ngIf="!loaderStatus">
         <p class="authenticationField-btn__title">{{ logInStatus ? 'Login' : 'Register' }} </p>
     </div>
+    <p-progressSpinner class="authenticationField__loader" *ngIf="loaderStatus"></p-progressSpinner>
 </div>

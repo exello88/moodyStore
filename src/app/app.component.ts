@@ -10,6 +10,7 @@ import { LocalStorageService } from './local-storage.service';
 export class AppComponent implements OnInit {
   public cartItemCount: number = 0;
   public wishlistItemCount: number = 0;
+  public email!: string;
   public admin: boolean = false;
   public auth: boolean = false;
 

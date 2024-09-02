@@ -1,3 +1,4 @@
+@import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "../../../variables";
 
 .authenticationField {
@@ -23,6 +24,10 @@
             margin-top: 60px;
             font-weight: bold;
         }
+
+        &__active {
+            color: red;
+        }
     }
 
     &-inputField {
@@ -36,6 +41,22 @@
             padding-left: 5px;
             border-width: 0px;
             border-radius: 10px;
+
+        }
+
+        .p-inputtext {
+            background-color: #F8F1FF;
+            margin-bottom: 5px;
+            margin-right: -22px;
+            width: 270px;
+            height: 40px;
+            padding-left: 5px;
+            border-width: 0px;
+            border-radius: 10px;
+        }
+
+        .p-icon-wrapper{
+            margin-top: 10px;
         }
     }
 
@@ -55,6 +76,16 @@
             color: white;
             font-family: 'Roboto', sans-serif;
             font-size: 18px;
+        }
+    }
+
+    &__loader {
+        display: flex;
+        justify-content: center;
+
+        .p-progress-spinner {
+            height: 50px;
+            width: 50px;
         }
     }
 }

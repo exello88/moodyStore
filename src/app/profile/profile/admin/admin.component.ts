@@ -2,6 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation 
 import { ICardsInfo, ProfileService } from '../../profile.service';
 import { Subscription } from 'rxjs';
 import { environment } from '../../../environments';
+import { ProfileComponent } from '../profile.component';
 
 @Component({
   selector: 'app-admin',
@@ -23,13 +24,12 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   private subscription !: Subscription;
 
-  constructor(private profileServise: ProfileService) { }
+  constructor(private profileServise: ProfileService, private profileComponent : ProfileComponent) { }
 
   ngOnInit() {
     this.subscription = this.profileServise.getFilters().subscribe(data => {
       this.allCategory = this.extractStrings(data);
       this.colors = data.Color;
-      console.log(this.colors)
     });
   }
 
@@ -77,6 +77,10 @@ export class AdminComponent implements OnInit, OnDestroy {
         this.profileServise.addCardToFB(this.selectedMode, this.selectedCategory, newCard)
       });
     }
+  }
+
+  public logOut():void{
+    this.profileComponent.logOut();
   }
 }
 
