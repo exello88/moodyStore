@@ -32,7 +32,8 @@
 
         <div class="admin-field__add-card-price">
             <p class="admin-field__add-card-price-title">Enter product price:</p>
-            <input type="number" pInputText [(ngModel)]="selectedPrice" class="admin-field__add-card-price-input" [min] = "1">
+            <input type="number" pInputText [(ngModel)]="selectedPrice" class="admin-field__add-card-price-input"
+                [min]="1">
         </div>
 
         <div class="admin-field__add-card-description">
@@ -48,7 +49,8 @@
         </div>
 
         <p class="admin-field__add-card-error" *ngIf="error">Error while entering data</p>
-        <p-button label="Submit" class="admin-field__add-card-btn" (click)="addCard()" />
+        <p-button label="Submit" class="admin-field__add-card-btn" (click)="addCard()" *ngIf="!paginationStatus"></p-button>
+        <p-progressSpinner class="admin-field__loader" *ngIf="paginationStatus"></p-progressSpinner>
     </div>
     <p-button label="Log Out" class="admin-field__logOut" (click)="logOut()" />
 </div>

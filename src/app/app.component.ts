@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   public admin: boolean = false;
   public auth: boolean = false;
 
-  constructor(private router: Router, private localStorageService: LocalStorageService) { }
+  constructor(private router: Router, private localStorageService: LocalStorageService, private authServise: AuthenticationService) { }
 
   ngOnInit() {
     this.changeCartItemCount();
@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   }
 
   public navigateToProfile(): void {
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/admin']);
   }
 
   public navigateToCart(): void {
@@ -47,5 +47,9 @@ export class AppComponent implements OnInit {
     let wishlistItemCount = this.localStorageService.changeWishlistItemCount();
     if (wishlistItemCount !== null)
       this.wishlistItemCount = wishlistItemCount;
+  }
+
+  public setEmail(): void {
+    this.email = this.authServise.email;
   }
 }

@@ -1,6 +1,8 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ProfileService } from '../../profile.service';
-import { AppComponent } from '../../../app.component';
+import { Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
+import { AuthenticationService } from '../authentication.service';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-authentication',
@@ -10,16 +12,22 @@ import { AppComponent } from '../../../app.component';
 })
 export class AuthenticationComponent {
   public logInStatus: boolean = true;
+  public admin!: boolean;
+  public auth!: boolean;
   public email!: string;
   public password!: string;
   public repeatPassword!: string;
   public errorMessage!: string;
   public loaderStatus: boolean = false;
 
-  @Output() changeAuthStatus: EventEmitter<boolean> = new EventEmitter<boolean>();
+  private subscribions!: Subscription;
 
+  constructor(private authServise: AuthenticationService, private router: Router, private appComponent: AppComponent) { }
 
-  constructor(private profileServise: ProfileService, private appComponent: AppComponent) { }
+  ngOnDestroy() {
+    if (this.subscribions)
+      this.subscribions.unsubscribe();
+  }
 
   public authentication(): void {
     this.loaderStatus = true;
@@ -40,17 +48,17 @@ export class AuthenticationComponent {
       this.loaderStatus = false;
     }
     else {
-      this.profileServise.logInUsers({ email: this.email, password: this.password }, (isRegistered, admin) => {
-        if (isRegistered) {
-          this.changeAuthStatus.emit(admin);
-          this.appComponent.admin = admin;
-          this.appComponent.auth = true;
-          this.appComponent.email = this.email;
-        }
-        else
-          this.errorMessage = "User not found";
+      this.subscribions = this.authServise.logInUsers({ email: this.email, password: this.password }).subscribe({
+        next: (isRegistered) => {
+          if (isRegistered) {
+            this.router.navigate(['admin']);
+          } else {
+            this.errorMessage = "User not found";
+          }
+          this.loaderStatus = false;
 
-        this.loaderStatus = false;
+          this.appComponent.setEmail();
+        }
       });
     }
   }
@@ -70,14 +78,13 @@ export class AuthenticationComponent {
       this.loaderStatus = false;
     }
     else {
-      this.profileServise.registerUsers({ email: this.email, password: this.password, admin: false }, (message) => {
-        if (message === 'User successfully registered')
-          this.logIn();
-        else
-          this.errorMessage = message;
-
-        this.loaderStatus = false;
-      })
+      this.subscribions = this.subscribions = this.authServise.registerUsers({ email: this.email, password: this.password, admin: false }).subscribe({
+        next: (error) => {
+          this.errorMessage = error;
+          this.loaderStatus = false;
+          this.router.navigate(['admin']);
+        }
+      });
     }
   }
 }

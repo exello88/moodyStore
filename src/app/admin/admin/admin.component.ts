@@ -1,14 +1,16 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ICardsInfo, ProfileService } from '../../profile.service';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { environment } from '../../../environments';
-import { ProfileComponent } from '../profile.component';
+import { AuthenticationService } from '../../authentication/authentication.service';
+import { ICardsInfo } from '../admin.service';
+import { Router } from '@angular/router';
+import { AdminService } from '../admin.service';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class AdminComponent implements OnInit, OnDestroy {
   public allCategory!: string[];
@@ -21,19 +23,20 @@ export class AdminComponent implements OnInit, OnDestroy {
   public selectedMode!: string;
   public selectedColor!: string;
   public error: boolean = false;
+  public paginationStatus: boolean = false;
 
   private subscription !: Subscription;
 
-  constructor(private profileServise: ProfileService, private profileComponent : ProfileComponent) { }
+  constructor(private appComponent: AppComponent, private adminService: AdminService, private authServise: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
-    this.subscription = this.profileServise.getFilters().subscribe(data => {
+    this.subscription = this.adminService.getFilters().subscribe(data => {
       this.allCategory = this.extractStrings(data);
       this.colors = data.Color;
     });
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
@@ -52,6 +55,8 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   public addCard(): void {
+    this.paginationStatus = true;
+
     if (!this.selectedName?.trim() ||
       !this.selectedPrice ||
       !this.selectedDescription?.trim() ||
@@ -59,13 +64,15 @@ export class AdminComponent implements OnInit, OnDestroy {
       !this.selectedCategory?.trim() ||
       !this.selectedColor?.trim() ||
       !this.selectedMode?.trim() ||
-      +this.selectedPrice < 1)
+      +this.selectedPrice < 1) {
       this.error = true;
+      this.paginationStatus = false;
+    }
     else {
       this.error = false;
-      this.selectedCategory = this.profileServise.convertToCamelCase(this.selectedCategory);
-      this.profileServise.generateArt((art) => {
-        let newCard : ICardsInfo = {
+      this.selectedCategory = this.adminService.convertToCamelCase(this.selectedCategory);
+      this.adminService.generateArt((art) => {
+        let newCard: ICardsInfo = {
           art: art,
           name: this.selectedName,
           price: +this.selectedPrice,
@@ -74,13 +81,18 @@ export class AdminComponent implements OnInit, OnDestroy {
           color: this.selectedColor
         }
 
-        this.profileServise.addCardToFB(this.selectedMode, this.selectedCategory, newCard)
+        this.adminService.addCardToFB(this.selectedMode, this.selectedCategory, newCard)
+
+        this.paginationStatus = false;
       });
     }
   }
 
-  public logOut():void{
-    this.profileComponent.logOut();
+  public logOut(): void {
+    this.authServise.admin = false;
+    this.authServise.auth = false;
+    this.authServise.email = '';
+    this.appComponent.setEmail();
+    this.router.navigate(['/authentication']);
   }
 }
-

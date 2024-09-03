@@ -1,8 +1,4 @@
-<app-authentication *ngIf="!auth" (changeAuthStatus)="changeAuthStatus($event)"></app-authentication>
-
-<app-admin *ngIf="auth && admin"></app-admin>
-
-<div class="user-profile" *ngIf="auth && !admin">
+<div class="user-profile">
     <p class="user-profile__title">Welcome to your personal account! Here you can manage your orders, view your purchase
         history, and update your account settings.</p>
     <p class="user-profile__overview">Feature overview</p>

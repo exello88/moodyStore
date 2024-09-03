@@ -2,6 +2,8 @@ import { Component, DoCheck, EventEmitter, Input, OnDestroy, Output, SimpleChang
 import { ICardInfo, CatalogService } from './catalog.service';
 import { Subscription } from 'rxjs';
 import { PaginatorState } from 'primeng/paginator';
+import { AppComponent } from '../../../app.component';
+import { ModeStatus } from './catalog.enum';
 
 export interface ISelectedItems {
   typeProduct: string[];
@@ -25,8 +27,8 @@ export class CatalogComponent implements DoCheck, OnDestroy {
 
   public ObjectForDrawing: ICardInfo[] = [];
   public PaginationObjectForDrawing: ICardInfo[] = [];
-  public modeStatus: string = 'Models';
-  public lastModeStatus: string = 'Models';
+  public modeStatus: string = ModeStatus.modeStatus;
+  public lastModeStatus: string = ModeStatus.lastModeStatus;
   public filterStatus: boolean = false;
   public catalogStatus: boolean = false;
   public paginationModeStatus!: boolean;
@@ -40,7 +42,8 @@ export class CatalogComponent implements DoCheck, OnDestroy {
   @Output() filterStatusEvent: EventEmitter<boolean> = new EventEmitter<boolean>(false);
   @Output() catalogStatusEvent: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
-  constructor(private catalogServise: CatalogService) { }
+  constructor(private catalogServise: CatalogService, private appComponent: AppComponent) { }
+
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

@@ -64,13 +64,8 @@ export class CatalogService {
     });
   }
 
-  public deleteCardFromFB(allCardss: IAllCardsObject, mode : string, callback : () => void): void {
-    fetch(environment.apiFireBase + '/CATALOG/' + mode + '.json', {
-      method: 'PUT',
-      body: JSON.stringify(allCardss)
-    }).then(data => {
-      callback()
-    })
+  public deleteCardFromFB(allCards: IAllCardsObject, mode: string): Observable<void> {
+    return this.http.put<void>(`${environment.apiFireBase}/CATALOG/${mode}.json`, allCards);
   }
 
 

@@ -1,5 +1,5 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
-@import "../../../variables";
+@import "../../variables";
 
 .authenticationField {
     width: 350px;
@@ -31,6 +31,7 @@
     }
 
     &-inputField {
+        position: relative;
         margin-left: 40px;
 
         &__input {
@@ -47,7 +48,6 @@
         .p-inputtext {
             background-color: #F8F1FF;
             margin-bottom: 5px;
-            margin-right: -22px;
             width: 270px;
             height: 40px;
             padding-left: 5px;
@@ -56,6 +56,7 @@
         }
 
         .p-icon-wrapper{
+            position: absolute;
             margin-top: 10px;
         }
     }

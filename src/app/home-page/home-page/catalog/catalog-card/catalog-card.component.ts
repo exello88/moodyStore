@@ -5,6 +5,7 @@ import { AppComponent } from '../../../../app.component';
 import { LocalStorageService } from '../../../../local-storage.service';
 import { Subscription } from 'rxjs';
 import { environment } from '../../../../environments'
+import { AuthenticationService } from '../../../../authentication/authentication.service';
 
 @Component({
   selector: 'app-catalog-card',
@@ -23,11 +24,11 @@ export class CatalogCardComponent implements OnInit, OnDestroy {
 
   @Output() redrawing: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private router: Router, private appComponent: AppComponent, private localStorageService: LocalStorageService, private catalogServise: CatalogService) { }
+  constructor(private router: Router, private appComponent: AppComponent, private authServise: AuthenticationService, private localStorageService: LocalStorageService, private catalogServise: CatalogService) { }
 
   ngOnInit() {
-    this.adminStatus = this.appComponent.admin;
-    
+    this.adminStatus = this.authServise.admin;
+
     this.initializingButtonColor();
   }
 
@@ -72,14 +73,13 @@ export class CatalogCardComponent implements OnInit, OnDestroy {
 
   public deleteCard(event: MouseEvent): void {
     event.stopPropagation();
-    this.subscription = this.catalogServise.getAllCards(this.modeStatus).subscribe(allCards => {/*  */
+    this.subscription = this.catalogServise.getAllCards(this.modeStatus).subscribe(allCards => {
       Object.keys(allCards).forEach(key => {
         allCards[key] = allCards[key].filter(card => card.art !== this.cardInfo.art);
       });
-      this.catalogServise.deleteCardFromFB(allCards, this.modeStatus, () => {
+      this.subscription = this.catalogServise.deleteCardFromFB(allCards, this.modeStatus).subscribe(() => {
         this.redrawing.emit();
-      })
+      });
     });
   }
-
 }
