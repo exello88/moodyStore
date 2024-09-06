@@ -14,21 +14,27 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
 
-  public logInUsers(userLogIn: { email: string, password: string }): Observable<boolean> {
+  public logInUsers(userLogIn: { email: string, password: string }): Observable<{ isRegistered: boolean, passwordIncorrect: boolean }> {
     return this.http.get<{ [key: string]: { email: string, password: string, admin: boolean } }>(`${environment.apiFireBase}/users/.json`).pipe(
       map(users => {
         let isRegistered = false;
+        let passwordIncorrect = false;
 
         Object.keys(users).forEach(user => {
-          if (users[user].email === userLogIn.email && users[user].password === userLogIn.password) {
-            isRegistered = true;
-            this.auth = true;
-            this.admin = users[user].admin;
-            this.email = users[user].email;
+
+          if (users[user].email === userLogIn.email) {
+            if (users[user].password !== userLogIn.password) {
+              passwordIncorrect = true;
+            } else {
+              isRegistered = true;
+              this.auth = true;
+              this.admin = users[user].admin;
+              this.email = users[user].email;
+            }
           }
         });
 
-        return isRegistered;
+        return { isRegistered, passwordIncorrect };
       })
     );
   }

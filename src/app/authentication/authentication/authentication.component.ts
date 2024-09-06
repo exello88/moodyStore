@@ -49,12 +49,13 @@ export class AuthenticationComponent {
     }
     else {
       this.subscribions = this.authServise.logInUsers({ email: this.email, password: this.password }).subscribe({
-        next: (isRegistered) => {
+        next: ({ isRegistered, passwordIncorrect }) => {
           if (isRegistered) {
             this.router.navigate(['admin']);
-          } else {
+          } else if (passwordIncorrect)
+            this.errorMessage = "Incorrect password";
+          else
             this.errorMessage = "User not found";
-          }
           this.loaderStatus = false;
 
           this.appComponent.setEmail();
@@ -83,6 +84,7 @@ export class AuthenticationComponent {
           this.errorMessage = error;
           this.loaderStatus = false;
           this.router.navigate(['admin']);
+          this.appComponent.setEmail();
         }
       });
     }
