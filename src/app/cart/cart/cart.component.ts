@@ -70,15 +70,13 @@ export class CartComponent implements OnInit, OnDestroy {
     }
   }
 
-  private filterProductCards(allCards: IAllCardsObject, elementsFromBagArts: { [key: string]: number }): void {
-    Object.keys(allCards).forEach(key => {
-      Object.keys(elementsFromBagArts).forEach(art => {
-        allCards[key].forEach(card => {
-          if (card.art === art) {
-            this.elementsFromBag.push(card);
-            this.totalPrice = this.totalPrice + elementsFromBagArts[card.art] * card.price;
-          }
-        });
+  private filterProductCards(allCards: ICardInfo[], elementsFromBagArts: { [key: string]: number }): void {
+    Object.keys(elementsFromBagArts).forEach(art => {
+      allCards.forEach(card => {
+        if (card.art === art) {
+          this.elementsFromBag.push(card);
+          this.totalPrice = this.totalPrice + elementsFromBagArts[card.art] * card.price;
+        }
       });
     });
     this.totalPrice = +this.totalPrice.toFixed(2);

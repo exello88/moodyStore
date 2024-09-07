@@ -12,7 +12,7 @@ import { LocalStorageService } from '../../local-storage.service';
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
-  styleUrl: './product-card.component.scss',
+  styleUrl: './product-card.component.scss' ,
   encapsulation: ViewEncapsulation.None
 })
 export class ProductCardComponent implements OnInit, OnDestroy {
@@ -101,10 +101,8 @@ export class ProductCardComponent implements OnInit, OnDestroy {
         return throwError(() => new Error(error.message));
       })
     ).subscribe(data => {
-      Object.keys(data).forEach(key => {
-        data[key].forEach(card => {
-          if (card.art === this.art) this.cardInfo = card;
-        });
+      data.forEach(card => {
+        if (card.art === this.art) this.cardInfo = card;
       });
     });
   }

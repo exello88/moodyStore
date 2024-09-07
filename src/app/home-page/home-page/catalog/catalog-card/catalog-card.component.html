@@ -12,5 +12,6 @@
       <div class="card__countImg" [ngStyle]="{'background-color': cardInfo.color}"></div>
     </div>
     <p class="card__price">{{cardInfo.price}}$</p>
+    <p-button class="input-field__button" *ngIf="adminStatus" label="Delete" (click) = deleteCard($event)/>
   </p-card>
 </div>

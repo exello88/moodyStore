@@ -1,0 +1,100 @@
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "../../variables";
+
+.authenticationField {
+    width: 350px;
+    padding-bottom: 30px;
+    border: 1px solid $font-color;
+    border-radius: 10%;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+
+    &-mode {
+        display: flex;
+        justify-content: space-around;
+        padding-left: 25px;
+        padding-right: 25px;
+
+        &__title {
+            cursor: pointer;
+            color: $font-color;
+            font-family: 'Roboto', sans-serif;
+            font-size: 28px;
+            margin-top: 60px;
+            font-weight: bold;
+        }
+
+        &__active {
+            color: red;
+        }
+    }
+
+    &-inputField {
+        position: relative;
+        margin-left: 40px;
+
+        &__input {
+            margin-bottom: 5px;
+            background-color: #F8F1FF;
+            width: 270px;
+            height: 40px;
+            padding-left: 5px;
+            border-width: 0px;
+            border-radius: 10px;
+
+        }
+
+        .p-inputtext {
+            background-color: #F8F1FF;
+            margin-bottom: 5px;
+            width: 270px;
+            height: 40px;
+            padding-left: 5px;
+            border-width: 0px;
+            border-radius: 10px;
+        }
+
+        .p-icon-wrapper{
+            position: absolute;
+            margin-top: 10px;
+        }
+    }
+
+    &-btn {
+        display: flex;
+        justify-content: center;
+        background-color: #985ACE;
+        margin-top: 20px;
+        margin-left: 40px;
+        width: 280px;
+        height: 40px;
+        border-radius: 10px;
+        cursor: pointer;
+
+        &__title {
+            margin-top: 11px;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            font-size: 18px;
+        }
+    }
+
+    &__loader {
+        display: flex;
+        justify-content: center;
+
+        .p-progress-spinner {
+            height: 50px;
+            width: 50px;
+        }
+    }
+}
+
+.errorField {
+    margin-left: 40px;
+    margin-top: 10px;
+    color: rgb(255, 62, 62);
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+}

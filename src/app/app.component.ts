@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalStorageService } from './local-storage.service';
+import { AuthenticationService } from './authentication/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,11 @@ import { LocalStorageService } from './local-storage.service';
 export class AppComponent implements OnInit {
   public cartItemCount: number = 0;
   public wishlistItemCount: number = 0;
+  public email!: string;
+  public admin: boolean = false;
+  public auth: boolean = false;
 
-  constructor(private router: Router, private localStorageService: LocalStorageService) { }
+  constructor(private router: Router, private localStorageService: LocalStorageService, private authServise: AuthenticationService) { }
 
   ngOnInit() {
     this.changeCartItemCount();
@@ -23,7 +27,7 @@ export class AppComponent implements OnInit {
   }
 
   public navigateToProfile(): void {
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/admin']);
   }
 
   public navigateToCart(): void {
@@ -44,5 +48,9 @@ export class AppComponent implements OnInit {
     let wishlistItemCount = this.localStorageService.changeWishlistItemCount();
     if (wishlistItemCount !== null)
       this.wishlistItemCount = wishlistItemCount;
+  }
+
+  public setEmail(): void {
+    this.email = this.authServise.email;
   }
 }

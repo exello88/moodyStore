@@ -48,7 +48,7 @@ export class WishlistComponent implements OnInit, OnDestroy {
         });
         return throwError(() => new Error(error.message));
       })
-    ).subscribe((data: IAllCardsObject) => {
+    ).subscribe((data: ICardInfo[]) => {
       this.filterProductCards(data, elementsFromBagArts);
       this.checkPagination();
     });
@@ -63,26 +63,24 @@ export class WishlistComponent implements OnInit, OnDestroy {
       this.getElementFromBag(allCardFromWishlist);
   }
 
-  public paginatorPageChange(event: PaginatorState) : void {
+  public paginatorPageChange(event: PaginatorState): void {
     if (event.first !== undefined)
       this.firstInPagination = event.first;
     this.lastInPagination = this.firstInPagination + 9;
     this.ObjectForDrawing = this.PaginationObjectForDrawing.slice(this.firstInPagination, this.lastInPagination);
   }
 
-  private filterProductCards(allCards: IAllCardsObject, elementsFromBagArts: string[]): void {
-    Object.keys(allCards).forEach(key => {
-      elementsFromBagArts.forEach(art => {
-        allCards[key].forEach(card => {
-          if (card.art === art) {
-            this.ObjectForDrawing.push(card);
-          }
-        });
+  private filterProductCards(allCards: ICardInfo[], elementsFromBagArts: string[]): void {
+    elementsFromBagArts.forEach(art => {
+      allCards.forEach(card => {
+        if (card.art === art) {
+          this.ObjectForDrawing.push(card);
+        }
       });
     });
   }
 
-  private checkPagination() : void {
+  private checkPagination(): void {
     this.paginationModeStatus = false;
     if (this.ObjectForDrawing.length >= 10) {
       this.PaginationObjectForDrawing = this.ObjectForDrawing;

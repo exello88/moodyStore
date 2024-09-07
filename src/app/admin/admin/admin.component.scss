@@ -1,0 +1,188 @@
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import '../../variables';
+
+.admin-field {
+    width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+
+    &__title {
+        font-family: 'Roboto', sans-serif;
+        font-size: 34px;
+        font-weight: 600;
+        color: $font-color;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__add-card {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+        border: 1px solid $font-color;
+        border-radius: 20px;
+
+        &:hover {
+            border: 1px solid #3B82F6;
+        }
+
+        &-title {
+            font-family: 'Roboto', sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: $font-color;
+            display: flex;
+            justify-content: center;
+        }
+
+        &-category {
+            &-title {
+                font-family: 'Roboto', sans-serif;
+                font-size: 20px;
+                font-weight: 600;
+                color: $font-color;
+            }
+
+            &-input {
+                height: 30px;
+                margin-left: 5px;
+            }
+        }
+
+        &-color {
+            display: flex;
+            flex-wrap: wrap;
+
+            &-title {
+                font-family: 'Roboto', sans-serif;
+                font-size: 20px;
+                font-weight: 600;
+                color: $font-color;
+            }
+
+            &-input {
+                width: 300px;
+                margin-left: 5px;
+                display: flex;
+                flex-wrap: wrap;
+
+                .color__block {
+                    height: 23px;
+                    width: 23px;
+                    border: 1px solid $font-color;
+                    border-radius: 20%;
+                    margin: 8px 8px 0px 0px;
+                    cursor: pointer;
+                }
+
+                .activeColor {
+                    border: 2px solid red;
+                }
+            }
+        }
+
+        &-name {
+            display: flex;
+            flex-wrap: wrap;
+
+            &-title {
+                font-family: 'Roboto', sans-serif;
+                font-size: 20px;
+                font-weight: 600;
+                color: $font-color;
+            }
+
+            &-input {
+                width: 100%;
+                height: 30px;
+                margin-left: 5px;
+            }
+        }
+
+        &-price {
+            display: flex;
+            flex-wrap: wrap;
+
+            &-title {
+                font-family: 'Roboto', sans-serif;
+                font-size: 20px;
+                font-weight: 600;
+                color: $font-color;
+            }
+
+            &-input {
+                width: 100%;
+                height: 30px;
+                margin-left: 5px;
+            }
+        }
+
+        &-description {
+            display: flex;
+            flex-wrap: wrap;
+
+            &-title {
+                font-family: 'Roboto', sans-serif;
+                font-size: 20px;
+                font-weight: 600;
+                color: $font-color;
+            }
+
+            &-input {
+                height: 100px;
+                margin-left: 5px;
+            }
+        }
+
+        &-image {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+
+            &-title {
+                font-family: 'Roboto', sans-serif;
+                font-size: 20px;
+                font-weight: 600;
+                color: $font-color;
+            }
+
+            &-input {
+                width: 100%;
+                height: 30px;
+                margin-left: 5px;
+            }
+        }
+
+        &-error {
+            margin-bottom: 10px;
+            color: rgb(255, 62, 62);
+            font-family: 'Roboto', sans-serif;
+            font-size: 15px;
+        }
+
+        .p-button {
+            width: 320px;
+        }
+    }
+
+    &__logOut {
+        display: flex;
+        justify-content: center;
+
+        .p-button {
+            width: 100%;
+            margin-top: 10px;
+
+        }
+    }
+
+    &__loader {
+        display: flex;
+        justify-content: center;
+
+        .p-progress-spinner {
+            height: 50px;
+            width: 50px;
+        }
+    }
+}

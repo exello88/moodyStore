@@ -3,6 +3,9 @@
 
     <div class="main-menu-actions">
         <button class="main-menu-actions__search pi pi-search"></button>
+
+        
+        <p class="main-menu-actions__email" *ngIf="email">{{ email.slice(0, email.indexOf('@')) }}</p>
         <button class="main-menu-actions__user pi pi-user" (click)="navigateToProfile()"></button>
         <div class="main-menu-actions__cart-field" (click)="navigateToCart()">
             <button class="main-menu-actions__cart pi pi-shopping-cart"></button>
@@ -14,7 +17,5 @@
         </div>
     </div>
 </div>
-
-<div class="dividing__line"></div>
 
 <router-outlet></router-outlet>
