@@ -14,8 +14,14 @@
         </div>
     </div>
     <div class="catalog-field__card-field" *ngIf="catalogStatus">
-        <app-catalog-card *ngFor="let cardInfo of ObjectForDrawing" [cardInfo]="cardInfo" [adminStatus]="adminStatus"
-            [modeStatus]="modeStatus" (redrawing) = "preparingElementsForDrawing()"></app-catalog-card>
+        <ng-container *ngIf="ObjectForDrawing.length > 0">
+            <app-catalog-card *ngFor="let cardInfo of ObjectForDrawing" [cardInfo]="cardInfo"
+                [adminStatus]="adminStatus" [modeStatus]="modeStatus"
+                (redrawing)="preparingElementsForDrawing()"></app-catalog-card>
+        </ng-container>
+        <div class="catalog-field__card-field-empty" *ngIf="ObjectForDrawing.length === 0">
+            <p class="catalog-field__card-field-empty__title">Catalog is empty!</p>
+        </div>
     </div>
     <p-paginator *ngIf="paginationModeStatus" [rows]="9" [totalRecords]="PaginationObjectForDrawing.length"
         (onPageChange)="paginatorPageChange($event)" />

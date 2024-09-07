@@ -1,10 +1,10 @@
-<div class="main-menu">
+<div class="main-menu" [class.active-search]="searchStatus">
     <p class="main-menu__tittle" (click)="navigateToHome()">MOODY STORE</p>
 
     <div class="main-menu-actions">
-        <button class="main-menu-actions__search pi pi-search"></button>
-
-        
+        <input class="main-menu-actions__search-input" *ngIf="searchStatus" type="text" pInputText
+            [(ngModel)]="searchStr" />
+        <button class="main-menu-actions__search pi pi-search" (click)="changeSearchInput()"></button>
         <p class="main-menu-actions__email" *ngIf="email">{{ email.slice(0, email.indexOf('@')) }}</p>
         <button class="main-menu-actions__user pi pi-user" (click)="navigateToProfile()"></button>
         <div class="main-menu-actions__cart-field" (click)="navigateToCart()">
