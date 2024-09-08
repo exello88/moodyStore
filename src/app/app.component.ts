@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   public searchStatus: boolean = false;
 
   private dataSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  searchDataSubject = this.dataSubject.asObservable();
+  public searchDataSubject : Observable<string> = this.dataSubject.asObservable();
 
 
 
