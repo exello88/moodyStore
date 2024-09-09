@@ -16,11 +16,6 @@ export class AppComponent implements OnInit {
   public searchStr: string = '';
   public searchStatus: boolean = false;
 
-  private dataSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  public searchDataSubject : Observable<string> = this.dataSubject.asObservable();
-
-
-
   constructor(private router: Router, private localStorageService: LocalStorageService, private authServise: AuthenticationService, private route: Router) { }
 
   ngOnInit() {
@@ -30,24 +25,22 @@ export class AppComponent implements OnInit {
 
   public navigateToHome(): void {
     this.router.navigate(['/home']);
+    this.changeSearchStatus();
   }
 
   public navigateToProfile(): void {
     this.router.navigate(['/admin']);
-    if (this.searchStatus)
-      this.searchStatus = false;
+    this.changeSearchStatus();
   }
 
   public navigateToCart(): void {
     this.router.navigate(['/cart']);
-    if (this.searchStatus)
-      this.searchStatus = false;
+    this.changeSearchStatus();
   }
 
   public navigateToWishlist(): void {
     this.router.navigate(['/wishlist']);
-    if (this.searchStatus)
-      this.searchStatus = false;
+    this.changeSearchStatus();
   }
 
   public changeCartItemCount(): void {
@@ -61,20 +54,17 @@ export class AppComponent implements OnInit {
     if (wishlistItemCount !== null)
       this.wishlistItemCount = wishlistItemCount;
   }
-  public test: boolean = false;
 
   public changeSearchInput(): void {
-    if (this.searchStatus !== false)
-      this.dataSubject.next(this.searchStr);
-    if (this.searchStr.trim() === '') {
-      this.test = !this.test;
-      this.searchStatus = !this.searchStatus;
-      if (this.route.url !== '/home')
-        this.route.navigate(['home'])
-    }
+    this.searchStatus = !this.searchStatus;
   }
 
   public setEmail(): void {
     this.email = this.authServise.email;
+  }
+
+  private changeSearchStatus(): void {
+    if (this.searchStatus)
+      this.searchStatus = false;
   }
 }

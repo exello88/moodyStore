@@ -8,10 +8,15 @@ import { WishlistModule } from './wishlist/wishlist.module';
 import { CartModule } from './cart/cart.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { SearchComponent } from './search/search.component';
+import { OrderListModule } from 'primeng/orderlist';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +26,9 @@ import { FormsModule } from '@angular/forms';
     WishlistModule,
     CartModule,
     InputTextModule,
-    FormsModule
+    FormsModule,
+    OrderListModule,
+    DragDropModule
   ],
   providers: [
     provideClientHydration()

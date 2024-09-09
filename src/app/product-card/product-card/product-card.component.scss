@@ -83,7 +83,7 @@
                     font-size: 30px;
                     font-family: 'Roboto', sans-serif;
                     cursor: pointer;
-                    z-index: 1;
+                    z-index: -1;
                 }
 
                 &__less {
@@ -104,7 +104,7 @@
                     color: $font-color;
                     background-color: #EEF2F8;
                     border-radius: 20px;
-                    z-index: 0;
+                    z-index: -2;
                 }
             }
         }

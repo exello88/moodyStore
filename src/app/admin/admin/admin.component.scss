@@ -2,6 +2,7 @@
 @import '../../variables';
 
 .admin-field {
+    position: relative;
     width: 360px;
     margin-left: auto;
     margin-right: auto;
@@ -35,7 +36,7 @@
             justify-content: center;
         }
 
-        &-category {
+        &-mode {
             &-title {
                 font-family: 'Roboto', sans-serif;
                 font-size: 20px;
@@ -46,6 +47,22 @@
             &-input {
                 height: 30px;
                 margin-left: 5px;
+                z-index: -1;
+            }
+        }
+
+        &-category {
+            &-title {
+                font-family: 'Roboto', sans-serif;
+                font-size: 20px;
+                font-weight: 600;
+                color: $font-color;
+            }
+
+            &-input {
+                height: 300px;
+                margin-left: 5px;
+                z-index: -1;
             }
         }
 

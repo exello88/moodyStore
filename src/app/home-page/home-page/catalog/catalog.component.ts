@@ -31,30 +31,18 @@ export class CatalogComponent implements DoCheck, OnDestroy {
   public lastModeStatus: string = ModeStatus.lastModeStatus;
   public filterStatus: boolean = false;
   public catalogStatus: boolean = false;
-  public searchStatus: boolean = false;
+  
   public paginationModeStatus!: boolean;
   public adminStatus: boolean = true;
   public firstInPagination: number = 0;
   public lastInPagination: number = 0;
-
-  private originalItemsReceived: boolean = false;
-  private originalObjectForDrawing: ICardInfo[] = [];
-  private originalPaginationObjectForDrawing: ICardInfo[] = [];
   private lustSelectedItems!: ISelectedItems;
   private subscription!: Subscription;
-  private searchStr: string = '';
 
   @Output() filterStatusEvent: EventEmitter<boolean> = new EventEmitter<boolean>(false);
   @Output() catalogStatusEvent: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
   constructor(private catalogServise: CatalogService, private appComponent: AppComponent) { }
-
-  ngOnInit() {
-    this.subscription = this.appComponent.searchDataSubject.subscribe((newData) => {
-      this.searchStr = newData;
-      this.filteringBySearch();
-    });
-  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
@@ -130,43 +118,6 @@ export class CatalogComponent implements DoCheck, OnDestroy {
         this.catalogStatus = true;
         this.checkPagination();
       });
-    }
-  }
-
-  private filteringBySearch(): void {
-    if (this.searchStr === '') {
-      this.searchStatus = false;
-      if (this.originalItemsReceived)
-        this.preparingElementsForDrawing();
-      this.originalItemsReceived = false;
-    }
-    else {
-      this.checkSavingFofOriginalItems();
-      this.ObjectForDrawing = JSON.parse(JSON.stringify(this.originalObjectForDrawing))
-      this.PaginationObjectForDrawing = JSON.parse(JSON.stringify(this.originalPaginationObjectForDrawing))
-      this.searchStatus = true;
-      let cards;
-      if (this.ObjectForDrawing.length >= 10) {
-        cards = this.PaginationObjectForDrawing;
-      }
-      else {
-        cards = this.ObjectForDrawing;
-      }
-      this.PaginationObjectForDrawing = [];
-      this.ObjectForDrawing = [];
-      cards.forEach(card => {
-        if (card.name.toLocaleLowerCase().includes(this.searchStr.toLocaleLowerCase()))
-          this.ObjectForDrawing.push(card)
-      })
-      this.checkPagination()
-    }
-  }
-
-  private checkSavingFofOriginalItems(): void {
-    if (!this.originalItemsReceived) {
-      this.originalObjectForDrawing = JSON.parse(JSON.stringify(this.ObjectForDrawing))
-      this.originalPaginationObjectForDrawing = JSON.parse(JSON.stringify(this.PaginationObjectForDrawing))
-      this.originalItemsReceived = true;
     }
   }
 
