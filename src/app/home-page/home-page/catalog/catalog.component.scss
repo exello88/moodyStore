@@ -76,7 +76,15 @@
         justify-content: space-around;
         gap: 15px;
 
-
+        &-empty{
+            margin-top: 10px;
+            &__title{
+                font-family: 'Roboto', sans-serif;
+                font-size: 28px;
+                font-weight: 400;
+                color: $font-color;
+            }
+        }
     }
 
     .selected-mod {

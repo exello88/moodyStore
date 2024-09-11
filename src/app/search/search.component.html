@@ -1,0 +1,12 @@
+<p-orderList  [value]="products" header="Search" filterBy="name" [listStyle]="{ 'max-height': '400px' }" class="search"
+    filterPlaceholder="Filter by name">
+    <ng-template let-product pTemplate="item">
+        <div class="card" (click)="navigateToCard(product)">
+            <img src="{{ product.image }}" [alt]="product.name" class="card__img" />
+            <span class="card__name">{{ product.name }}</span>
+            <span class="card__price">
+                {{ '$' + product.price }}
+            </span>
+        </div>
+    </ng-template>
+</p-orderList> 

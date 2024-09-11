@@ -1,0 +1,35 @@
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import '../variables';
+
+.card {
+    display: grid;
+    z-index: 99;
+
+    &__img {
+        width: 306px;
+        height: 365px;
+        object-fit: cover;
+        margin-top: 10px;
+        border-radius: 10px;
+    }
+
+    &__name{
+        margin-top: 20px;
+        color: $font-color;
+        font-weight: 600;
+        font-size: 18px;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    &__price{
+        margin-top: 20px;
+        color: $font-color;
+        font-weight: 600;
+        font-size: 24px;
+        font-family: 'Roboto', sans-serif;
+    }
+}
+
+.p-orderlist-controls {
+    display: none;
+}

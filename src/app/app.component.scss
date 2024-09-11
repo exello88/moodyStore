@@ -22,8 +22,16 @@
         align-items: center;
         display: flex;
         margin-left: auto;
-        
-        &__email{
+
+        &__search-field {
+            position: absolute;
+            top: 110px;
+            right: 0;
+            margin-right: 5%;
+            z-index: 2;
+        }
+
+        &__email {
             font-family: 'Roboto', sans-serif;
             color: $font-color;
             font-size: 20px;

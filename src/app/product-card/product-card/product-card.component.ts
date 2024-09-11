@@ -30,10 +30,10 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscriptions = this.activeRoute.paramMap.subscribe(params => {
       this.art = params.get('art') || '';
-    });
     this.initialButton();
     this.getCardInfo();
     this.initializingButtonColor();
+    });
   }
 
   ngOnDestroy() {

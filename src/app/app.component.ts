@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalStorageService } from './local-storage.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthenticationService } from './authentication/authentication.service';
 
 @Component({
@@ -12,10 +13,10 @@ export class AppComponent implements OnInit {
   public cartItemCount: number = 0;
   public wishlistItemCount: number = 0;
   public email!: string;
-  public admin: boolean = false;
-  public auth: boolean = false;
+  public searchStr: string = '';
+  public searchStatus: boolean = false;
 
-  constructor(private router: Router, private localStorageService: LocalStorageService, private authServise: AuthenticationService) { }
+  constructor(private router: Router, private localStorageService: LocalStorageService, private authServise: AuthenticationService, private route: Router) { }
 
   ngOnInit() {
     this.changeCartItemCount();
@@ -24,18 +25,22 @@ export class AppComponent implements OnInit {
 
   public navigateToHome(): void {
     this.router.navigate(['/home']);
+    this.changeSearchStatus();
   }
 
   public navigateToProfile(): void {
     this.router.navigate(['/admin']);
+    this.changeSearchStatus();
   }
 
   public navigateToCart(): void {
     this.router.navigate(['/cart']);
+    this.changeSearchStatus();
   }
 
   public navigateToWishlist(): void {
     this.router.navigate(['/wishlist']);
+    this.changeSearchStatus();
   }
 
   public changeCartItemCount(): void {
@@ -50,7 +55,16 @@ export class AppComponent implements OnInit {
       this.wishlistItemCount = wishlistItemCount;
   }
 
+  public changeSearchInput(): void {
+    this.searchStatus = !this.searchStatus;
+  }
+
   public setEmail(): void {
     this.email = this.authServise.email;
+  }
+
+  private changeSearchStatus(): void {
+    if (this.searchStatus)
+      this.searchStatus = false;
   }
 }

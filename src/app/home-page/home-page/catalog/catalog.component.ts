@@ -31,11 +31,11 @@ export class CatalogComponent implements DoCheck, OnDestroy {
   public lastModeStatus: string = ModeStatus.lastModeStatus;
   public filterStatus: boolean = false;
   public catalogStatus: boolean = false;
+  
   public paginationModeStatus!: boolean;
   public adminStatus: boolean = true;
   public firstInPagination: number = 0;
   public lastInPagination: number = 0;
-
   private lustSelectedItems!: ISelectedItems;
   private subscription!: Subscription;
 
@@ -43,7 +43,6 @@ export class CatalogComponent implements DoCheck, OnDestroy {
   @Output() catalogStatusEvent: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
   constructor(private catalogServise: CatalogService, private appComponent: AppComponent) { }
-
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
@@ -122,7 +121,7 @@ export class CatalogComponent implements DoCheck, OnDestroy {
     }
   }
 
-  private checkPagination() {
+  private checkPagination(): void {
     this.paginationModeStatus = false;
     if (this.ObjectForDrawing.length >= 10) {
       this.PaginationObjectForDrawing = this.ObjectForDrawing;
