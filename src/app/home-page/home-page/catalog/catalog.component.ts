@@ -19,17 +19,17 @@ export interface ISelectedItems {
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
-  styleUrl: './catalog.component.scss',
+  styleUrls: ['./catalog.component.scss', './media.scss'],
   encapsulation: ViewEncapsulation.ShadowDom
 })
 export class CatalogComponent implements DoCheck, OnDestroy {
   @Input() selectedItems!: ISelectedItems;
+  @Input() filterStatus: boolean = false;
+  @Input() modeStatus: string = ModeStatus.modeStatus;
 
   public ObjectForDrawing: ICardInfo[] = [];
   public PaginationObjectForDrawing: ICardInfo[] = [];
-  public modeStatus: string = ModeStatus.modeStatus;
   public lastModeStatus: string = ModeStatus.lastModeStatus;
-  public filterStatus: boolean = false;
   public catalogStatus: boolean = false;
   
   public paginationModeStatus!: boolean;
@@ -76,15 +76,6 @@ export class CatalogComponent implements DoCheck, OnDestroy {
           this.ObjectForDrawing = data;
         });
     }
-  }
-
-  public changeFilterStatus(): void {
-    this.filterStatus = !this.filterStatus;
-    this.filterStatusEvent.emit(this.filterStatus);
-  }
-
-  public changeModeStatus(mode: string): void {
-    this.modeStatus = mode;
   }
 
   public paginatorPageChange(event: PaginatorState) {

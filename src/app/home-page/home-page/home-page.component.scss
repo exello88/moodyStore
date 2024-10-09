@@ -1,7 +1,78 @@
+@import '../../variables';
+
+
+.menu{
+    margin-top: 30px;
+    margin-left: 5%;
+    margin-right: 5%;
+
+    &__main-title {
+        margin-top: 20px;
+        color: $font-color;
+        font-weight: 600;
+        font-size: 40px;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    &__second-title {
+        margin-top: 20px;
+        color: $font-color;
+        font-weight: 300;
+        font-size: 18px;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    &__filter {
+        display: flex;
+        margin-top: 35px;
+
+        .filter__icon {
+            cursor: pointer;
+        }
+
+        .filter__title {
+            margin-top: 17px;
+            color: $font-color;
+            font-weight: 300;
+            font-size: 16px;
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .filter__icon {
+            margin-top: 17px;
+            width: 19px;
+            height: 16px;
+        }
+
+        .filer-mode {
+            display: flex;
+            margin-left: auto;
+            margin-right: 5%;
+
+            .filter-mode__title {
+                margin-left: 10px;
+                cursor: pointer;
+                font-size: 16px;
+                color: $font-color;
+            }
+
+            .selected-mod {
+                color: $selected-mod;
+            }
+        }
+    }
+}
+
 .filter-catalog{
     display: flex;
     margin-left: 5%;
     margin-right: 5%;
-    margin-top: 80px;
     position: relative;
+
+    .filter{
+        width: 320px;
+        height: 480px;
+        padding-top: 5px;
+    }
 }

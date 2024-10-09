@@ -1,0 +1,55 @@
+@media (max-width: 1024px) {
+    .promotion-field{
+        &__main-title, &__conditions-title{
+            font-size: 34px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .promotion-field{
+        height: 200px;
+        &__main-title, &__conditions-title{
+            font-size: 25px;
+        }
+
+        &__additionally-title{
+            font-size: 15px;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .promotion-field{
+        height: 170px;
+        &__main-title, &__conditions-title{
+            font-size: 20px;
+        }
+
+        &__additionally-title{
+            font-size: 13px;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .promotion-field{
+        height: 130px;
+        &__main-title, &__conditions-title{
+            font-size: 17px;
+        }
+
+        &__additionally-title{
+            font-size: 10px;
+        }
+    }
+}
+
+@media (max-width: 400px) {
+    .promotion-field{
+        height: 120px;
+        &__main-title, &__conditions-title{
+            font-size: 15px;
+        }
+    }
+}

@@ -1,7 +1,26 @@
 <app-promotion-field></app-promotion-field>
-<div class="filter-catalog" *ngIf = "catalogIsLoad" >
-  <app-filter *ngIf="filterStatus" (filtersLoadedEvent)="filtersLoaded($event)"
-    (selectedItemsEvent)="selectedItemsChange($event)" [selectedItems]="selectedItems"></app-filter>
-  <app-catalog (filterStatusEvent)="filterStatusChange($event)" (catalogStatusEvent)="catalogStatusChange($event)" [selectedItems]="selectedItems"></app-catalog>
+<div class="menu">
+  <p class="menu__main-title">CATALOG</p>
+  <p class="menu__second-title">It's easy to transform your bedroom interior with our great selection of
+    accessories.</p>
+  <div class="menu__filter">
+    <div class="filter__icon pi pi-filter" (click)="changeFilterStatus()"></div>
+    <p class="filter__title" (click)="changeFilterStatus()" [class.selected-mod]="catalogStatus">FILTER & SORT</p>
+
+    <div class="filer-mode">
+      <p class="filter-mode__title" (click)="changeModeStatus('Models')" [class.selected-mod]="modeStatus === 'Models'">
+        Models</p>
+      <p class="filter-mode__title" (click)="changeModeStatus('Products')"
+        [class.selected-mod]="modeStatus === 'Products'">Products</p>
+    </div>
+  </div>
 </div>
-<app-loader *ngIf = "!catalogIsLoad"></app-loader>
+<div class="filter-catalog" *ngIf="catalogIsLoad" [class.filter-is-active]="filterStatus">
+  <app-filter class="filter" *ngIf="filterStatus" (filtersLoadedEvent)="filtersLoaded($event)"
+    (selectedItemsEvent)="selectedItemsChange($event)" [selectedItems]="selectedItems"></app-filter>
+  <app-catalog class="catalog" (filterStatusEvent)="filterStatusChange($event)"
+    (catalogStatusEvent)="catalogStatusChange($event)" [filterStatus] = "filterStatus" [modeStatus] = "modeStatus" [selectedItems]="selectedItems"></app-catalog>
+</div>
+
+<div class="blackout" *ngIf="filterStatus" (click) = "test()"></div>
+<app-loader *ngIf="!catalogIsLoad"></app-loader>

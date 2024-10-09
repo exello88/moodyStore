@@ -17,7 +17,7 @@ export interface ISelectedItems {
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
-  styleUrl: './filter.component.scss',
+  styleUrls: ['./filter.component.scss', './media.scss'],
   encapsulation: ViewEncapsulation.ShadowDom
 })
 export class FilterComponent implements OnInit, OnDestroy {

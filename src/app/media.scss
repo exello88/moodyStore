@@ -1,0 +1,26 @@
+@media (max-width: 800px) {}
+
+@media (max-width: 600px) {
+    .active-search {
+        .main-menu {
+            &-actions {
+                &__search-field {
+                    left: 0;
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 460px) {
+    .main-menu {
+        &-actions {
+            &__search-field {
+                margin-top: 30px;
+            }
+        }
+    }
+}
+
+@media (max-width: 400px) {}

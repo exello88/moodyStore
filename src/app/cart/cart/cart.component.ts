@@ -9,7 +9,7 @@ import { ErrorMessageComponent } from './error-message/error-message.component';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrl: './cart.component.scss',
+  styleUrls: ['./cart.component.scss', './media.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class CartComponent implements OnInit, OnDestroy {

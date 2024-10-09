@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { ModeStatus } from './catalog/catalog.enum';
+import { CatalogComponent } from './catalog/catalog.component';
 
 export interface ISelectedItems {
   typeProduct: string[],
@@ -14,9 +16,10 @@ export interface ISelectedItems {
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.scss'
+  styleUrls: ['./home-page.component.scss', './media.scss']
 })
 export class HomePageComponent {
+  public modeStatus: string = ModeStatus.modeStatus;
   public selectedItems: ISelectedItems = {
     typeProduct: [],
     price: {},
@@ -26,8 +29,15 @@ export class HomePageComponent {
   public filterIsLoad: boolean = true;
   public catalogIsLoad: boolean = true;
   public filterStatus: boolean = false;
+  public catalogStatus: boolean = false;
 
+  public changeFilterStatus(): void {
+    this.filterStatus = !this.filterStatus;
+  }
 
+  public changeModeStatus(mode: string): void {
+    this.modeStatus = mode;
+  }
 
   public filtersLoaded(loaded: boolean): void {
     this.filterIsLoad = loaded;
@@ -41,7 +51,11 @@ export class HomePageComponent {
     this.selectedItems = items;
   }
 
-  public catalogStatusChange(status: boolean) {
+  public catalogStatusChange(status: boolean) : void {
     this.catalogIsLoad = status;
+  }
+
+  public test() : void{
+    this.filterStatus = false;
   }
 }

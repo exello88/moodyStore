@@ -8,68 +8,10 @@
     left: 0;
     right: 0;
 
-    &__main-title {
-        margin-top: 20px;
-        color: $font-color;
-        font-weight: 600;
-        font-size: 40px;
-        font-family: 'Roboto', sans-serif;
-    }
-
-    &__second-title {
-        margin-top: 20px;
-        color: $font-color;
-        font-weight: 300;
-        font-size: 18px;
-        font-family: 'Roboto', sans-serif;
-    }
-
-    &__filter {
-        display: flex;
-        margin-top: 35px;
-
-        .filter__icon {
-            cursor: pointer;
-        }
-
-        .filter__title {
-            margin-top: 17px;
-            color: $font-color;
-            font-weight: 300;
-            font-size: 16px;
-            cursor: pointer;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        .filter__icon {
-            margin-top: 17px;
-            width: 19px;
-            height: 16px;
-        }
-
-        .filer-mode {
-            display: flex;
-            margin-left: auto;
-            margin-right: 5%;
-
-            .filter-mode__title {
-                margin-left: 10px;
-                cursor: pointer;
-                font-size: 16px;
-                color: $font-color;
-            }
-
-            .selected-mod {
-                color: $selected-mod;
-            }
-        }
-    }
-
     &__card-field {
         width: 100%;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 20px;
         margin-bottom: 10px;
         display: flex;
         flex-wrap: wrap;

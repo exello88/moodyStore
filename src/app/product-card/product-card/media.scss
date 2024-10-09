@@ -1,0 +1,181 @@
+@media (max-width: 768px) {
+    .product {
+
+        .first-level-content {
+
+            grid-template-columns: 100%;
+
+            .image-content {
+
+                p-image {
+                    span {
+                        img {
+                            min-height: 250px;
+
+                        }
+                    }
+                }
+
+            }
+
+            .buy-content {
+                &__name {
+                    font-size: 24px;
+                }
+
+                &__price {
+                    font-size: 20px;
+                }
+
+                &__button {
+
+                    button {
+
+                        .p-button-label {
+                            font-size: 18px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .description-field {
+            grid-template-columns: 100%;
+
+            .p-card {
+                margin-top: 20px;
+
+                .description__header {
+                    font-size: 22px;
+                }
+
+                .description__content {
+                    font-size: 18px;
+                }
+
+                .description__art {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .product {
+
+        .first-level-content {
+
+            grid-template-columns: 1fr;
+
+            .buy-content {
+                &__name {
+                    font-size: 28px;
+                }
+
+                &__price {
+                    font-size: 20px;
+                }
+
+                &__button {
+
+                    button {
+
+                        .p-button-label {
+                            font-size: 20px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .description-field {
+            grid-template-columns: 1fr;
+
+            .p-card {
+
+                .description__header {
+                    font-size: 24px;
+                }
+
+                .description__content {
+                    font-size: 20px;
+                }
+
+                .description__art {
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .product {
+
+        .first-level-content {
+
+            .image-content {
+
+                p-image {
+                    span {
+                        img {
+                            min-height: 150px;
+
+                        }
+                    }
+                }
+
+            }
+
+            .buy-content {
+
+                &__first-level {
+                    .pi-heart {
+                        margin-top: 10px;
+                    }
+                }
+
+                &__name {
+                    margin-top: 10px;
+                    font-size: 18px;
+                }
+
+                &__price {
+                    margin-top: 5px;
+                    font-size: 14px;
+                }
+
+                &__button {
+
+                    button {
+
+                        .p-button-label {
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .description-field {
+
+            .p-card {
+
+                .description__header {
+                    font-size: 18px;
+                }
+
+                .description__content {
+                    font-size: 14px;
+                }
+
+                .description__art {
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 400px) {}

@@ -8,7 +8,7 @@ import { AppComponent } from '../app.component';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrl: './search.component.scss',
+  styleUrls: ['./search.component.scss', './media.scss'],
   encapsulation: ViewEncapsulation.ShadowDom
 })
 export class SearchComponent implements OnInit, OnDestroy {

@@ -1,0 +1,17 @@
+@media (max-width: 800px) {
+    .catalog-field{
+        &__main-title{
+            margin-top: 5px;
+        } 
+    }
+}
+
+@media (max-width: 650px) {
+    .filter-enabled {
+        margin-left: 0px;
+    }
+}
+
+@media (max-width: 480px) {}
+
+@media (max-width: 400px) {}

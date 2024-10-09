@@ -7,8 +7,9 @@ import { AuthenticationService } from './authentication/authentication.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss', './media.scss']
 })
+
 export class AppComponent implements OnInit {
   public cartItemCount: number = 0;
   public wishlistItemCount: number = 0;
